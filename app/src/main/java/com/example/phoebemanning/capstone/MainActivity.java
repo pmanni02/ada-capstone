@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOnClick(View view) {
 
-        Log.i("UPC TEXT: ", upcEditText.getText().toString());
+//        Log.i("UPC TEXT: ", upcEditText.getText().toString());
 
 //      Hide the Keyboard after submit
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -33,15 +33,13 @@ public class MainActivity extends AppCompatActivity {
         if (upcEditText.length() != 12){
             Toast.makeText(this, "Invalid UPC", Toast.LENGTH_LONG).show();
         } else {
-
             getProductCode();
-
         }
-
     }
 
     public void getProductCode(){
-        Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(),getResources().getString(R.string.usda_api_key));
+        Log.i("UPC TEXT: ", upcEditText.getText().toString());
+        Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(), getResources().getString(R.string.usda_api_key));
 
         call.enqueue(new Callback<ResponseData>() {
             @Override
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseData> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
