@@ -8,16 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.phoebemanning.capstone.Models.Item;
+import com.example.phoebemanning.capstone.Models.List;
+import com.example.phoebemanning.capstone.Models.ResponseData;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity {
 

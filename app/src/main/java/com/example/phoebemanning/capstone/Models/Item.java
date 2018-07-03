@@ -1,4 +1,4 @@
-package com.example.phoebemanning.capstone;
+package com.example.phoebemanning.capstone.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

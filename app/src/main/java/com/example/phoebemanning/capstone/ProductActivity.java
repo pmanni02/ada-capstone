@@ -16,9 +16,16 @@ public class ProductActivity extends AppCompatActivity {
 
         productName = findViewById(R.id.productName);
 
+//      Get data from main activity
         Intent intent = getIntent();
         String intentStringName = intent.getStringExtra("name");
         productName.setText(intentStringName);
+
+//      Make GET request for product image
+
+
+
+
         String intentStringUpc = intent.getStringExtra("upc");
         String intentStringNdbno = intent.getStringExtra("ndbno");
     }
