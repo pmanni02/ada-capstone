@@ -21,7 +21,6 @@ import retrofit2.http.Path;
 public class MainActivity extends AppCompatActivity {
 
     EditText upcEditText;
-//    UsdaApi api;
 
     public void submitOnClick(View view) {
 
@@ -34,37 +33,37 @@ public class MainActivity extends AppCompatActivity {
         if (upcEditText.length() != 12){
             Toast.makeText(this, "Invalid UPC", Toast.LENGTH_LONG).show();
         } else {
-//            UpcSearch task = new UpcSearch();
-//            task.execute("https://api.nal.usda.gov/ndb/search/?format=json&q=" + upcEditText.getText().toString() + "&sort=n&max=25&offset=0&api_key=q6qvjjZIr3O49ztYwWN61onoR0t0XxdZziUMOkzn");
 
-//            Call<ResponseData> call = UsdaApi.getClient().getResponse();
-            Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(),"q6qvjjZIr3O49ztYwWN61onoR0t0XxdZziUMOkzn");
-
-            call.enqueue(new Callback<ResponseData>() {
-                @Override
-                public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                    Log.i("Response", "Success");
-
-                    if (response.isSuccessful()){
-                        if (response.body() != null){
-                            List list = response.body().getList();
-                            java.util.List<Item> item = list.getItem();
-
-                            Log.i("NAME", item.get(0).getName());
-                            Log.i("NDBNO", item.get(0).getNdbno());
-                        }
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<ResponseData> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
-                }
-            });
+            getProductCode();
 
         }
 
+    }
+
+    public void getProductCode(){
+        Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(),getResources().getString(R.string.usda_api_key));
+
+        call.enqueue(new Callback<ResponseData>() {
+            @Override
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                Log.i("Response", "Success");
+
+                if (response.isSuccessful()){
+                    if (response.body() != null){
+                        List list = response.body().getList();
+                        java.util.List<Item> item = list.getItem();
+
+                        Log.i("NAME", item.get(0).getName());
+                        Log.i("NDBNO", item.get(0).getNdbno());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseData> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -73,6 +72,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         upcEditText = findViewById(R.id.upcEditText);
-//        api = UsdaApi.getClient().create(UsdaApi.class);
     }
 }
