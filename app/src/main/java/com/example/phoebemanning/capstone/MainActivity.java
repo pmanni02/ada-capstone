@@ -48,11 +48,19 @@ public class MainActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()){
                     if (response.body() != null){
-                        List list = response.body().getList();
-                        java.util.List<Item> item = list.getItem();
 
-                        Log.i("NAME", item.get(0).getName());
-                        Log.i("NDBNO", item.get(0).getNdbno());
+                        List list = response.body().getList();
+
+                        if (list != null){
+                            java.util.List<Item> item = list.getItem();
+
+                            Log.i("NAME", item.get(0).getName());
+                            Log.i("NDBNO", item.get(0).getNdbno());
+                        } else {
+                            Toast.makeText(MainActivity.this, "Your search resulted in zero results. Change your parameters and try again", Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
                 }
             }
