@@ -10,9 +10,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText upcEditText;
+//    UsdaApi api;
 
     public void submitOnClick(View view) {
 
@@ -28,6 +37,32 @@ public class MainActivity extends AppCompatActivity {
 //            UpcSearch task = new UpcSearch();
 //            task.execute("https://api.nal.usda.gov/ndb/search/?format=json&q=" + upcEditText.getText().toString() + "&sort=n&max=25&offset=0&api_key=q6qvjjZIr3O49ztYwWN61onoR0t0XxdZziUMOkzn");
 
+//            Call<ResponseData> call = UsdaApi.getClient().getResponse();
+            Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(),"q6qvjjZIr3O49ztYwWN61onoR0t0XxdZziUMOkzn");
+
+            call.enqueue(new Callback<ResponseData>() {
+                @Override
+                public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                    Log.i("Response", "Success");
+
+                    if (response.isSuccessful()){
+                        if (response.body() != null){
+                            List list = response.body().getList();
+                            java.util.List<Item> item = list.getItem();
+
+                            Log.i("NAME", item.get(0).getName());
+                            Log.i("NDBNO", item.get(0).getNdbno());
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseData> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
 
     }
@@ -38,5 +73,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         upcEditText = findViewById(R.id.upcEditText);
+//        api = UsdaApi.getClient().create(UsdaApi.class);
     }
 }
