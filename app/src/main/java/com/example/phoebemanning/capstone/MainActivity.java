@@ -1,6 +1,7 @@
 package com.example.phoebemanning.capstone;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
                         if (list != null){
                             java.util.List<Item> item = list.getItem();
+                            String name = item.get(0).getName();
+                            String ndbno = item.get(0).getNdbno();
+
+                            Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+                            intent.putExtra("name",name);
+                            intent.putExtra("ndbno", ndbno);
+                            intent.putExtra("upc", upcEditText.getText().toString());
+                            startActivity(intent);
 
                             Log.i("NAME", item.get(0).getName());
                             Log.i("NDBNO", item.get(0).getNdbno());
@@ -60,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Your search resulted in zero results. Change your parameters and try again", Toast.LENGTH_SHORT).show();
                         }
 
-
                     }
+
                 }
             }
 
