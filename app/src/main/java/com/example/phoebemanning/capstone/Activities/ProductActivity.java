@@ -84,10 +84,12 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ImageData> call, Response<ImageData> response) {
                 Log.i("URL", call.request().url().toString());
+
                 if(response.isSuccessful()){
 //                    Log.i("onResponse", "Call is successful");
                     if(response.body() != null){
-                        Log.i("onResponse", "Body NOT NULL");
+//                        Log.i("onResponse", "Body NOT NULL");
+
                         Items[] items = response.body().getItems();
                         String [] images = items[0].getImages();
                         String testImg = images[0];
@@ -110,7 +112,10 @@ public class ProductActivity extends AppCompatActivity {
                         Log.i("onResponse", "Body NULL");
                     }
                 } else {
+//                    String error = response.body().getError().toString();
                     Log.i("onResponse", "Image API call failed");
+                    imageView.setImageResource(R.drawable.default_img);
+//                    Toast.makeText(ProductActivity.this, "U", Toast.LENGTH_SHORT).show();
                 }
             }
 
