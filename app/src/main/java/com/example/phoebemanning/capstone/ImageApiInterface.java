@@ -16,7 +16,4 @@ public interface ImageApiInterface {
     @GET("lookup")
     Call<ImageData> getImage(@Query("upc") String upc);
 
-//    @GET("lookup")
-//    Call<ImageData> getImage(@Path("path") String path);
-
 }

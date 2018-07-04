@@ -83,7 +83,7 @@ public class ProductActivity extends AppCompatActivity {
         call.enqueue(new Callback<ImageData>() {
             @Override
             public void onResponse(Call<ImageData> call, Response<ImageData> response) {
-                Log.i("URL", call.request().url().toString());
+//                Log.i("URL", call.request().url().toString());
 
                 if(response.isSuccessful()){
 //                    Log.i("onResponse", "Call is successful");
@@ -95,8 +95,7 @@ public class ProductActivity extends AppCompatActivity {
                         String testImg = images[0];
                         baseUrl = testImg;
 
-
-                        Log.i("onResponse", images[0]);
+//                        Log.i("onResponse", images[0]);
 
                         ImageDownloader imgTask = new ImageDownloader();
                         Bitmap myImage;
@@ -112,10 +111,8 @@ public class ProductActivity extends AppCompatActivity {
                         Log.i("onResponse", "Body NULL");
                     }
                 } else {
-//                    String error = response.body().getError().toString();
                     Log.i("onResponse", "Image API call failed");
                     imageView.setImageResource(R.drawable.default_img);
-//                    Toast.makeText(ProductActivity.this, "U", Toast.LENGTH_SHORT).show();
                 }
             }
 

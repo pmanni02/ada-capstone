@@ -10,9 +10,6 @@ import retrofit2.http.Url;
 
 public interface DownloadImageInterface {
 
-//    @GET
-//    Call<String> getImage(@Url String url);
-
     @GET("/")
     Call<String> getImage(@Url String url);
 

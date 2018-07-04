@@ -4,15 +4,6 @@ import java.util.Arrays;
 
 public class ImageData {
 
-    @Override
-    public String toString() {
-//        return "ImageData{" +
-////                "error='" + error + '\'' +
-////                ", items=" + Arrays.toString(items) +
-////                '}';
-        return "{error}";
-    }
-
     String error;
 
     Items[] items;
