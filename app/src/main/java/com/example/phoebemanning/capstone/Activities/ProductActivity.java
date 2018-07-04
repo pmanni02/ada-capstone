@@ -10,6 +10,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.phoebemanning.capstone.ImageApi;
+import com.example.phoebemanning.capstone.Models.Image_Models.ImageData;
+import com.example.phoebemanning.capstone.Models.Image_Models.Items;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Food;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
@@ -27,6 +30,7 @@ public class ProductActivity extends AppCompatActivity {
 
     TextView productName;
     String intentStringNdbno;
+    String intentStringUpc;
     ListView listView;
     ArrayList<String> myArray;
     ImageView imageView;
@@ -46,8 +50,7 @@ public class ProductActivity extends AppCompatActivity {
         String intentStringName = intent.getStringExtra("name");
         productName.setText(intentStringName);
         intentStringNdbno = intent.getStringExtra("ndbno");
-
-//      String intentStringUpc = intent.getStringExtra("upc");
+        intentStringUpc = intent.getStringExtra("upc");
 
 //      Make GET request for product nutrients
         getNutrients();
@@ -57,7 +60,38 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void getImage(){
+        Call<ImageData> call = ImageApi.getClient().getImage(intentStringUpc);
 
+        call.enqueue(new Callback<ImageData>() {
+            @Override
+            public void onResponse(Call<ImageData> call, Response<ImageData> response) {
+//                Log.i("URL", call.request().url().toString());
+                if(response.isSuccessful()){
+//                    Log.i("onResponse", "Call is successful");
+                    if(response.body() != null){
+//                        Log.i("onResponse", "Body NOT NULL");
+                        Items[] items = response.body().getItems();
+                        String [] images = items[0].getImages();
+//                        Log.i("onResponse", images[0]);
+                        downloadImage(images);
+
+                    } else {
+                        Log.i("onResponse", "Body NULL");
+                    }
+                } else {
+                    Log.i("onResponse", "Image API call failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ImageData> call, Throwable t) {
+                Toast.makeText(ProductActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void downloadImage(String [] images){
+        String firstImg = images[0];
     }
 
     public void getNutrients() {
@@ -70,7 +104,7 @@ public class ProductActivity extends AppCompatActivity {
 //                Log.i("URL", call.request().url().toString());
 
                 if(response.isSuccessful()) {
-                    Log.i("Response", "Nutrient Api Call Success");
+//                    Log.i("Response", "Nutrient Api Call Success");
                     if (response.body() != null) {
                         Foods foods = response.body().getFoods().get(0);
                         Food food = foods.getFood();
@@ -83,7 +117,7 @@ public class ProductActivity extends AppCompatActivity {
                         Toast.makeText(ProductActivity.this, "Zero search results", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Log.i("Response", "Call FAILED");
+                    Log.i("Response", "Usda API Call FAILED");
                 }
             }
 
