@@ -66,7 +66,11 @@ public class ProductActivity extends AppCompatActivity {
 //      Get data from main activity
         Intent intent = getIntent();
         String intentStringName = intent.getStringExtra("name");
-        productName.setText(intentStringName);
+
+        String[] splitProductName = intentStringName.split(",");
+        productName.setText(splitProductName[0]);
+
+
         intentStringNdbno = intent.getStringExtra("ndbno");
         intentStringUpc = intent.getStringExtra("upc");
 
