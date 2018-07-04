@@ -1,4 +1,4 @@
-package com.example.phoebemanning.capstone.Models;
+package com.example.phoebemanning.capstone.Models.Nutrient_Models;
 
 public class Nutrients {
 //    private String unit;

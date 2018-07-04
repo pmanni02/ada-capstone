@@ -10,9 +10,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.phoebemanning.capstone.Models.Item;
-import com.example.phoebemanning.capstone.Models.List;
-import com.example.phoebemanning.capstone.Models.ResponseData;
+import com.example.phoebemanning.capstone.Activities.ProductActivity;
+import com.example.phoebemanning.capstone.Models.Search_Models.Item;
+import com.example.phoebemanning.capstone.Models.Search_Models.List;
+import com.example.phoebemanning.capstone.Models.Search_Models.ResponseData;
 
 import retrofit2.Call;
 import retrofit2.Callback;

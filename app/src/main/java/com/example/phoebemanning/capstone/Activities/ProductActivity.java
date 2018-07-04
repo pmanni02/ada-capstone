@@ -1,4 +1,4 @@
-package com.example.phoebemanning.capstone;
+package com.example.phoebemanning.capstone.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,13 +9,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.phoebemanning.capstone.Models.Food;
-import com.example.phoebemanning.capstone.Models.Foods;
-import com.example.phoebemanning.capstone.Models.Item;
-import com.example.phoebemanning.capstone.Models.List;
-import com.example.phoebemanning.capstone.Models.NutrientData;
-import com.example.phoebemanning.capstone.Models.Nutrients;
-import com.example.phoebemanning.capstone.Models.ResponseData;
+import com.example.phoebemanning.capstone.Models.Nutrient_Models.Food;
+import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
+import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
+import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
+import com.example.phoebemanning.capstone.R;
+import com.example.phoebemanning.capstone.UsdaApi;
 
 import java.util.ArrayList;
 
@@ -43,12 +42,9 @@ public class ProductActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String intentStringName = intent.getStringExtra("name");
         productName.setText(intentStringName);
-
-        String intentStringUpc = intent.getStringExtra("upc");
         intentStringNdbno = intent.getStringExtra("ndbno");
 
-//        Log.i("UPC", intentStringUpc);
-//        Log.i("Ndbno", intentStringNdbno);
+//      String intentStringUpc = intent.getStringExtra("upc");
 
 //      Make GET request for product image
         getNutrients();
@@ -102,7 +98,7 @@ public class ProductActivity extends AppCompatActivity {
             }
         }
 
-        //                  Array Adapter
+        //Array Adapter
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ProductActivity.this, android.R.layout.simple_expandable_list_item_1, myArray);
         listView.setAdapter(arrayAdapter);
     }

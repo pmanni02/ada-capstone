@@ -1,5 +1,6 @@
-package com.example.phoebemanning.capstone.Models;
+package com.example.phoebemanning.capstone.Models.Nutrient_Models;
 
+import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

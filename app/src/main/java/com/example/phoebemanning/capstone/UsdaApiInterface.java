@@ -1,9 +1,7 @@
 package com.example.phoebemanning.capstone;
 
-import android.util.Log;
-
-import com.example.phoebemanning.capstone.Models.NutrientData;
-import com.example.phoebemanning.capstone.Models.ResponseData;
+import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
+import com.example.phoebemanning.capstone.Models.Search_Models.ResponseData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
