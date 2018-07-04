@@ -1,6 +1,9 @@
 package com.example.phoebemanning.capstone.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.phoebemanning.capstone.DownloadImage;
 import com.example.phoebemanning.capstone.ImageApi;
 import com.example.phoebemanning.capstone.Models.Image_Models.ImageData;
 import com.example.phoebemanning.capstone.Models.Image_Models.Items;
@@ -20,6 +24,11 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
 import com.example.phoebemanning.capstone.R;
 import com.example.phoebemanning.capstone.UsdaApi;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -34,6 +43,15 @@ public class ProductActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> myArray;
     ImageView imageView;
+
+    public String baseUrl = null;
+
+    public String firstImg;
+
+    public String getFirstImg() {
+        return firstImg;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +83,28 @@ public class ProductActivity extends AppCompatActivity {
         call.enqueue(new Callback<ImageData>() {
             @Override
             public void onResponse(Call<ImageData> call, Response<ImageData> response) {
-//                Log.i("URL", call.request().url().toString());
+                Log.i("URL", call.request().url().toString());
                 if(response.isSuccessful()){
 //                    Log.i("onResponse", "Call is successful");
                     if(response.body() != null){
-//                        Log.i("onResponse", "Body NOT NULL");
+                        Log.i("onResponse", "Body NOT NULL");
                         Items[] items = response.body().getItems();
                         String [] images = items[0].getImages();
-//                        Log.i("onResponse", images[0]);
-                        downloadImage(images);
+                        String testImg = images[0];
+                        baseUrl = testImg;
+
+
+                        Log.i("onResponse", images[0]);
+
+                        ImageDownloader imgTask = new ImageDownloader();
+                        Bitmap myImage;
+
+                        try {
+                            myImage = imgTask.execute(images).get();
+                            imageView.setImageBitmap(myImage);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                     } else {
                         Log.i("onResponse", "Body NULL");
@@ -90,8 +121,29 @@ public class ProductActivity extends AppCompatActivity {
         });
     }
 
-    public void downloadImage(String [] images){
-        String firstImg = images[0];
+    public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            try {
+                URL url = new URL(urls[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+                InputStream inputStream = connection.getInputStream();
+//              Convert to Bitmap
+                Bitmap myBitmap = BitmapFactory.decodeStream(inputStream);
+
+                return myBitmap;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 
     public void getNutrients() {

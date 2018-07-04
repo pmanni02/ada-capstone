@@ -6,10 +6,14 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface DownloadImageInterface {
 
-    @GET("{input}")
-    Call<ImageData> getImage(@Path("input") String input);
+//    @GET
+//    Call<String> getImage(@Url String url);
+
+    @GET("/")
+    Call<String> getImage(@Url String url);
 
 }
