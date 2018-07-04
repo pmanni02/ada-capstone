@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class ProductActivity extends AppCompatActivity {
     String intentStringNdbno;
     ListView listView;
     ArrayList<String> myArray;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class ProductActivity extends AppCompatActivity {
         productName = findViewById(R.id.productName);
         listView = findViewById(R.id.listView);
         myArray = new ArrayList<String>();
+        imageView = findViewById(R.id.imageView);
 
 //      Get data from main activity
         Intent intent = getIntent();
@@ -46,8 +49,15 @@ public class ProductActivity extends AppCompatActivity {
 
 //      String intentStringUpc = intent.getStringExtra("upc");
 
-//      Make GET request for product image
+//      Make GET request for product nutrients
         getNutrients();
+
+//      Make GET request for product image
+        getImage();
+    }
+
+    public void getImage(){
+
     }
 
     public void getNutrients() {
