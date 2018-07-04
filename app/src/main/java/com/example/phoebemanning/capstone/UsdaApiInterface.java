@@ -1,5 +1,7 @@
 package com.example.phoebemanning.capstone;
 
+import android.util.Log;
+
 import com.example.phoebemanning.capstone.Models.NutrientData;
 import com.example.phoebemanning.capstone.Models.ResponseData;
 

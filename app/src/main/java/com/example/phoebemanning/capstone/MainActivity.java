@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                Log.i("Response", "Success");
+//                Log.i("Response", "Success");
 
                 if (response.isSuccessful()){
                     if (response.body() != null){
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("upc", upcEditText.getText().toString());
                             startActivity(intent);
 
-                            Log.i("NAME", item.get(0).getName());
-                            Log.i("NDBNO", item.get(0).getNdbno());
+//                            Log.i("NAME", item.get(0).getName());
+//                            Log.i("NDBNO", item.get(0).getNdbno());
                         } else {
                             Toast.makeText(MainActivity.this, "Your search resulted in zero results. Change your parameters and try again", Toast.LENGTH_SHORT).show();
                         }
