@@ -51,42 +51,42 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 //        TODO: break out into separate function
         if(idInt.equals(204)){
             if(valueInt > 17.5 ){
-                viewHolder.itemView.setBackgroundColor(parseColor("#FF0000"));
+                viewHolder.title.setBackgroundColor(parseColor("#FF0000"));
             } else if(valueInt < 3){
-                viewHolder.itemView.setBackgroundColor(parseColor("#32CD32"));
+                viewHolder.title.setBackgroundColor(parseColor("#32CD32"));
             } else {
 //                Log.i("onBindViewHolder", "INSIDE ELSE STATEMENT");
-                viewHolder.itemView.setBackgroundColor(parseColor("#FFA500"));
+                viewHolder.title.setBackgroundColor(parseColor("#FFA500"));
             }
         }
 
         if(idInt.equals(269)){
             if(valueInt > 22.5){
-                viewHolder.itemView.setBackgroundColor(parseColor("#FF0000"));
+                viewHolder.title.setBackgroundColor(parseColor("#FF0000"));
             } else if(valueInt < 5){
-                viewHolder.itemView.setBackgroundColor(parseColor("#32CD32"));
+                viewHolder.title.setBackgroundColor(parseColor("#32CD32"));
             } else {
-                viewHolder.itemView.setBackgroundColor(parseColor("#FFA500"));
+                viewHolder.title.setBackgroundColor(parseColor("#FFA500"));
             }
         }
 
         if(idInt.equals(307)){
             if(valueInt > 1.5){
-                viewHolder.itemView.setBackgroundColor(parseColor("#FF0000"));
+                viewHolder.title.setBackgroundColor(parseColor("#FF0000"));
             } else if(valueInt < 0.3){
-                viewHolder.itemView.setBackgroundColor(parseColor("#32CD32"));
+                viewHolder.title.setBackgroundColor(parseColor("#32CD32"));
             } else {
-                viewHolder.itemView.setBackgroundColor(parseColor("#FFA500"));
+                viewHolder.title.setBackgroundColor(parseColor("#FFA500"));
             }
         }
 
         if(idInt.equals(606)){
             if(valueInt > 5){
-                viewHolder.itemView.setBackgroundColor(parseColor("#FF0000"));
+                viewHolder.title.setBackgroundColor(parseColor("#FF0000"));
             } else if(valueInt < 1.5){
-                viewHolder.itemView.setBackgroundColor(parseColor("#32CD32"));
+                viewHolder.title.setBackgroundColor(parseColor("#32CD32"));
             } else {
-                viewHolder.itemView.setBackgroundColor(parseColor("#FFA500"));
+                viewHolder.title.setBackgroundColor(parseColor("#FFA500"));
             }
         }
     }
