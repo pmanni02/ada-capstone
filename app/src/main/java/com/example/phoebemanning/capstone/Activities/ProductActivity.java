@@ -206,26 +206,28 @@ public class ProductActivity extends AppCompatActivity {
             id = Integer.parseInt(nutrients[i].getNutrient_id());
             name = nutrients[i].getName();
             if(id == 208 || id == 269 || id == 307 || id == 606){
-                myArray.add(name);
+                String [] splitName = name.split(",");
+                myArray.add(splitName[0]);
             }
         }
 
 //      RecyclerView custom adapter
         adapter = new RecyclerAdapter(myArray, ProductActivity.this);
         recyclerView.setAdapter(adapter);
+//        colorMenuRow(recyclerView,0);
 
     }
 
-//    public void colorMenuRow(ListView lv, int position)
+//    public void colorMenuRow(RecyclerView recyclerView, int position)
 //    {
 //        // Changing current row color
-//        TextView textView = (TextView) listView.getAdapter().getView(position,null,lv );
-//        if (textView == null){
+//        View view = recyclerView.getChildAt(position);
+//        if (view == null){
 //            Log.i("colorMenuRow", "view is NULL");
 //
 //        } else {
-//            Log.i("colorMenuRow", textView.getText().toString());
-//            textView.setBackgroundColor(parseColor("#4286f4"));
+////            Log.i("colorMenuRow", view.getText().toString());
+//            view.setBackgroundColor(parseColor("#4286f4"));
 //        }
 //
 //    }

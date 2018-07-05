@@ -7,7 +7,7 @@ public class Nutrients {
     private String name;
     private String nutrient_id;
     private String value;
-//    private Measures[] measures;
+    private Measures[] measures;
 
 //    private String group;
 
@@ -57,13 +57,13 @@ public class Nutrients {
 //        this.value = value;
 //    }
 
-//    public Measures[] getMeasures () {
-//        return measures;
-//    }
-//
-//    public void setMeasures (Measures[] measures) {
-//        this.measures = measures;
-//    }
+    public Measures[] getMeasures () {
+        return measures;
+    }
+
+    public void setMeasures (Measures[] measures) {
+        this.measures = measures;
+    }
 
 //    public String getGroup ()
 //    {

@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import static android.graphics.Color.parseColor;
+
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
     private List<String> nutrientTitles;
@@ -31,6 +33,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
         String title = nutrientTitles.get(i);
         viewHolder.title.setText(title);
+//        viewHolder.title.setBackgroundColor(parseColor("#4286f4"));
     }
 
     @Override
