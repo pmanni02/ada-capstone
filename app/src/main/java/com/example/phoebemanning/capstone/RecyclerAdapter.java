@@ -30,7 +30,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
         String title = nutrientTitles.get(i);
-        viewHolder.Title.setText(title);
+        viewHolder.title.setText(title);
     }
 
     @Override
@@ -40,11 +40,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Title;
+        TextView title;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            Title = itemView.findViewById(R.id.nutrient_item);
+            title = itemView.findViewById(R.id.nutrient_item);
         }
     }
 }

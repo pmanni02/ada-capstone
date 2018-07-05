@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
 import com.example.phoebemanning.capstone.R;
+import com.example.phoebemanning.capstone.RecyclerAdapter;
 import com.example.phoebemanning.capstone.UsdaApi;
 
 import java.io.IOException;
@@ -52,11 +56,15 @@ public class ProductActivity extends AppCompatActivity {
 
     public String baseUrl = null;
 
-    public String firstImg;
+//    public String firstImg;
 
-    public String getFirstImg() {
-        return firstImg;
-    }
+//    public String getFirstImg() {
+//        return firstImg;
+//    }
+
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    RecyclerAdapter adapter;
 
 
     @Override
@@ -65,9 +73,14 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         productName = findViewById(R.id.productName);
-        listView = findViewById(R.id.listView);
+//        listView = findViewById(R.id.listView);
         myArray = new ArrayList<String>();
         imageView = findViewById(R.id.imageView);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
 //      Get data from main activity
         Intent intent = getIntent();
@@ -206,9 +219,13 @@ public class ProductActivity extends AppCompatActivity {
         }
 
         //Array Adapter
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ProductActivity.this, android.R.layout.simple_expandable_list_item_1, myArray);
-        listView.setAdapter(arrayAdapter);
-//        colorMenuRow(listView, 2);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ProductActivity.this, android.R.layout.simple_expandable_list_item_1, myArray);
+//        listView.setAdapter(arrayAdapter);
+        //        colorMenuRow(listView, 2);
+
+//      RecyclerView custom adapter
+        adapter = new RecyclerAdapter(myArray, ProductActivity.this);
+        recyclerView.setAdapter(adapter);
 
     }
 
