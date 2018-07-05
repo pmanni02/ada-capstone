@@ -50,17 +50,10 @@ public class ProductActivity extends AppCompatActivity {
     TextView productName;
     String intentStringNdbno;
     String intentStringUpc;
-    ListView listView;
     ArrayList<String> myArray;
     ImageView imageView;
 
     public String baseUrl = null;
-
-//    public String firstImg;
-
-//    public String getFirstImg() {
-//        return firstImg;
-//    }
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
@@ -73,7 +66,6 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         productName = findViewById(R.id.productName);
-//        listView = findViewById(R.id.listView);
         myArray = new ArrayList<String>();
         imageView = findViewById(R.id.imageView);
 
@@ -217,11 +209,6 @@ public class ProductActivity extends AppCompatActivity {
                 myArray.add(name);
             }
         }
-
-        //Array Adapter
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ProductActivity.this, android.R.layout.simple_expandable_list_item_1, myArray);
-//        listView.setAdapter(arrayAdapter);
-        //        colorMenuRow(listView, 2);
 
 //      RecyclerView custom adapter
         adapter = new RecyclerAdapter(myArray, ProductActivity.this);
