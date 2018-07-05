@@ -75,7 +75,6 @@ public class Nutrients {
 //        this.group = group;
 //    }
 
-//    TODO: add measures class and add to recyclerView
 
     @Override
     public String toString() {

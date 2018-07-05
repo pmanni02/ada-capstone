@@ -3,6 +3,7 @@ package com.example.phoebemanning.capstone;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +36,59 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
         String title = nutrients.get(i).getName().split(",")[0];
-//        String amount = nutrients.get(i).getNutrient_id();
+        String id = nutrients.get(i).getNutrient_id();
+        Integer idInt = Integer.parseInt(id);
+
         Measures measure = nutrients.get(i).getMeasures()[0];
-        String amount = measure.getValue();
+        String value = measure.getValue();
+        Float valueInt = Float.parseFloat(value);
+
         String unit = measure.getEunit();
 
         viewHolder.title.setText(title);
-        viewHolder.amount.setText(amount+unit);
-//        viewHolder.title.setBackgroundColor(parseColor("#4286f4"));
+        viewHolder.amount.setText(value + " " + unit);
+
+//        TODO: break out into separate function
+        if(idInt.equals(204)){
+            if(valueInt > 17.5 ){
+                viewHolder.itemView.setBackgroundColor(parseColor("#FF0000"));
+            } else if(valueInt < 3){
+                viewHolder.itemView.setBackgroundColor(parseColor("#32CD32"));
+            } else {
+//                Log.i("onBindViewHolder", "INSIDE ELSE STATEMENT");
+                viewHolder.itemView.setBackgroundColor(parseColor("#FFA500"));
+            }
+        }
+
+        if(idInt.equals(269)){
+            if(valueInt > 22.5){
+                viewHolder.itemView.setBackgroundColor(parseColor("#FF0000"));
+            } else if(valueInt < 5){
+                viewHolder.itemView.setBackgroundColor(parseColor("#32CD32"));
+            } else {
+                viewHolder.itemView.setBackgroundColor(parseColor("#FFA500"));
+            }
+        }
+
+        if(idInt.equals(307)){
+            if(valueInt > 1.5){
+                viewHolder.itemView.setBackgroundColor(parseColor("#FF0000"));
+            } else if(valueInt < 0.3){
+                viewHolder.itemView.setBackgroundColor(parseColor("#32CD32"));
+            } else {
+                viewHolder.itemView.setBackgroundColor(parseColor("#FFA500"));
+            }
+        }
+
+        if(idInt.equals(606)){
+            if(valueInt > 5){
+                viewHolder.itemView.setBackgroundColor(parseColor("#FF0000"));
+            } else if(valueInt < 1.5){
+                viewHolder.itemView.setBackgroundColor(parseColor("#32CD32"));
+            } else {
+                viewHolder.itemView.setBackgroundColor(parseColor("#FFA500"));
+            }
+        }
     }
 
     @Override
@@ -61,4 +107,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             amount = itemView.findViewById(R.id.nutrient_amount);
         }
     }
+
 }

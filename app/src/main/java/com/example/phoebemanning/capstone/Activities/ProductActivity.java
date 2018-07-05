@@ -51,10 +51,7 @@ public class ProductActivity extends AppCompatActivity {
     String intentStringNdbno;
     String intentStringUpc;
     ImageView imageView;
-
-//    ArrayList<String> myArray;
     ArrayList<Nutrients> nutrientArray;
-
 
     public String baseUrl = null;
 
@@ -208,8 +205,7 @@ public class ProductActivity extends AppCompatActivity {
         for(int i=0; i < nutrients.length; i++){
             id = Integer.parseInt(nutrients[i].getNutrient_id());
             name = nutrients[i].getName();
-            if(id == 208 || id == 269 || id == 307 || id == 606){
-//                String [] splitName = name.split(",");
+            if(id == 208|| id == 204 ||id == 606|| id == 269 || id == 307 ){
                 nutrientArray.add(nutrients[i]);
             }
         }
