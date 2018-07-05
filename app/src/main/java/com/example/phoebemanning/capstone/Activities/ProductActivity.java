@@ -3,10 +3,13 @@ package com.example.phoebemanning.capstone.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -34,6 +37,9 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.graphics.Color.RED;
+import static android.graphics.Color.parseColor;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -66,19 +72,18 @@ public class ProductActivity extends AppCompatActivity {
 //      Get data from main activity
         Intent intent = getIntent();
         String intentStringName = intent.getStringExtra("name");
-
         String[] splitProductName = intentStringName.split(",");
         productName.setText(splitProductName[0]);
-
 
         intentStringNdbno = intent.getStringExtra("ndbno");
         intentStringUpc = intent.getStringExtra("upc");
 
+//      Make GET request for product image
+        getImage();
+
 //      Make GET request for product nutrients
         getNutrients();
 
-//      Make GET request for product image
-        getImage();
     }
 
     public void getImage(){
@@ -203,7 +208,23 @@ public class ProductActivity extends AppCompatActivity {
         //Array Adapter
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ProductActivity.this, android.R.layout.simple_expandable_list_item_1, myArray);
         listView.setAdapter(arrayAdapter);
+//        colorMenuRow(listView, 2);
+
     }
+
+//    public void colorMenuRow(ListView lv, int position)
+//    {
+//        // Changing current row color
+//        TextView textView = (TextView) listView.getAdapter().getView(position,null,lv );
+//        if (textView == null){
+//            Log.i("colorMenuRow", "view is NULL");
+//
+//        } else {
+//            Log.i("colorMenuRow", textView.getText().toString());
+//            textView.setBackgroundColor(parseColor("#4286f4"));
+//        }
+//
+//    }
 
 }
 
