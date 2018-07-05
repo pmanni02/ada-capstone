@@ -50,8 +50,11 @@ public class ProductActivity extends AppCompatActivity {
     TextView productName;
     String intentStringNdbno;
     String intentStringUpc;
-    ArrayList<String> myArray;
     ImageView imageView;
+
+//    ArrayList<String> myArray;
+    ArrayList<Nutrients> nutrientArray;
+
 
     public String baseUrl = null;
 
@@ -66,7 +69,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         productName = findViewById(R.id.productName);
-        myArray = new ArrayList<String>();
+        nutrientArray = new ArrayList<Nutrients>();
         imageView = findViewById(R.id.imageView);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -206,13 +209,13 @@ public class ProductActivity extends AppCompatActivity {
             id = Integer.parseInt(nutrients[i].getNutrient_id());
             name = nutrients[i].getName();
             if(id == 208 || id == 269 || id == 307 || id == 606){
-                String [] splitName = name.split(",");
-                myArray.add(splitName[0]);
+//                String [] splitName = name.split(",");
+                nutrientArray.add(nutrients[i]);
             }
         }
 
 //      RecyclerView custom adapter
-        adapter = new RecyclerAdapter(myArray, ProductActivity.this);
+        adapter = new RecyclerAdapter(nutrientArray, ProductActivity.this);
         recyclerView.setAdapter(adapter);
 //        colorMenuRow(recyclerView,0);
 
