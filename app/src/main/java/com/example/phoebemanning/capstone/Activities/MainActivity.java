@@ -11,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.Models.Search_Models.Item;
 import com.example.phoebemanning.capstone.Models.Search_Models.List;
 import com.example.phoebemanning.capstone.Models.Search_Models.ResponseData;
+import com.example.phoebemanning.capstone.Models.User;
 import com.example.phoebemanning.capstone.R;
 import com.example.phoebemanning.capstone.Apis.UsdaApi;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,10 +37,9 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     EditText upcEditText;
+    TextView userName;
 
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+//    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
 
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 //      Hide the Keyboard after submit
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        mgr.hideSoftInputFromWindow(upcEditText.getWindowToken(), 0);
+        Objects.requireNonNull(mgr).hideSoftInputFromWindow(upcEditText.getWindowToken(), 0);
 
         if (upcEditText.length() != 12){
             Toast.makeText(this, "Invalid UPC", Toast.LENGTH_LONG).show();
@@ -104,28 +107,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         upcEditText = findViewById(R.id.upcEditText);
+        userName = findViewById(R.id.userName);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
 
         String current_id = mUser.getUid();
-        databaseReference = database.getReference().child("Users").child(current_id);
+        DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
 
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                User user = dataSnapshot.getValue(User.class);
-//                String fullName = user.getFirstName() + " " + user.getLastName();
-//                userEmail.setText(fullName);
-////                Toast.makeText(UserActivity.this, user.getFirstName(), Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(UserActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                String fullName = null;
+                if (user != null) {
+                    fullName = "Welcome " + user.getFirstName() + " " + user.getLastName() + "!";
+                }
+                userName.setText(fullName);
+//                Toast.makeText(UserActivity.this, user.getFirstName(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(MainActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
