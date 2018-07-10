@@ -2,9 +2,12 @@ package com.example.phoebemanning.capstone.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -15,6 +18,13 @@ import com.example.phoebemanning.capstone.Models.Search_Models.List;
 import com.example.phoebemanning.capstone.Models.Search_Models.ResponseData;
 import com.example.phoebemanning.capstone.R;
 import com.example.phoebemanning.capstone.Apis.UsdaApi;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,6 +33,12 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     EditText upcEditText;
+
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseUser mUser;
+    private FirebaseAuth mAuth;
 
     public void submitOnClick(View view) {
 
@@ -88,5 +104,47 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         upcEditText = findViewById(R.id.upcEditText);
+
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+
+        String current_id = mUser.getUid();
+        databaseReference = database.getReference().child("Users").child(current_id);
+
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                User user = dataSnapshot.getValue(User.class);
+//                String fullName = user.getFirstName() + " " + user.getLastName();
+//                userEmail.setText(fullName);
+////                Toast.makeText(UserActivity.this, user.getFirstName(), Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Toast.makeText(UserActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.action_logout){
+            if(mUser !=null && mAuth != null){
+                mAuth.signOut();
+                Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
