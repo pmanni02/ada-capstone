@@ -81,10 +81,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-//    public void createAccountClick(View view){
-//        Intent intent = new Intent(LoginActivity.this, NewUserActivity.class);
-//        startActivity(intent);
-//    }
+    public void createAccountClick(View view){
+        Intent intent = new Intent(LoginActivity.this, NewUserActivity.class);
+        startActivity(intent);
+    }
 
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
