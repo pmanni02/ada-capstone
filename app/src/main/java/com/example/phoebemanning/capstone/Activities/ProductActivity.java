@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -25,6 +27,9 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
 import com.example.phoebemanning.capstone.R;
 import com.example.phoebemanning.capstone.Adapters.RecyclerAdapter;
 import com.example.phoebemanning.capstone.Apis.UsdaApi;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +43,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductActivity extends AppCompatActivity {
+
+    private FirebaseUser mUser;
+    private FirebaseAuth mAuth;
 
     TextView productName;
     String intentStringNdbno;
@@ -60,6 +68,10 @@ public class ProductActivity extends AppCompatActivity {
 
         loadProductProgress = findViewById(R.id.loadProductProgress);
         loadProductProgress.setVisibility(View.VISIBLE);
+
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         productName = findViewById(R.id.productName);
         nutrientArray = new ArrayList<Nutrients>();
@@ -84,7 +96,6 @@ public class ProductActivity extends AppCompatActivity {
 
 //      Make GET request for product image
         getImage();
-
     }
 
     public void getImage(){
@@ -120,8 +131,8 @@ public class ProductActivity extends AppCompatActivity {
                 } else {
                     Log.i("onResponse", "Image API call failed");
                     imageView.setImageResource(R.drawable.default_img);
+                    loadProductProgress.setVisibility(View.INVISIBLE);
                 }
-
             }
 
             @Override
@@ -207,7 +218,26 @@ public class ProductActivity extends AppCompatActivity {
 //      RecyclerView custom adapter
         adapter = new RecyclerAdapter(nutrientArray, ProductActivity.this);
         recyclerView.setAdapter(adapter);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.action_logout){
+            if(mUser !=null && mAuth != null){
+                mAuth.signOut();
+                Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ProductActivity.this, LoginActivity.class));
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

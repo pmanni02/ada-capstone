@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-
         String current_id = mUser.getUid();
         DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
 
