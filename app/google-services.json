@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "348298158874",
+    "firebase_url": "https://ada-capstone-697b3.firebaseio.com",
+    "project_id": "ada-capstone-697b3",
+    "storage_bucket": "ada-capstone-697b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348298158874:android:3b735dba0dfc9df5",
+        "android_client_info": {
+          "package_name": "com.example.phoebemanning.capstone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348298158874-u6plppqq5g3ab7qci2hilnp94nld388i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.phoebemanning.capstone",
+            "certificate_hash": "abaee54f10a6e275114046192378c1b8ff1dd708"
+          }
+        },
+        {
+          "client_id": "348298158874-nhsl70gvbllc1sa3sf04qkejc4m9dci4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRHMmMIqbD0ujonWUr3meoBqegTEgPMFk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348298158874-nhsl70gvbllc1sa3sf04qkejc4m9dci4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
