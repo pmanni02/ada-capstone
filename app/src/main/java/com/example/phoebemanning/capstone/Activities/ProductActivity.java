@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,6 +61,9 @@ public class ProductActivity extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     RecyclerAdapter adapter;
     ProgressBar loadProductProgress;
+    FloatingActionButton addNewScanButton;
+
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,7 @@ public class ProductActivity extends AppCompatActivity {
         productName = findViewById(R.id.productName);
         nutrientArray = new ArrayList<Nutrients>();
         imageView = findViewById(R.id.imageView);
+        addNewScanButton = findViewById(R.id.floatingActionButton);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -97,6 +102,13 @@ public class ProductActivity extends AppCompatActivity {
 
 //      Make GET request for product image
         getImage();
+
+        addNewScanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ProductActivity.this, "FAB Touched!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void getImage(){
