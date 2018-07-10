@@ -69,7 +69,7 @@ public class ProductActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        
+
 //      Get data from main activity
         Intent intent = getIntent();
         String intentStringName = intent.getStringExtra("name");
@@ -94,24 +94,18 @@ public class ProductActivity extends AppCompatActivity {
         call.enqueue(new Callback<ImageData>() {
             @Override
             public void onResponse(Call<ImageData> call, Response<ImageData> response) {
-//                Log.i("URL", call.request().url().toString());
 
                 if(response.isSuccessful()){
                     loadProductProgress.setVisibility(View.INVISIBLE);
-//                    Log.i("onResponse", "Call is successful");
                     if(response.body() != null){
-//                        Log.i("onResponse", "Body NOT NULL");
 
                         Items[] items = response.body().getItems();
                         String [] images = items[0].getImages();
                         String testImg = images[0];
                         baseUrl = testImg;
 
-//                        Log.i("onResponse", images[0]);
-
                         ImageDownloader imgTask = new ImageDownloader();
                         Bitmap myImage;
-
 
                         try {
                             myImage = imgTask.execute(images).get();
@@ -174,14 +168,12 @@ public class ProductActivity extends AppCompatActivity {
 //                Log.i("URL", call.request().url().toString());
 
                 if(response.isSuccessful()) {
-//                    Log.i("Response", "Nutrient Api Call Success");
                     if (response.body() != null) {
                         Foods foods = response.body().getFoods().get(0);
                         Food food = foods.getFood();
                         Nutrients [] nutrients = food.getNutrients();
 
                         setList(nutrients);
-//                        Log.i("Nutrient List", nutrients[0].getName());
                     } else {
                         Log.i("ERROR", "ERROR");
                         Toast.makeText(ProductActivity.this, "Zero search results", Toast.LENGTH_SHORT).show();
@@ -215,8 +207,6 @@ public class ProductActivity extends AppCompatActivity {
 //      RecyclerView custom adapter
         adapter = new RecyclerAdapter(nutrientArray, ProductActivity.this);
         recyclerView.setAdapter(adapter);
-
-//        colorMenuRow(recyclerView,0);
 
     }
 
