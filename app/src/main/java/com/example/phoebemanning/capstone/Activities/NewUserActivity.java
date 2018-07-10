@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.Models.User;
@@ -31,8 +32,11 @@ public class NewUserActivity extends AppCompatActivity {
     EditText weight;
     EditText email;
     EditText password;
+    ProgressBar newUserProgress;
 
     public void createAccount(View view){
+
+
         final String emailString = email.getText().toString();
         final String passwordString = password.getText().toString();
         final String firstNameString = firstName.getText().toString();
@@ -41,6 +45,7 @@ public class NewUserActivity extends AppCompatActivity {
         final Integer weightInt = Integer.parseInt(weight.getText().toString());
 
         if(!emailString.equals("") && !passwordString.equals("")){
+            newUserProgress.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(NewUserActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -59,11 +64,15 @@ public class NewUserActivity extends AppCompatActivity {
                         Intent intent = new Intent(NewUserActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
+                    newUserProgress.setVisibility(View.INVISIBLE);
                 }
             });
         } else {
             Toast.makeText(this, "Username and password cannot be empty", Toast.LENGTH_SHORT).show();
+            newUserProgress.setVisibility(View.INVISIBLE);
         }
+
+
     }
 
     @Override
@@ -79,5 +88,6 @@ public class NewUserActivity extends AppCompatActivity {
         weight = findViewById(R.id.weight);
         email = findViewById(R.id.newEmailId);
         password = findViewById(R.id.newPasswordId);
+        newUserProgress = findViewById(R.id.newUserProgress);
     }
 }
