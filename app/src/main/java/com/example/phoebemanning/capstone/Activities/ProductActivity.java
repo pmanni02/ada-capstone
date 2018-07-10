@@ -106,7 +106,7 @@ public class ProductActivity extends AppCompatActivity {
         addNewScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProductActivity.this, "FAB Touched!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ProductActivity.this, MainActivity.class));
             }
         });
     }
