@@ -17,11 +17,6 @@
         android:text="Product Name"
         android:textAlignment="center"
         android:textSize="18sp" />
-        <!--app:layout_constraintBottom_toTopOf="@+id/imageView"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
 
     <ImageView
         android:id="@+id/imageView"
@@ -31,10 +26,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="88dp"
         android:background="#00ffffff" />
-        <!--app:layout_constraintBottom_toTopOf="@+id/recyclerView"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/productName" />-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -45,10 +36,21 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp" />
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
+
+    <ProgressBar
+        android:id="@+id/loadProductProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="-2dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </RelativeLayout>

@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,12 +50,16 @@ public class ProductActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     RecyclerAdapter adapter;
-
+    ProgressBar loadProductProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+        loadProductProgress = findViewById(R.id.loadProductProgress);
+        loadProductProgress.setVisibility(View.VISIBLE);
 
         productName = findViewById(R.id.productName);
         nutrientArray = new ArrayList<Nutrients>();
@@ -63,7 +69,7 @@ public class ProductActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
+        
 //      Get data from main activity
         Intent intent = getIntent();
         String intentStringName = intent.getStringExtra("name");
@@ -73,15 +79,16 @@ public class ProductActivity extends AppCompatActivity {
         intentStringNdbno = intent.getStringExtra("ndbno");
         intentStringUpc = intent.getStringExtra("upc");
 
-//      Make GET request for product image
-        getImage();
-
 //      Make GET request for product nutrients
         getNutrients();
+
+//      Make GET request for product image
+        getImage();
 
     }
 
     public void getImage(){
+
         Call<ImageData> call = ImageApi.getClient().getImage(intentStringUpc);
 
         call.enqueue(new Callback<ImageData>() {
@@ -90,6 +97,7 @@ public class ProductActivity extends AppCompatActivity {
 //                Log.i("URL", call.request().url().toString());
 
                 if(response.isSuccessful()){
+                    loadProductProgress.setVisibility(View.INVISIBLE);
 //                    Log.i("onResponse", "Call is successful");
                     if(response.body() != null){
 //                        Log.i("onResponse", "Body NOT NULL");
@@ -103,6 +111,7 @@ public class ProductActivity extends AppCompatActivity {
 
                         ImageDownloader imgTask = new ImageDownloader();
                         Bitmap myImage;
+
 
                         try {
                             myImage = imgTask.execute(images).get();
@@ -118,13 +127,16 @@ public class ProductActivity extends AppCompatActivity {
                     Log.i("onResponse", "Image API call failed");
                     imageView.setImageResource(R.drawable.default_img);
                 }
+
             }
 
             @Override
             public void onFailure(Call<ImageData> call, Throwable t) {
                 Toast.makeText(ProductActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
+
         });
+
     }
 
     public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
@@ -203,23 +215,10 @@ public class ProductActivity extends AppCompatActivity {
 //      RecyclerView custom adapter
         adapter = new RecyclerAdapter(nutrientArray, ProductActivity.this);
         recyclerView.setAdapter(adapter);
+
 //        colorMenuRow(recyclerView,0);
 
     }
-
-//    public void colorMenuRow(RecyclerView recyclerView, int position)
-//    {
-//        // Changing current row color
-//        View view = recyclerView.getChildAt(position);
-//        if (view == null){
-//            Log.i("colorMenuRow", "view is NULL");
-//
-//        } else {
-////            Log.i("colorMenuRow", view.getText().toString());
-//            view.setBackgroundColor(parseColor("#4286f4"));
-//        }
-//
-//    }
 
 }
 
