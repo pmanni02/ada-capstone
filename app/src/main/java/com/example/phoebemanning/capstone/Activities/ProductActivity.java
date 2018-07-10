@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.Apis.ImageApi;
+import com.example.phoebemanning.capstone.BuildConfig;
 import com.example.phoebemanning.capstone.Models.Image_Models.ImageData;
 import com.example.phoebemanning.capstone.Models.Image_Models.Items;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Food;
@@ -171,7 +172,7 @@ public class ProductActivity extends AppCompatActivity {
 
     public void getNutrients() {
 
-        Call<NutrientData> call = UsdaApi.getClient().getNutrients(intentStringNdbno, getResources().getString(R.string.usda_api_key));
+        Call<NutrientData> call = UsdaApi.getClient().getNutrients(intentStringNdbno, BuildConfig.ApiKey);
 
         call.enqueue(new Callback<NutrientData>() {
             @Override

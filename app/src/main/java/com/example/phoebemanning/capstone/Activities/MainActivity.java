@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.phoebemanning.capstone.BuildConfig;
 import com.example.phoebemanning.capstone.Models.Search_Models.Item;
 import com.example.phoebemanning.capstone.Models.Search_Models.List;
 import com.example.phoebemanning.capstone.Models.Search_Models.ResponseData;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getProductCode(){
         Log.i("UPC TEXT: ", upcEditText.getText().toString());
-        Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(), getResources().getString(R.string.usda_api_key));
+        Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(), BuildConfig.ApiKey);
 
         call.enqueue(new Callback<ResponseData>() {
             @Override
