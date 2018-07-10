@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.R;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
+    private ProgressBar loginProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        loginProgress = findViewById(R.id.loginProgress);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -56,17 +59,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginOnClick(View view){
+
         final String emailString = email.getText().toString();
         final String passwordString = password.getText().toString();
 
         if(!emailString.equals("") && !passwordString.equals("")){
+            loginProgress.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(emailString, passwordString)
                     .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>(){
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-
                             if(!task.isSuccessful()){
-                                Toast.makeText(LoginActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
+                                String exception = task.getException().getMessage();
+                                Toast.makeText(LoginActivity.this, exception, Toast.LENGTH_SHORT).show();
                             } else {
                                 if(!emailString.equals("") || !passwordString.equals("")){
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -76,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Username and password cannot be empty", Toast.LENGTH_SHORT).show();
                                 }
                             }
+
+                            loginProgress.setVisibility(View.INVISIBLE);
                         }
                     });
         }
