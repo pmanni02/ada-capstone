@@ -1,9 +1,8 @@
-package com.example.phoebemanning.capstone;
+package com.example.phoebemanning.capstone.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Measures;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
+import com.example.phoebemanning.capstone.R;
 
 import java.util.List;
 

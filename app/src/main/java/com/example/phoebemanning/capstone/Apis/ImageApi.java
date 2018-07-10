@@ -1,12 +1,7 @@
-package com.example.phoebemanning.capstone;
-
-import android.content.Context;
-import android.provider.SyncStateContract;
+package com.example.phoebemanning.capstone.Apis;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.provider.Settings.Global.getString;
 
 public class ImageApi {
 

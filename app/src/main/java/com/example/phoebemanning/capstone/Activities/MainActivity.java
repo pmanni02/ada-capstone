@@ -1,4 +1,4 @@
-package com.example.phoebemanning.capstone;
+package com.example.phoebemanning.capstone.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +10,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.phoebemanning.capstone.Activities.ProductActivity;
 import com.example.phoebemanning.capstone.Models.Search_Models.Item;
 import com.example.phoebemanning.capstone.Models.Search_Models.List;
 import com.example.phoebemanning.capstone.Models.Search_Models.ResponseData;
+import com.example.phoebemanning.capstone.R;
+import com.example.phoebemanning.capstone.Apis.UsdaApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;

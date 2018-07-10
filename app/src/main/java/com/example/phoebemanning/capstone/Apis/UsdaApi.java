@@ -1,4 +1,4 @@
-package com.example.phoebemanning.capstone;
+package com.example.phoebemanning.capstone.Apis;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

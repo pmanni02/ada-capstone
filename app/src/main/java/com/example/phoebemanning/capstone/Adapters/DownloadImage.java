@@ -1,6 +1,6 @@
-package com.example.phoebemanning.capstone;
+package com.example.phoebemanning.capstone.Adapters;
 
-import android.provider.SyncStateContract;
+import com.example.phoebemanning.capstone.Apis.DownloadImageInterface;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

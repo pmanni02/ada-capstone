@@ -3,24 +3,17 @@ package com.example.phoebemanning.capstone.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.phoebemanning.capstone.DownloadImage;
-import com.example.phoebemanning.capstone.ImageApi;
+import com.example.phoebemanning.capstone.Apis.ImageApi;
 import com.example.phoebemanning.capstone.Models.Image_Models.ImageData;
 import com.example.phoebemanning.capstone.Models.Image_Models.Items;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Food;
@@ -28,8 +21,8 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
 import com.example.phoebemanning.capstone.R;
-import com.example.phoebemanning.capstone.RecyclerAdapter;
-import com.example.phoebemanning.capstone.UsdaApi;
+import com.example.phoebemanning.capstone.Adapters.RecyclerAdapter;
+import com.example.phoebemanning.capstone.Apis.UsdaApi;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,9 +34,6 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.graphics.Color.RED;
-import static android.graphics.Color.parseColor;
 
 public class ProductActivity extends AppCompatActivity {
 

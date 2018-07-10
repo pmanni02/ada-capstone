@@ -1,4 +1,4 @@
-package com.example.phoebemanning.capstone;
+package com.example.phoebemanning.capstone.Apis;
 
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
 import com.example.phoebemanning.capstone.Models.Search_Models.ResponseData;
