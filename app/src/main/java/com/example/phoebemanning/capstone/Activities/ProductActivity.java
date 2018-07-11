@@ -284,76 +284,48 @@ public class ProductActivity extends AppCompatActivity {
 
         final String name = productName.getText().toString();
         final String upcCode = intentStringUpc;
-        Scan newScan = new Scan(name, upcCode);
 
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         if (current_user != null) {
             String uid = current_user.getUid();
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
-            Log.i("ref", databaseReference.getKey());
+            
 
 //          read database to check for "null" scan
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    Log.i("onDataChange", (Long.parseLong(dataSnapshot.ge)));
-//                    Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
-                    int count = 0;
-                    for( DataSnapshot snap : dataSnapshot.getChildren()){
-                        count++;
-                    }
-
-                    ArrayList<Scan> list = new ArrayList<Scan>();
-//                    if(dataSnapshot.getChildren() != null){
-                        for(DataSnapshot s : dataSnapshot.getChildren()){
-                            Scan scan = s.getValue(Scan.class);
-                            list.add(scan);
-                        }
-//                    }
-
-                    if(count == 0) {
-                        if (list.get(0).getProductName().equals("Null")) {
-                            updateScan(name, upcCode);
-//                        } else {
-//                            addNewScan(name, upcCode);
-//                        }
-//                    }
-                        }
-                    }
-
-
-
-//                    if(count == 1){
-//                        Log.i("Count", "ONE");
-////                        int innerCount = 0;
-////                        for(DataSnapshot single : dataSnapshot.getChildren()){
-////                            Scan scan = single.getValue(Scan.class);
-////                            if(scan != null){
-////                                    if(scan.getProductName().equals("Null")){
-////                                        updateScan(name, upcCode);
-////                                    } else {
-////                                        addNewScan(name, upcCode);
-////                                    }
-////                            }
-//////                            innerCount++;
-////                        }
+//            databaseReference.addValueEventListener(new ValueEventListener() {
+//                ArrayList<Scan> list = new ArrayList<Scan>();
 //
-//                    } else if(count > 1){
-//                        Log.i("Count", "> ONE");
-//                        addNewScan(name, upcCode);
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    int count = 0;
+//                    for( DataSnapshot snap : dataSnapshot.getChildren()){
+//                        count += 1;
 //                    }
+//
+//                    for(DataSnapshot s : dataSnapshot.getChildren()){
+//                        Scan scan = s.getValue(Scan.class);
+//                        list.add(scan);
+//                    }
+//
+//                    if(list.size() ==1 && list.get(0).getProductName().equals("Null")){
+//
+//                    }
+//                }
+//
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//                    Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
 
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
 
-//          push new scan onto the list
+            //          push new scan onto the list
+            addNewScan(name, upcCode);
 
         }
+
     }
 
     private void updateScan(final String name, final String upcCode) {

@@ -70,6 +70,8 @@ public class NewUserActivity extends AppCompatActivity {
 //                        scanList.getScans().add(emptyScan);
                         DatabaseReference databaseReferenceScan = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid).push();
                         databaseReferenceScan.setValue(emptyScan);
+//                        DatabaseReference databaseReferenceScan = FirebaseDatabase.getInstance().getReference().child("Scans").push();
+//                        databaseReferenceScan.setValue(uid);
 
                         Intent intent = new Intent(NewUserActivity.this, MainActivity.class);
                         startActivity(intent);
