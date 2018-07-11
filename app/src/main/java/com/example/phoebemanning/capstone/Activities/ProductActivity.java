@@ -57,7 +57,7 @@ import retrofit2.Response;
 
 public class ProductActivity extends AppCompatActivity {
 
-    private static final String TAG = "ProductActivity";
+//    private static final String TAG = "ProductActivity";
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
 
@@ -75,8 +75,7 @@ public class ProductActivity extends AppCompatActivity {
     ProgressBar loadProductProgress;
     FloatingActionButton addNewScanButton;
     Menu main_menu;
-    Item favorite;
-    
+//    Item favorite;
 
     @SuppressLint("ResourceType")
     @Override
@@ -271,7 +270,6 @@ public class ProductActivity extends AppCompatActivity {
 
             case R.id.action_favorite:
                 saveUpc();
-//                Toast.makeText(this, "Favorite Selected", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
@@ -304,7 +302,7 @@ public class ProductActivity extends AppCompatActivity {
                         updateScan(name, upcCode);
                         Toast.makeText(ProductActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
                     } else {
-//                      check if scan already exists before adding
+                        //check if scan already exists before adding
                         Boolean found = false;
                         for(int i=0; i<size; i++){
                             if(list.get(i).getProductName().equals(name)){
@@ -344,7 +342,6 @@ public class ProductActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     private void addNewScan(String name, String upcCode) {

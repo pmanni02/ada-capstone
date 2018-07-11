@@ -1,6 +1,5 @@
 package com.example.phoebemanning.capstone.Activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.Models.Scan;
-import com.example.phoebemanning.capstone.Models.ScanList;
 import com.example.phoebemanning.capstone.Models.User;
 import com.example.phoebemanning.capstone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -63,15 +61,10 @@ public class NewUserActivity extends AppCompatActivity {
                         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
                         databaseReference.setValue(user);
 
-//                      add empty arrayList of Scan objects
-//                        ScanList scanList = new ScanList();
+//                      add empty scan to database
                         Scan emptyScan = new Scan("Null", "Null");
-
-//                        scanList.getScans().add(emptyScan);
                         DatabaseReference databaseReferenceScan = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid).push();
                         databaseReferenceScan.setValue(emptyScan);
-//                        DatabaseReference databaseReferenceScan = FirebaseDatabase.getInstance().getReference().child("Scans").push();
-//                        databaseReferenceScan.setValue(uid);
 
                         Intent intent = new Intent(NewUserActivity.this, MainActivity.class);
                         startActivity(intent);
