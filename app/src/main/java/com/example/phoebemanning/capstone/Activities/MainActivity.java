@@ -138,21 +138,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.logout, menu);
+        getMenuInflater().inflate(R.menu.no_favorite_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.action_logout){
-            if(mUser !=null && mAuth != null){
-                mAuth.signOut();
-                Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        switch (item.getItemId()){
+            case R.id.action_logout:
+                if(mUser !=null && mAuth != null){
+                    mAuth.signOut();
+                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                }
+                return true;
+
+            case R.id.action_user_scans:
+                startActivity(new Intent(MainActivity.this, UserScansActivity.class));
                 finish();
-            }
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }
