@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".Activities.ProductActivity" />
         <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.NewUserActivity"></activity>
+        <activity android:name=".Activities.NewUserActivity" />
+        <activity android:name=".Activities.UserScansActivity"></activity>
     </application>
 
 </manifest>
