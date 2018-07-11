@@ -289,51 +289,45 @@ public class ProductActivity extends AppCompatActivity {
         if (current_user != null) {
             String uid = current_user.getUid();
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
-            
 
 //          read database to check for "null" scan
-//            databaseReference.addValueEventListener(new ValueEventListener() {
-//                ArrayList<Scan> list = new ArrayList<Scan>();
-//
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<Scan> list = new ArrayList<Scan>();
 //                    int count = 0;
 //                    for( DataSnapshot snap : dataSnapshot.getChildren()){
 //                        count += 1;
 //                    }
-//
-//                    for(DataSnapshot s : dataSnapshot.getChildren()){
-//                        Scan scan = s.getValue(Scan.class);
-//                        list.add(scan);
-//                    }
-//
-//                    if(list.size() ==1 && list.get(0).getProductName().equals("Null")){
-//
-//                    }
-//                }
-//
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                    Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
 
+                    for(DataSnapshot s : dataSnapshot.getChildren()){
+                        Scan scan = s.getValue(Scan.class);
+                        list.add(scan);
+                    }
 
+                    if(list.size() ==1 && list.get(0).getProductName().equals("Null")){
+                        updateScan(name, upcCode);
+                    } else {
+                        addNewScan(name, upcCode);
+                    }
+                }
 
-            //          push new scan onto the list
-            addNewScan(name, upcCode);
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+//            addNewScan(name, upcCode);
 
         }
 
     }
 
     private void updateScan(final String name, final String upcCode) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         if(current_user != null){
             String uid = current_user.getUid();
-//            String scanKey = database.getReference().child("Scans").child(uid).push().getKey();
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
             databaseReference.removeValue(new DatabaseReference.CompletionListener() {
                 @Override
@@ -351,7 +345,6 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void addNewScan(String name, String upcCode) {
-
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         if (current_user != null) {
             String uid = current_user.getUid();
