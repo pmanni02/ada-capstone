@@ -22,10 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    //    private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+//    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mUser;
 
     private EditText email;
@@ -37,8 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Users");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference databaseReference = database.getReference("Users");
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
@@ -46,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         loginProgress = findViewById(R.id.loginProgress);
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+        FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 mUser = firebaseAuth.getCurrentUser();

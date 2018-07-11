@@ -4,7 +4,7 @@ import com.example.phoebemanning.capstone.Models.Search_Models.Item;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class List {
+public class List<T> {
 
     @SerializedName("item")
     @Expose

@@ -2,21 +2,16 @@ package com.example.phoebemanning.capstone.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,13 +29,19 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Food;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
+import com.example.phoebemanning.capstone.Models.Scan;
 import com.example.phoebemanning.capstone.Models.Search_Models.Item;
+import com.example.phoebemanning.capstone.Models.Search_Models.List;
 import com.example.phoebemanning.capstone.R;
 import com.example.phoebemanning.capstone.Adapters.RecyclerAdapter;
 import com.example.phoebemanning.capstone.Apis.UsdaApi;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,15 +49,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.graphics.PorterDuff.Mode.SRC_ATOP;
-
 public class ProductActivity extends AppCompatActivity {
 
+    private static final String TAG = "ProductActivity";
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
 
@@ -279,9 +280,113 @@ public class ProductActivity extends AppCompatActivity {
 
     }
 
-    private void saveUpc() {
+    public void saveUpc() {
 
-        
+        final String name = productName.getText().toString();
+        final String upcCode = intentStringUpc;
+        Scan newScan = new Scan(name, upcCode);
+
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        if (current_user != null) {
+            String uid = current_user.getUid();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
+            Log.i("ref", databaseReference.getKey());
+
+//          read database to check for "null" scan
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    Log.i("onDataChange", (Long.parseLong(dataSnapshot.ge)));
+//                    Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
+                    int count = 0;
+                    for( DataSnapshot snap : dataSnapshot.getChildren()){
+                        count++;
+                    }
+
+                    ArrayList<Scan> list = new ArrayList<Scan>();
+//                    if(dataSnapshot.getChildren() != null){
+                        for(DataSnapshot s : dataSnapshot.getChildren()){
+                            Scan scan = s.getValue(Scan.class);
+                            list.add(scan);
+                        }
+//                    }
+
+                    if(count == 0) {
+                        if (list.get(0).getProductName().equals("Null")) {
+                            updateScan(name, upcCode);
+//                        } else {
+//                            addNewScan(name, upcCode);
+//                        }
+//                    }
+                        }
+                    }
+
+
+
+//                    if(count == 1){
+//                        Log.i("Count", "ONE");
+////                        int innerCount = 0;
+////                        for(DataSnapshot single : dataSnapshot.getChildren()){
+////                            Scan scan = single.getValue(Scan.class);
+////                            if(scan != null){
+////                                    if(scan.getProductName().equals("Null")){
+////                                        updateScan(name, upcCode);
+////                                    } else {
+////                                        addNewScan(name, upcCode);
+////                                    }
+////                            }
+//////                            innerCount++;
+////                        }
+//
+//                    } else if(count > 1){
+//                        Log.i("Count", "> ONE");
+//                        addNewScan(name, upcCode);
+//                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+//          push new scan onto the list
+
+        }
+    }
+
+    private void updateScan(final String name, final String upcCode) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        if(current_user != null){
+            String uid = current_user.getUid();
+//            String scanKey = database.getReference().child("Scans").child(uid).push().getKey();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
+            databaseReference.removeValue(new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    if(databaseError == null){
+                        addNewScan(name, upcCode);
+                    } else {
+                        Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+        }
+
+    }
+
+    private void addNewScan(String name, String upcCode) {
+
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        if (current_user != null) {
+            String uid = current_user.getUid();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid).push();
+            Scan newScan = new Scan(name, upcCode);
+            databaseReference.setValue(newScan);
+        }
     }
 
 }

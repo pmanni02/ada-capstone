@@ -1,11 +1,16 @@
 package com.example.phoebemanning.capstone.Models;
 
+import com.example.phoebemanning.capstone.Models.Search_Models.Item;
+
+import java.util.List;
+
 public class User {
     private String email;
     private String firstName;
     private String lastName;
     private Integer age;
     private Integer weight;
+//    private String [] searches;
 
     public User(String email, String firstName, String lastName, Integer age, Integer weight) {
         this.email = email;
@@ -13,6 +18,8 @@ public class User {
         this.lastName = lastName;
         this.age = age;
         this.weight = weight;
+//        this.searches = searches;
+
     }
 
     public User() {
@@ -57,5 +64,12 @@ public class User {
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
-    
+//
+//    public String[] getSearches() {
+//        return searches;
+//    }
+//
+//    public void setSearches(String[] searches) {
+//        this.searches = searches;
+//    }
 }

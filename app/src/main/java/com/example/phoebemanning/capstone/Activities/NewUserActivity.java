@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.phoebemanning.capstone.Models.Scan;
+import com.example.phoebemanning.capstone.Models.ScanList;
 import com.example.phoebemanning.capstone.Models.User;
 import com.example.phoebemanning.capstone.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,7 +38,6 @@ public class NewUserActivity extends AppCompatActivity {
 
     public void createAccount(View view){
 
-
         final String emailString = email.getText().toString();
         final String passwordString = password.getText().toString();
         final String firstNameString = firstName.getText().toString();
@@ -56,10 +57,19 @@ public class NewUserActivity extends AppCompatActivity {
 
                         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
                         String uid = current_user.getUid();
-                        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+
 //                      add new user info to database
                         User user = new User(emailString, firstNameString, lastNameString, ageInt, weightInt);
+                        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
                         databaseReference.setValue(user);
+
+//                      add empty arrayList of Scan objects
+//                        ScanList scanList = new ScanList();
+                        Scan emptyScan = new Scan("Null", "Null");
+
+//                        scanList.getScans().add(emptyScan);
+                        DatabaseReference databaseReferenceScan = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid).push();
+                        databaseReferenceScan.setValue(emptyScan);
 
                         Intent intent = new Intent(NewUserActivity.this, MainActivity.class);
                         startActivity(intent);
