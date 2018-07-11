@@ -271,17 +271,15 @@ public class ProductActivity extends AppCompatActivity {
 
             case R.id.action_favorite:
                 saveUpc();
-                Toast.makeText(this, "Favorite Selected", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Favorite Selected", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     public void saveUpc() {
-
         final String name = productName.getText().toString();
         final String upcCode = intentStringUpc;
 
@@ -290,25 +288,34 @@ public class ProductActivity extends AppCompatActivity {
             String uid = current_user.getUid();
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
 
-//          read database to check for "null" scan
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     ArrayList<Scan> list = new ArrayList<Scan>();
-//                    int count = 0;
-//                    for( DataSnapshot snap : dataSnapshot.getChildren()){
-//                        count += 1;
-//                    }
 
                     for(DataSnapshot s : dataSnapshot.getChildren()){
                         Scan scan = s.getValue(Scan.class);
                         list.add(scan);
                     }
 
-                    if(list.size() ==1 && list.get(0).getProductName().equals("Null")){
+                    int size = list.size();
+                    Log.i("SIZE", String.valueOf(size));
+                    if(list.size() == 1 && list.get(0).getProductName().equals("Null")){
                         updateScan(name, upcCode);
+                        Toast.makeText(ProductActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
                     } else {
-                        addNewScan(name, upcCode);
+//                      check if scan already exists before adding
+                        Boolean found = false;
+                        for(int i=0; i<size; i++){
+                            if(list.get(i).getProductName().equals(name)){
+                                found = true;
+                                Toast.makeText(ProductActivity.this, "Product Already Scanned", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        if(!found){
+                            addNewScan(name, upcCode);
+                            Toast.makeText(ProductActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
@@ -317,11 +324,7 @@ public class ProductActivity extends AppCompatActivity {
                     Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-
-//            addNewScan(name, upcCode);
-
         }
-
     }
 
     private void updateScan(final String name, final String upcCode) {
