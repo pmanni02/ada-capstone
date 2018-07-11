@@ -1,14 +1,22 @@
 package com.example.phoebemanning.capstone.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +34,7 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Food;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
+import com.example.phoebemanning.capstone.Models.Search_Models.Item;
 import com.example.phoebemanning.capstone.R;
 import com.example.phoebemanning.capstone.Adapters.RecyclerAdapter;
 import com.example.phoebemanning.capstone.Apis.UsdaApi;
@@ -43,6 +52,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.graphics.PorterDuff.Mode.SRC_ATOP;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -62,9 +73,11 @@ public class ProductActivity extends AppCompatActivity {
     RecyclerAdapter adapter;
     ProgressBar loadProductProgress;
     FloatingActionButton addNewScanButton;
-
+    Menu main_menu;
+    Item favorite;
     
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -82,6 +95,7 @@ public class ProductActivity extends AppCompatActivity {
         nutrientArray = new ArrayList<Nutrients>();
         imageView = findViewById(R.id.imageView);
         addNewScanButton = findViewById(R.id.floatingActionButton);
+        main_menu = findViewById(R.menu.main_menu);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -109,6 +123,8 @@ public class ProductActivity extends AppCompatActivity {
                 startActivity(new Intent(ProductActivity.this, MainActivity.class));
             }
         });
+
+//      add on click action for fav icon
     }
 
     public void getImage(){
@@ -242,15 +258,30 @@ public class ProductActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.action_logout){
-            if(mUser !=null && mAuth != null){
-                mAuth.signOut();
-                Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(ProductActivity.this, LoginActivity.class));
-                finish();
-            }
+        switch (item.getItemId()){
+            case R.id.action_logout:
+                if(mUser !=null && mAuth != null){
+                    mAuth.signOut();
+                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProductActivity.this, LoginActivity.class));
+                    finish();
+                }
+                return true;
+
+            case R.id.action_favorite:
+                saveUpc();
+                Toast.makeText(this, "Favorite Selected", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+
+    }
+
+    private void saveUpc() {
+
+        
     }
 
 }
