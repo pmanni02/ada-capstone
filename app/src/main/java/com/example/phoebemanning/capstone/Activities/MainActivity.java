@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -112,12 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+            photoFile = createImageFile();
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 photoURI = FileProvider.getUriForFile(this,
@@ -153,6 +149,28 @@ public class MainActivity extends AppCompatActivity {
 
         return image;
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            Bitmap rotatedImg = null;
+            try {
+                rotatedImg = rotateImage(photoFile.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            Log.i("PHOTO_PATH", mCurrentPhotoPath);
+            Log.i("EXTRAS", photoURI.getPath());
+
+//            mImageView.setImageBitmap(rotatedImg);
+
+//            barcodeRecognitionURI(photoURI);
+            barcodeRecognitionBitmap(rotatedImg);
+        }
     }
 
     public void getProductCode(){
