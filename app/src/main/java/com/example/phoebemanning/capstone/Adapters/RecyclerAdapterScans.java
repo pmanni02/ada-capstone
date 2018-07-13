@@ -13,14 +13,15 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
 import com.example.phoebemanning.capstone.Models.Scan;
 import com.example.phoebemanning.capstone.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapterScans extends RecyclerView.Adapter<RecyclerAdapterScans.MyViewHolder> {
 
-    private List<Scan> scans;
+    private ArrayList<Scan> scans;
     private Context context;
 
-    public RecyclerAdapterScans(List<Scan> scans, Context context){
+    public RecyclerAdapterScans(ArrayList<Scan> scans, Context context){
         this.scans = scans;
         this.context = context;
     }

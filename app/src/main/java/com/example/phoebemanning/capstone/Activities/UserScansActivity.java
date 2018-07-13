@@ -5,12 +5,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.phoebemanning.capstone.Adapters.RecyclerAdapterScans;
 import com.example.phoebemanning.capstone.Models.Scan;
 import com.example.phoebemanning.capstone.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,16 +31,24 @@ public class UserScansActivity extends AppCompatActivity {
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
     FloatingActionButton addNewScanButton;
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewScans;
+    RecyclerAdapterScans adapter;
+    LinearLayoutManager layoutManager;
+    ArrayList<Scan> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_scans);
+
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         addNewScanButton = findViewById(R.id.floatingActionButton);
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerViewScans = findViewById(R.id.recyclerViewScans);
+
+        recyclerViewScans.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerViewScans.setLayoutManager(layoutManager);
 
         addNewScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,32 +65,30 @@ public class UserScansActivity extends AppCompatActivity {
             String uid = mUser.getUid();
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
 
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<Scan> list = new ArrayList<Scan>();
+//                    ArrayList<Scan> list = new ArrayList<>();
 
                     for(DataSnapshot s : dataSnapshot.getChildren()){
                         Scan scan = s.getValue(Scan.class);
                         list.add(scan);
                     }
 
-                    setScanList();
-
+                    setScanList(list);
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    Toast.makeText(UserScansActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
-
     }
 
-    private void setScanList() {
-
-
+    private void setScanList(ArrayList<Scan> list) {
+        adapter = new RecyclerAdapterScans(list, UserScansActivity.this);
+        recyclerViewScans.setAdapter(adapter);
     }
 
     @Override
