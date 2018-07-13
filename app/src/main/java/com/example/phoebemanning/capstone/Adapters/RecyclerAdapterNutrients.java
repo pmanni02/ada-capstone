@@ -1,7 +1,9 @@
 package com.example.phoebemanning.capstone.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +22,11 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
     private List<Nutrients> nutrients;
     private Context context;
+//    private CardView cardView;
 
     public RecyclerAdapterNutrients(List<Nutrients> nutrients, Context context){
         this.nutrients = nutrients;
+//        this.cardView = findViewById(R.id.cardView);
         this.context = context;
     }
 
@@ -51,42 +55,41 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 //        TODO: break out into separate function
         if(idInt.equals(204)){
             if(valueInt > 17.5 ){
-                viewHolder.title.setBackgroundColor(parseColor("#FF0000"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#FF0000"));
             } else if(valueInt < 3){
-                viewHolder.title.setBackgroundColor(parseColor("#32CD32"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#32CD32"));
             } else {
-//                Log.i("onBindViewHolder", "INSIDE ELSE STATEMENT");
-                viewHolder.title.setBackgroundColor(parseColor("#FFA500"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#FFA500"));
             }
         }
 
         if(idInt.equals(269)){
             if(valueInt > 22.5){
-                viewHolder.title.setBackgroundColor(parseColor("#FF0000"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#FF0000"));
             } else if(valueInt < 5){
-                viewHolder.title.setBackgroundColor(parseColor("#32CD32"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#32CD32"));
             } else {
-                viewHolder.title.setBackgroundColor(parseColor("#FFA500"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#FFA500"));
             }
         }
 
         if(idInt.equals(307)){
             if(valueInt > 1.5){
-                viewHolder.title.setBackgroundColor(parseColor("#FF0000"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#FF0000"));
             } else if(valueInt < 0.3){
-                viewHolder.title.setBackgroundColor(parseColor("#32CD32"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#32CD32"));
             } else {
-                viewHolder.title.setBackgroundColor(parseColor("#FFA500"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#FFA500"));
             }
         }
 
         if(idInt.equals(606)){
             if(valueInt > 5){
-                viewHolder.title.setBackgroundColor(parseColor("#FF0000"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#FF0000"));
             } else if(valueInt < 1.5){
-                viewHolder.title.setBackgroundColor(parseColor("#32CD32"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#32CD32"));
             } else {
-                viewHolder.title.setBackgroundColor(parseColor("#FFA500"));
+                viewHolder.cardView.setCardBackgroundColor(parseColor("#FFA500"));
             }
         }
     }
@@ -100,11 +103,14 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
         TextView title;
         TextView amount;
+        CardView cardView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.nutrient_item);
             amount = itemView.findViewById(R.id.nutrient_amount);
+
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
 
