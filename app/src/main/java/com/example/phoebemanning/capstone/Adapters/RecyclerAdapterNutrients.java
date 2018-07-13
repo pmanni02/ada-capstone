@@ -16,12 +16,12 @@ import java.util.List;
 
 import static android.graphics.Color.parseColor;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapterNutrients.MyViewHolder> {
 
     private List<Nutrients> nutrients;
     private Context context;
 
-    public RecyclerAdapter(List<Nutrients> nutrients, Context context){
+    public RecyclerAdapterNutrients(List<Nutrients> nutrients, Context context){
         this.nutrients = nutrients;
         this.context = context;
     }
@@ -29,7 +29,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_layout, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.nutrient_item_layout, viewGroup, false);
         return new MyViewHolder(view);
     }
 

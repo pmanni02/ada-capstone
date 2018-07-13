@@ -30,10 +30,8 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
 import com.example.phoebemanning.capstone.Models.Scan;
-import com.example.phoebemanning.capstone.Models.Search_Models.Item;
-import com.example.phoebemanning.capstone.Models.Search_Models.List;
 import com.example.phoebemanning.capstone.R;
-import com.example.phoebemanning.capstone.Adapters.RecyclerAdapter;
+import com.example.phoebemanning.capstone.Adapters.RecyclerAdapterNutrients;
 import com.example.phoebemanning.capstone.Apis.UsdaApi;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,7 +47,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,7 +68,7 @@ public class ProductActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
-    RecyclerAdapter adapter;
+    RecyclerAdapterNutrients adapter;
     ProgressBar loadProductProgress;
     FloatingActionButton addNewScanButton;
     Menu main_menu;
@@ -245,7 +242,7 @@ public class ProductActivity extends AppCompatActivity {
         }
 
 //      RecyclerView custom adapter
-        adapter = new RecyclerAdapter(nutrientArray, ProductActivity.this);
+        adapter = new RecyclerAdapterNutrients(nutrientArray, ProductActivity.this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -311,7 +308,7 @@ public class ProductActivity extends AppCompatActivity {
                         for(int i=0; i<size; i++){
                             if(list.get(i).getProductName().equals(name)){
                                 found = true;
-                                Toast.makeText(ProductActivity.this, "Product Already Scanned", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductActivity.this, "Product Already Saved", Toast.LENGTH_SHORT).show();
                             }
                         }
                         if(!found){
