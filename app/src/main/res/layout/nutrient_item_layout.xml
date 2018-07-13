@@ -27,7 +27,7 @@
                 android:paddingLeft="14dp"
                 android:text="Test"
                 android:textAlignment="center"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <android.support.v4.widget.Space
                 android:layout_width="20dp"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="amount"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
