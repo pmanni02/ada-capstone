@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getProductCode(){
-        Log.i("UPC TEXT: ", upcEditText.getText().toString());
+//        Log.i("UPC TEXT: ", upcEditText.getText().toString());
         Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(), BuildConfig.ApiKey);
 
         call.enqueue(new Callback<ResponseData>() {

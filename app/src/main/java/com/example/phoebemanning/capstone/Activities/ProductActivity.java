@@ -281,6 +281,7 @@ public class ProductActivity extends AppCompatActivity {
     public void saveUpc() {
         final String name = productName.getText().toString();
         final String upcCode = intentStringUpc;
+        final String ndbno = intentStringNdbno;
 
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         if (current_user != null) {
@@ -298,9 +299,9 @@ public class ProductActivity extends AppCompatActivity {
                     }
 
                     int size = list.size();
-                    Log.i("SIZE", String.valueOf(size));
+//                    Log.i("SIZE", String.valueOf(size));
                     if(list.size() == 1 && list.get(0).getProductName().equals("Null")){
-                        updateScan(name, upcCode);
+                        updateScan(name, upcCode, ndbno);
                         Toast.makeText(ProductActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
                     } else {
                         //check if scan already exists before adding
@@ -312,7 +313,7 @@ public class ProductActivity extends AppCompatActivity {
                             }
                         }
                         if(!found){
-                            addNewScan(name, upcCode);
+                            addNewScan(name, upcCode, ndbno);
                             Toast.makeText(ProductActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -326,7 +327,7 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
-    private void updateScan(final String name, final String upcCode) {
+    private void updateScan(final String name, final String upcCode, final String ndbno) {
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         if(current_user != null){
             String uid = current_user.getUid();
@@ -335,7 +336,7 @@ public class ProductActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     if(databaseError == null){
-                        addNewScan(name, upcCode);
+                        addNewScan(name, upcCode, ndbno);
                     } else {
                         Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -345,12 +346,12 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
-    private void addNewScan(String name, String upcCode) {
+    private void addNewScan(String name, String upcCode, String ndbno) {
         FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
         if (current_user != null) {
             String uid = current_user.getUid();
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid).push();
-            Scan newScan = new Scan(name, upcCode);
+            Scan newScan = new Scan(name, upcCode, ndbno);
             databaseReference.setValue(newScan);
         }
     }

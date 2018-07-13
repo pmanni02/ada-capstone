@@ -62,7 +62,7 @@ public class NewUserActivity extends AppCompatActivity {
                         databaseReference.setValue(user);
 
 //                      add empty scan to database
-                        Scan emptyScan = new Scan("Null", "Null");
+                        Scan emptyScan = new Scan("Null", "Null", "Null");
                         DatabaseReference databaseReferenceScan = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid).push();
                         databaseReferenceScan.setValue(emptyScan);
 
