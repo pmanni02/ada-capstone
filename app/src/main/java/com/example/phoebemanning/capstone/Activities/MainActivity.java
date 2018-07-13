@@ -1,8 +1,13 @@
 package com.example.phoebemanning.capstone.Activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,9 +45,10 @@ public class MainActivity extends AppCompatActivity {
     EditText upcEditText;
     TextView userName;
 
-//    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
+
+    private int REQUEST_CODE = 1;
 
     public void submitOnClick(View view) {
 
@@ -60,7 +66,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scanBtnClick(View view){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ){
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
 
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1);
+            } else {
+                Toast.makeText(this, "You already have permission", Toast.LENGTH_SHORT).show();
+//                takePicIntent();
+            }
+        }
     }
 
     public void getProductCode(){
