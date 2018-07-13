@@ -3,15 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.phoebemanning.capstone">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:remove="android:maxSdkVersion"/>
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:remove="android:maxSdkVersion" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:remove="android:maxSdkVersion" />
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        tools:remove="android:maxSdkVersion"/>
-
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -31,7 +33,7 @@
         <activity android:name=".Activities.ProductActivity" />
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.NewUserActivity" />
-        <activity android:name=".Activities.UserScansActivity"></activity>
+        <activity android:name=".Activities.UserScansActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -40,8 +42,10 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".Activities.UserProfileActivity"></activity>
     </application>
 
 </manifest>
