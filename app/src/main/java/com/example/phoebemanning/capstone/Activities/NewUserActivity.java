@@ -76,8 +76,6 @@ public class NewUserActivity extends AppCompatActivity {
             Toast.makeText(this, "Username and password cannot be empty", Toast.LENGTH_SHORT).show();
             newUserProgress.setVisibility(View.INVISIBLE);
         }
-
-
     }
 
     @Override
