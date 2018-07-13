@@ -80,6 +80,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_CODE){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                    grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+                    grantResults[2] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+//                takePicIntent();
+            } else {
+                Toast.makeText(this, "Permission NOT granted", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     public void getProductCode(){
 //        Log.i("UPC TEXT: ", upcEditText.getText().toString());
         Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(), BuildConfig.ApiKey);
