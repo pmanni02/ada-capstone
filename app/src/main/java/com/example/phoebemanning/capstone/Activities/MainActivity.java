@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1);
             } else {
                 Toast.makeText(this, "You already have permission", Toast.LENGTH_SHORT).show();
+                takePicIntent();
             }
         }
     }
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                     grantResults[2] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-                takePicIntent();
+//                takePicIntent();
             } else {
                 Toast.makeText(this, "Permission NOT granted", Toast.LENGTH_SHORT).show();
             }
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.fileprovider",
+                        "com.example.android.fileprovidercapstone",
                         photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
