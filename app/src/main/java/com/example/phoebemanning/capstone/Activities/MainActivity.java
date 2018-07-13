@@ -4,10 +4,13 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +37,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -48,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private int REQUEST_CODE = 1;
+
+    String mCurrentPhotoPath;
+    private Uri photoURI;
+    File photoFile = null;
 
     public void submitOnClick(View view) {
 
@@ -75,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1);
             } else {
                 Toast.makeText(this, "You already have permission", Toast.LENGTH_SHORT).show();
-//                takePicIntent();
             }
         }
     }
@@ -87,11 +96,35 @@ public class MainActivity extends AppCompatActivity {
                     grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                     grantResults[2] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-//                takePicIntent();
+                takePicIntent();
             } else {
                 Toast.makeText(this, "Permission NOT granted", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void takePicIntent() {
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                photoURI = FileProvider.getUriForFile(this,
+                        "com.example.android.fileprovider",
+                        photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+
     }
 
     public void getProductCode(){
