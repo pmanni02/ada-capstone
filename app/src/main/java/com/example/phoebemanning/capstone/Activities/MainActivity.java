@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -34,6 +36,9 @@ import com.example.phoebemanning.capstone.Models.Search_Models.ResponseData;
 import com.example.phoebemanning.capstone.Models.User;
 import com.example.phoebemanning.capstone.R;
 import com.example.phoebemanning.capstone.Apis.UsdaApi;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +46,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -225,6 +235,43 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return rotate;
+    }
+
+    private void barcodeRecognitionBitmap(Bitmap rotatedImg) {
+
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(rotatedImg);
+
+        FirebaseVisionBarcodeDetectorOptions options =
+                new FirebaseVisionBarcodeDetectorOptions.Builder()
+                        .setBarcodeFormats(
+                                FirebaseVisionBarcode.FORMAT_UPC_A,
+                                FirebaseVisionBarcode.FORMAT_UPC_E)
+                        .build();
+
+        FirebaseVisionBarcodeDetector detector = FirebaseVision.getInstance()
+                .getVisionBarcodeDetector(options);
+
+        Task<java.util.List<FirebaseVisionBarcode>> result = detector.detectInImage(image)
+                .addOnSuccessListener(new OnSuccessListener<java.util.List<FirebaseVisionBarcode>>() {
+                    @Override
+                    public void onSuccess(java.util.List<FirebaseVisionBarcode> barcodes) {
+                        for (FirebaseVisionBarcode barcode: barcodes) {
+                            Rect bounds = barcode.getBoundingBox();
+                            Point[] corners = barcode.getCornerPoints();
+
+                            String rawValue = barcode.getRawValue();
+
+                            Toast.makeText(MainActivity.this, rawValue, Toast.LENGTH_SHORT).show();
+//                            resultText.setText(rawValue);
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     public void getProductCode(){
