@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void scanBtnClick(View view){
+
+    }
+
     public void getProductCode(){
 //        Log.i("UPC TEXT: ", upcEditText.getText().toString());
         Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(), BuildConfig.ApiKey);

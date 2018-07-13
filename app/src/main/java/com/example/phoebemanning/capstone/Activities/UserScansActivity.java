@@ -75,7 +75,6 @@ public class UserScansActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                    ArrayList<Scan> list = new ArrayList<>();
 
-
                     for(DataSnapshot s : dataSnapshot.getChildren()){
                         Scan scan = s.getValue(Scan.class);
                         list.add(scan);
