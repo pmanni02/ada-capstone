@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         if (upcEditText.length() != 12){
             Toast.makeText(this, "Invalid UPC", Toast.LENGTH_LONG).show();
         } else {
-            getProductCode();
+            getProductCode(upcEditText.getText().toString());
         }
     }
 
@@ -264,6 +264,9 @@ public class MainActivity extends AppCompatActivity {
 
                             Toast.makeText(MainActivity.this, rawValue, Toast.LENGTH_SHORT).show();
 //                            resultText.setText(rawValue);
+
+//                          TODO: check that upc code is valid
+                            getProductCode(rawValue);
                         }
                     }
                 })
@@ -275,9 +278,9 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void getProductCode(){
+    public void getProductCode(String upcCode){
 //        Log.i("UPC TEXT: ", upcEditText.getText().toString());
-        Call<ResponseData> call = UsdaApi.getClient().getResponse(upcEditText.getText().toString(), BuildConfig.ApiKey);
+        Call<ResponseData> call = UsdaApi.getClient().getResponse(upcCode, BuildConfig.ApiKey);
 
         call.enqueue(new Callback<ResponseData>() {
             @Override
