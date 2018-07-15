@@ -55,7 +55,6 @@ import retrofit2.Response;
 
 public class ProductActivity extends AppCompatActivity {
 
-//    private static final String TAG = "ProductActivity";
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
 
@@ -74,7 +73,6 @@ public class ProductActivity extends AppCompatActivity {
     FloatingActionButton addNewScanButton;
     Menu main_menu;
     Boolean percent = false;
-//    Item favorite;
 
     @SuppressLint("ResourceType")
     @Override
@@ -124,7 +122,6 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
-//      add on click action for fav icon
     }
 
     public void getImage(){
@@ -326,7 +323,6 @@ public class ProductActivity extends AppCompatActivity {
                     }
 
                     int size = list.size();
-//                    Log.i("SIZE", String.valueOf(size));
                     if(list.size() == 1 && list.get(0).getProductName().equals("Null")){
                         updateScan(name, upcCode, ndbno);
                         Toast.makeText(ProductActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();

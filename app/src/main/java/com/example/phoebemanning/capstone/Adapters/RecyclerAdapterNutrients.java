@@ -1,17 +1,13 @@
 package com.example.phoebemanning.capstone.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.DailyNeeds;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Measures;
@@ -63,6 +59,9 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         roundedVal = roundedVal.setScale(2, BigDecimal.ROUND_HALF_UP);
 
         viewHolder.title.setText(title);
+
+//        TODO: finish percent daily values for other nutrients
+//        TODO: round values up
         if(title.equals("Energy")){
             //      get % daily calories
             if(dailyVal != null && percent){
@@ -89,8 +88,6 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             viewHolder.amount.setText(roundedVal + " " + unit);
         }
 
-//        TODO: break out into separate function
-//        setBackgroundColor(high, low);
         if(idInt.equals(204)){
             String color = getBackgroundColor(valueInt ,17.5, 3.0);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));

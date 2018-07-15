@@ -80,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOnClick(View view) {
 
-//        Log.i("UPC TEXT: ", upcEditText.getText().toString());
-
 //      Hide the Keyboard after submit
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Objects.requireNonNull(mgr).hideSoftInputFromWindow(upcEditText.getWindowToken(), 0);
@@ -178,10 +176,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
-            Log.i("PHOTO_PATH", mCurrentPhotoPath);
-            Log.i("EXTRAS", photoURI.getPath());
-
-//            mImageView.setImageBitmap(rotatedImg);
+//            Log.i("PHOTO_PATH", mCurrentPhotoPath);
+//            Log.i("EXTRAS", photoURI.getPath());
 
 //            barcodeRecognitionURI(photoURI);
             barcodeRecognitionBitmap(rotatedImg);
@@ -285,7 +281,6 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-//                Log.i("Response", "Success");
 
                 if (response.isSuccessful()){
                     if (response.body() != null){
@@ -303,8 +298,6 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("upc", upcEditText.getText().toString());
                             startActivity(intent);
 
-//                            Log.i("NAME", item.get(0).getName());
-//                            Log.i("NDBNO", item.get(0).getNdbno());
                         } else {
                             Toast.makeText(MainActivity.this, "Your search resulted in zero results. Change your parameters and try again", Toast.LENGTH_SHORT).show();
                         }
@@ -345,7 +338,6 @@ public class MainActivity extends AppCompatActivity {
                     fullName = "Welcome " + user.getFirstName() + " " + user.getLastName() + "!";
                 }
                 userName.setText(fullName);
-//                Toast.makeText(UserActivity.this, user.getFirstName(), Toast.LENGTH_LONG).show();
             }
 
             @Override

@@ -34,15 +34,8 @@ public class DailyNeeds {
         return dailyCals2000;
     }
 
-    public static void setDailyCals2000(Map<String, String> dailyCals2000) {
-        DailyNeeds.dailyCals2000 = dailyCals2000;
-    }
-
     public static Map<String, String> getDailyCals2500() {
         return dailyCals2500;
     }
 
-    public static void setDailyCals2500(Map<String, String> dailyCals2500) {
-        DailyNeeds.dailyCals2500 = dailyCals2500;
-    }
 }

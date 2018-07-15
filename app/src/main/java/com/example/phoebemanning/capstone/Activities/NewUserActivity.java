@@ -28,8 +28,6 @@ public class NewUserActivity extends AppCompatActivity {
 
     EditText firstName;
     EditText lastName;
-//    EditText age;
-//    EditText weight;
     EditText email;
     EditText password;
     ProgressBar newUserProgress;
@@ -40,8 +38,6 @@ public class NewUserActivity extends AppCompatActivity {
         final String passwordString = password.getText().toString();
         final String firstNameString = firstName.getText().toString();
         final String lastNameString = lastName.getText().toString();
-//        final Integer ageInt = Integer.parseInt(age.getText().toString());
-//        final Integer weightInt = Integer.parseInt(weight.getText().toString());
 
         if(!emailString.equals("") && !passwordString.equals("")){
             newUserProgress.setVisibility(View.VISIBLE);
@@ -87,8 +83,6 @@ public class NewUserActivity extends AppCompatActivity {
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
-//        age = findViewById(R.id.age);
-//        weight = findViewById(R.id.weight);
         email = findViewById(R.id.newEmailId);
         password = findViewById(R.id.newPasswordId);
         newUserProgress = findViewById(R.id.newUserProgress);
