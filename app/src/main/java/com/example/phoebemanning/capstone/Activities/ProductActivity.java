@@ -73,6 +73,7 @@ public class ProductActivity extends AppCompatActivity {
     ProgressBar loadProductProgress;
     FloatingActionButton addNewScanButton;
     Menu main_menu;
+    Boolean percent = false;
 //    Item favorite;
 
     @SuppressLint("ResourceType")
@@ -94,6 +95,7 @@ public class ProductActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         addNewScanButton = findViewById(R.id.floatingActionButton);
         main_menu = findViewById(R.menu.main_menu);
+
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -230,22 +232,22 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void setList(Nutrients [] nutrients){
+        Integer id;
+        for(int i=0; i < nutrients.length; i++){
+            id = Integer.parseInt(nutrients[i].getNutrient_id());
+            if(id == 208|| id == 204 ||id == 606|| id == 269 || id == 307 ){
+                nutrientArray.add(nutrients[i]);
+            }
+        }
+        setAdapter();
+    }
+
+    private void setAdapter() {
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         String current_id = mUser.getUid();
         DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
-
-        Integer id;
-//        String name;
-
-        for(int i=0; i < nutrients.length; i++){
-            id = Integer.parseInt(nutrients[i].getNutrient_id());
-//            name = nutrients[i].getName();
-            if(id == 208|| id == 204 ||id == 606|| id == 269 || id == 307 ){
-                nutrientArray.add(nutrients[i]);
-            }
-        }
 
         databaseReference.addValueEventListener(new ValueEventListener() {
 
@@ -254,7 +256,7 @@ public class ProductActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 String dailyVal = user.getDailyCalAmount();
 
-                adapter = new RecyclerAdapterNutrients(nutrientArray, dailyVal,ProductActivity.this);
+                adapter = new RecyclerAdapterNutrients(nutrientArray, dailyVal, percent,ProductActivity.this);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -265,7 +267,7 @@ public class ProductActivity extends AppCompatActivity {
         });
 
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -293,9 +295,10 @@ public class ProductActivity extends AppCompatActivity {
                 saveUpc();
                 return true;
 
-//            case R.id.action_percent:
-//                Toast.makeText(this, "Percent pressed", Toast.LENGTH_SHORT).show();
-//                return true;
+            case R.id.action_percent:
+                percent = !percent;
+                setAdapter();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

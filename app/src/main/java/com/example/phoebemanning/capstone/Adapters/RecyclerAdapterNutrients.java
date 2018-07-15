@@ -27,11 +27,13 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
     private List<Nutrients> nutrients;
     private Context context;
     private String dailyVal;
+    private Boolean percent;
 
-    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyVal, Context context){
+    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyVal, Boolean percent, Context context){
         this.nutrients = nutrients;
         this.context = context;
         this.dailyVal = dailyVal;
+        this.percent = percent;
     }
 
     @NonNull
@@ -60,8 +62,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         viewHolder.title.setText(title);
         if(title.equals("Energy")){
             //      get % daily calories
-//            Float percentDailyCals = valueInt / dailyVal;
-            if(dailyVal != null){
+            if(dailyVal != null && percent){
+//                Toast.makeText(context, "Percent pressed = TRUE", Toast.LENGTH_SHORT).show();
                 Float dailyValFloat = Float.parseFloat(dailyVal);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
                 viewHolder.amount.setText(percentDailyVal + " % Daily");
