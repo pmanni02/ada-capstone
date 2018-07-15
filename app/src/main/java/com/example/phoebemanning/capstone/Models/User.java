@@ -10,13 +10,15 @@ public class User {
     private String lastName;
 //    private Integer age;
 //    private Integer weight;
+    private Integer dailyCalAmount;
 
-    public User(String email, String firstName, String lastName) {
+    public User(String email, String firstName, String lastName, Integer dailyCalAmount) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
 //        this.age = age;
 //        this.weight = weight;
+        this.dailyCalAmount = dailyCalAmount;
     }
 
     public User() {
@@ -62,4 +64,12 @@ public class User {
 //        this.weight = weight;
 //    }
 
+
+    public Integer getDailyCalAmount() {
+        return dailyCalAmount;
+    }
+
+    public void setDailyCalAmount(Integer dailyCalAmount) {
+        this.dailyCalAmount = dailyCalAmount;
+    }
 }
