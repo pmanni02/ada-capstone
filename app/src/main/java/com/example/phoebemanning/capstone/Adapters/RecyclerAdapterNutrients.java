@@ -90,45 +90,27 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         }
 
 //        TODO: break out into separate function
+//        setBackgroundColor(high, low);
         if(idInt.equals(204)){
-            if(valueInt > 17.5 ){
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#FF0000"));
-            } else if(valueInt < 3){
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#32CD32"));
-            } else {
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#FFA500"));
-            }
+            String color = getBackgroundColor(valueInt ,17.5, 3.0);
+            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
         }
 
         if(idInt.equals(269)){
-            if(valueInt > 22.5){
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#FF0000"));
-            } else if(valueInt < 5){
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#32CD32"));
-            } else {
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#FFA500"));
-            }
+            String color = getBackgroundColor(valueInt ,22.5, 5.0);
+            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
         }
 
         if(idInt.equals(307)){
-            if(valueInt > 1.5){
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#FF0000"));
-            } else if(valueInt < 0.3){
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#32CD32"));
-            } else {
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#FFA500"));
-            }
+            String color = getBackgroundColor(valueInt ,1.5, 0.3);
+            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
         }
 
         if(idInt.equals(606)){
-            if(valueInt > 5){
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#FF0000"));
-            } else if(valueInt < 1.5){
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#32CD32"));
-            } else {
-                viewHolder.cardView.setCardBackgroundColor(parseColor("#FFA500"));
-            }
+            String color = getBackgroundColor(valueInt ,5.0, 1.5);
+            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
         }
+
     }
 
     @Override
@@ -150,4 +132,16 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         }
     }
 
+    public String getBackgroundColor(Float valueInt, Double high, Double low) {
+        if(valueInt > high ){
+            return "#FF0000";
+        } else if(valueInt < low){
+            return "#32CD32";
+        } else {
+            return "#FFA500";
+        }
+    }
+
 }
+
+
