@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.Adapters.RecyclerAdapterScans;
@@ -37,6 +38,7 @@ public class UserScansActivity extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     ProgressBar loadScansProgress;
     ArrayList<Scan> list = new ArrayList<>();
+    TextView noScans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class UserScansActivity extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         addNewScanButton = findViewById(R.id.floatingActionButton);
         recyclerViewScans = findViewById(R.id.recyclerViewScans);
+        noScans = findViewById(R.id.noScansText);
 
         recyclerViewScans.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -92,8 +95,13 @@ public class UserScansActivity extends AppCompatActivity {
     }
 
     private void setScanList(ArrayList<Scan> list) {
-        adapter = new RecyclerAdapterScans(list, UserScansActivity.this);
-        recyclerViewScans.setAdapter(adapter);
+        if(list.get(0).getProductName().equals("Null")){
+            noScans.setVisibility(View.VISIBLE);
+        } else {
+            noScans.setVisibility(View.INVISIBLE);
+            adapter = new RecyclerAdapterScans(list, UserScansActivity.this);
+            recyclerViewScans.setAdapter(adapter);
+        }
     }
 
     @Override
