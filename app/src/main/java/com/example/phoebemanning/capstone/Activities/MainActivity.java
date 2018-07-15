@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void getProductCode(String upcCode){
+    public void getProductCode(final String upcCode){
 //        Log.i("UPC TEXT: ", upcEditText.getText().toString());
         Call<ResponseData> call = UsdaApi.getClient().getResponse(upcCode, BuildConfig.ApiKey);
 
@@ -295,7 +295,12 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
                             intent.putExtra("name",name);
                             intent.putExtra("ndbno", ndbno);
-                            intent.putExtra("upc", upcEditText.getText().toString());
+                            if(upcEditText.getText().toString().equals("")){
+                                intent.putExtra("upc", upcCode);
+                            } else {
+                                intent.putExtra("upc", upcEditText.getText().toString());
+                            }
+
                             startActivity(intent);
 
                         } else {
