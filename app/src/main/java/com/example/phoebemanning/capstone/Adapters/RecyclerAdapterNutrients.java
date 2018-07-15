@@ -63,7 +63,6 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         if(title.equals("Energy")){
             //      get % daily calories
             if(dailyVal != null && percent){
-//                Toast.makeText(context, "Percent pressed = TRUE", Toast.LENGTH_SHORT).show();
                 Float dailyValFloat = Float.parseFloat(dailyVal);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
                 viewHolder.amount.setText(percentDailyVal + " % Daily");
