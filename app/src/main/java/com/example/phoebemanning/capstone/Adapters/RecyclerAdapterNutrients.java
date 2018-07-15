@@ -17,6 +17,7 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Measures;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
 import com.example.phoebemanning.capstone.R;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static android.graphics.Color.parseColor;
@@ -49,13 +50,17 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         String value = measure.getValue();
         Float valueInt = Float.parseFloat(value);
 
+//      rounded to two decimal places
+        BigDecimal roundedVal = new BigDecimal(Float.toString(valueInt));
+        roundedVal = roundedVal.setScale(2, BigDecimal.ROUND_HALF_UP);
+
         String unit = measure.getEunit();
 
         viewHolder.title.setText(title);
         if(title.equals("Energy")){
-            viewHolder.amount.setText(value + " Calories");
+            viewHolder.amount.setText(roundedVal + " Calories");
         } else {
-            viewHolder.amount.setText(value + " " + unit);
+            viewHolder.amount.setText(roundedVal + " " + unit);
         }
 
 //        TODO: break out into separate function
