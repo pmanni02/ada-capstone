@@ -273,6 +273,10 @@ public class ProductActivity extends AppCompatActivity {
                 saveUpc();
                 return true;
 
+            case R.id.action_percent:
+                Toast.makeText(this, "Percent pressed", Toast.LENGTH_SHORT).show();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

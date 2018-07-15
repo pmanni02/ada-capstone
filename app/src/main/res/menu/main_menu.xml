@@ -14,5 +14,11 @@
         android:id="@+id/action_favorite"
         android:icon="@drawable/ic_action_favorite"
         android:title="action_favorite"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_percent"
+        android:icon="@drawable/ic_action_percent"
+        android:title="action_percent"
+        app:showAsAction="always" />
 </menu>

@@ -3,6 +3,8 @@ package com.example.phoebemanning.capstone.Activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.phoebemanning.capstone.R;
+
 public class UserProfileActivity extends AppCompatActivity {
 
     @Override
