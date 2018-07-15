@@ -13,12 +13,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.phoebemanning.capstone.DailyNeeds;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Measures;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
+import com.example.phoebemanning.capstone.DailyNeeds;
 import com.example.phoebemanning.capstone.R;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import static android.graphics.Color.parseColor;
 
@@ -68,6 +71,18 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 viewHolder.amount.setText(percentDailyVal + " % Daily");
             } else {
                 viewHolder.amount.setText(roundedVal + " Calories");
+            }
+        } else if(title.equals("Total lipid (fat)")){
+
+            if(dailyVal != null && percent){
+                Float dailyValFloat = Float.parseFloat(dailyVal);
+                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
+                String fat= dailyCals2000.get("fat");
+                Float fatFloat = Float.parseFloat(fat);
+                Float percentDaily = (valueInt/fatFloat)*100;
+                viewHolder.amount.setText(percentDaily + " % Daily");
+            } else {
+                viewHolder.amount.setText(roundedVal + " " + unit);
             }
 
         } else {
