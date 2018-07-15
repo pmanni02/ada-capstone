@@ -26,10 +26,12 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
     private List<Nutrients> nutrients;
     private Context context;
+    private String dailyVal;
 
-    public RecyclerAdapterNutrients(List<Nutrients> nutrients, Context context){
+    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyVal, Context context){
         this.nutrients = nutrients;
         this.context = context;
+        this.dailyVal = dailyVal;
     }
 
     @NonNull
@@ -49,16 +51,24 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         Measures measure = nutrients.get(i).getMeasures()[0];
         String value = measure.getValue();
         Float valueInt = Float.parseFloat(value);
+        String unit = measure.getEunit();
 
 //      rounded to two decimal places
         BigDecimal roundedVal = new BigDecimal(Float.toString(valueInt));
         roundedVal = roundedVal.setScale(2, BigDecimal.ROUND_HALF_UP);
 
-        String unit = measure.getEunit();
-
         viewHolder.title.setText(title);
         if(title.equals("Energy")){
-            viewHolder.amount.setText(roundedVal + " Calories");
+            //      get % daily calories
+//            Float percentDailyCals = valueInt / dailyVal;
+            if(dailyVal != null){
+                Float dailyValFloat = Float.parseFloat(dailyVal);
+                Float percentDailyVal = (valueInt/dailyValFloat)*100;
+                viewHolder.amount.setText(percentDailyVal + " % Daily");
+            } else {
+                viewHolder.amount.setText(roundedVal + " Calories");
+            }
+
         } else {
             viewHolder.amount.setText(roundedVal + " " + unit);
         }

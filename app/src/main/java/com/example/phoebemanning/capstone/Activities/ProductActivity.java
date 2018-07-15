@@ -30,6 +30,7 @@ import com.example.phoebemanning.capstone.Models.Nutrient_Models.Foods;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.NutrientData;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
 import com.example.phoebemanning.capstone.Models.Scan;
+import com.example.phoebemanning.capstone.Models.User;
 import com.example.phoebemanning.capstone.R;
 import com.example.phoebemanning.capstone.Adapters.RecyclerAdapterNutrients;
 import com.example.phoebemanning.capstone.Apis.UsdaApi;
@@ -230,22 +231,41 @@ public class ProductActivity extends AppCompatActivity {
 
     public void setList(Nutrients [] nutrients){
 
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        String current_id = mUser.getUid();
+        DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
+
         Integer id;
-        String name;
+//        String name;
 
         for(int i=0; i < nutrients.length; i++){
             id = Integer.parseInt(nutrients[i].getNutrient_id());
-            name = nutrients[i].getName();
+//            name = nutrients[i].getName();
             if(id == 208|| id == 204 ||id == 606|| id == 269 || id == 307 ){
                 nutrientArray.add(nutrients[i]);
             }
         }
 
-//      RecyclerView custom adapter
-        adapter = new RecyclerAdapterNutrients(nutrientArray, ProductActivity.this);
-        recyclerView.setAdapter(adapter);
-    }
+        databaseReference.addValueEventListener(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                String dailyVal = user.getDailyCalAmount();
+
+                adapter = new RecyclerAdapterNutrients(nutrientArray, dailyVal,ProductActivity.this);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -274,7 +294,6 @@ public class ProductActivity extends AppCompatActivity {
                 return true;
 
 //            case R.id.action_percent:
-//
 //                Toast.makeText(this, "Percent pressed", Toast.LENGTH_SHORT).show();
 //                return true;
 
