@@ -6,9 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Measures;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Nutrients;
@@ -22,11 +25,9 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
     private List<Nutrients> nutrients;
     private Context context;
-//    private CardView cardView;
 
     public RecyclerAdapterNutrients(List<Nutrients> nutrients, Context context){
         this.nutrients = nutrients;
-//        this.cardView = findViewById(R.id.cardView);
         this.context = context;
     }
 
@@ -39,6 +40,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
+
         String title = nutrients.get(i).getName().split(",")[0];
         String id = nutrients.get(i).getNutrient_id();
         Integer idInt = Integer.parseInt(id);
@@ -50,7 +52,11 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         String unit = measure.getEunit();
 
         viewHolder.title.setText(title);
-        viewHolder.amount.setText(value + " " + unit);
+        if(title.equals("Energy")){
+            viewHolder.amount.setText(value + " Calories");
+        } else {
+            viewHolder.amount.setText(value + " " + unit);
+        }
 
 //        TODO: break out into separate function
         if(idInt.equals(204)){
@@ -109,7 +115,6 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             super(itemView);
             title = itemView.findViewById(R.id.nutrient_item);
             amount = itemView.findViewById(R.id.nutrient_amount);
-
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
