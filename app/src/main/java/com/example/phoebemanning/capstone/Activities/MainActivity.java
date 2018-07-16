@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         String current_id = mUser.getUid();
-        DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
+        final DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -343,6 +343,7 @@ public class MainActivity extends AppCompatActivity {
                     fullName = "Welcome " + user.getFirstName() + " " + user.getLastName() + "!";
                 }
                 userName.setText(fullName);
+//                databaseReference.removeEventListener(this);
             }
 
             @Override

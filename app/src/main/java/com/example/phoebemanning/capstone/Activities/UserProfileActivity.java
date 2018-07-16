@@ -54,7 +54,7 @@ public class UserProfileActivity extends AppCompatActivity {
             int gender = radioGroup.getCheckedRadioButtonId();
 
             Integer bmr = getBasalMetabolicRate(gender, weightVal, heightFtVal, heightInVal, ageVal);
-            Toast.makeText(this, bmr.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, bmr.toString(), Toast.LENGTH_SHORT).show();
 
             saveValInDatabase(bmr);
         }
@@ -80,35 +80,13 @@ public class UserProfileActivity extends AppCompatActivity {
     private void saveValInDatabase(Integer bmr) {
         final String BMR = Integer.toString(bmr);
 
-//        use user id to read email, first name, and last name
-
         if(mUser != null){
             String uid = mUser.getUid();
             final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-            final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).push();
-
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    User oldUser = dataSnapshot.getValue(User.class);
-                    updatedUser = new User(oldUser.getEmail(), oldUser.getFirstName(), oldUser.getLastName(), BMR);
-                    databaseReference.removeValue(new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            if(databaseError == null){
-                                updateDbRef.setValue(updatedUser);
-                            } else {
-                                Toast.makeText(UserProfileActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(UserProfileActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("dailyCalAmount");
+            updateDbRef.setValue(BMR);
+            Toast.makeText(this, "Your new % Daily Value is " + BMR, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(UserProfileActivity.this, MainActivity.class));
         }
     }
 

@@ -55,6 +55,7 @@ import retrofit2.Response;
 
 public class ProductActivity extends AppCompatActivity {
 
+    private static final String TAG = "ProductActivity";
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
 
@@ -240,7 +241,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void setAdapter() {
-
+        Log.d(TAG, "in SetAdapter");
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         String current_id = mUser.getUid();

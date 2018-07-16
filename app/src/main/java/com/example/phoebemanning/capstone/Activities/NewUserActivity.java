@@ -56,7 +56,8 @@ public class NewUserActivity extends AppCompatActivity {
                             String uid = current_user.getUid();
 
 //                      add new user info to database
-                            User user = new User(emailString, firstNameString, lastNameString, "2000");
+                            String defaultCalAmt = "2000";
+                            User user = new User(emailString, firstNameString, lastNameString, defaultCalAmt);
                             databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
                             databaseReference.setValue(user);
 
