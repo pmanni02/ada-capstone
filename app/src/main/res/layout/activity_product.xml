@@ -65,12 +65,21 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="243dp"
+        android:layout_width="241dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recyclerView"
         android:layout_centerHorizontal="true"
         android:text="Note: Values are per 100 grams"
         android:textAlignment="center"
         android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="241dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:text="Energy %DV based on 2000 cal/day if custom settings left blank"
+        android:textAlignment="center" />
 
 </RelativeLayout>

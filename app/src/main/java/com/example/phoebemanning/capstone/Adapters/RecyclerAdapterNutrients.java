@@ -45,7 +45,6 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         return new MyViewHolder(view);
     }
 
-//    TODO: refactor this function
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
 
@@ -60,7 +59,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         String value = nutrients.get(i).getValue();
         String unit = nutrients.get(i).getUnit();
         Float valueInt = Float.parseFloat(value);
-        
+
 //      rounded to two decimal places
         BigDecimal roundedVal = new BigDecimal(Float.toString(valueInt));
         roundedVal = roundedVal.setScale(2, BigDecimal.ROUND_HALF_UP);
