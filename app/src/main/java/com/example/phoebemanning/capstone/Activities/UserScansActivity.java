@@ -108,7 +108,7 @@ public class UserScansActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.only_logout, menu);
+        getMenuInflater().inflate(R.menu.saved_scans_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
