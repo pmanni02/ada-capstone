@@ -126,7 +126,7 @@ public class UserScansActivity extends AppCompatActivity {
             case R.id.action_settings:
                 startActivity(new Intent(UserScansActivity.this, UserProfileActivity.class));
                 finish();
-                return true;    
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
