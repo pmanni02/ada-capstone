@@ -67,7 +67,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             if(dailyValCals != null && percent){
                 Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
-                viewHolder.amount.setText(percentDailyVal + " % Daily");
+                String s = String.format("%.2f", percentDailyVal);
+                viewHolder.amount.setText(s + " % Daily");
             } else {
                 viewHolder.amount.setText(roundedVal + " Calories");
             }
@@ -79,7 +80,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 String fat= dailyCals2000.get("fat");
                 Float fatFloat = Float.parseFloat(fat);
                 Float percentDaily = (valueInt/fatFloat)*100;
-                viewHolder.amount.setText(percentDaily + " % Daily");
+                String s = String.format("%.2f", percentDaily);
+                viewHolder.amount.setText(s + " % Daily");
             } else {
                 viewHolder.amount.setText(roundedVal + " " + unit);
             }
@@ -91,7 +93,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 String sugar = dailyCals2000.get("sugar");
                 Float sugarFloat = Float.parseFloat(sugar);
                 Float percentDaily = (valueInt/sugarFloat)*100;
-                viewHolder.amount.setText(percentDaily + " % Daily");
+                String s = String.format("%.2f", percentDaily);
+                viewHolder.amount.setText(s + " % Daily");
             } else {
                 viewHolder.amount.setText(roundedVal + " " + unit);
             }
@@ -108,7 +111,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 String sodium = dailyCals2000.get("sodium");
                 Float sodiumFloat = Float.parseFloat(sodium);
                 Float percentDaily = (valueIntSodium/sodiumFloat)*100;
-                viewHolder.amount.setText(percentDaily + " % Daily");
+                String s = String.format("%.2f", percentDaily);
+                viewHolder.amount.setText(s + " % Daily");
             } else {
                 viewHolder.amount.setText(roundedValSodium + " " + unit);
             }
@@ -120,7 +124,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 String fattyAcid = dailyCals2000.get("sat fat");
                 Float fattyAcidFloat = Float.parseFloat(fattyAcid);
                 Float percentDaily = (valueInt/fattyAcidFloat)*100;
-                viewHolder.amount.setText(percentDaily + " % Daily");
+                String s = String.format("%.2f", percentDaily);
+                viewHolder.amount.setText(s + " % Daily");
             } else {
                 viewHolder.amount.setText(roundedVal + " " + unit);
             }
