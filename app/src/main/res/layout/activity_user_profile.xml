@@ -41,7 +41,7 @@
 
         <RadioButton
             android:id="@+id/femaleRadio"
-            android:layout_width="88dp"
+            android:layout_width="84dp"
             android:layout_height="wrap_content"
             android:text="Female"
             android:textAlignment="center" />
@@ -126,13 +126,14 @@
         app:layout_constraintVertical_bias="0.521" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="submitSettings"
         android:text="Submit/Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

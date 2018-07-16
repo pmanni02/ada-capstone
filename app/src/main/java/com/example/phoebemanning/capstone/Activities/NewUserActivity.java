@@ -66,6 +66,7 @@ public class NewUserActivity extends AppCompatActivity {
                             databaseReferenceScan.setValue(emptyScan);
 
                             Intent intent = new Intent(NewUserActivity.this, MainActivity.class);
+                            Toast.makeText(NewUserActivity.this, "Fill out user settings for more accurate results", Toast.LENGTH_LONG).show();
                             startActivity(intent);
                         }
                         newUserProgress.setVisibility(View.INVISIBLE);
