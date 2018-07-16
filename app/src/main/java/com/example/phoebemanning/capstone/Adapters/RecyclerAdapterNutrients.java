@@ -98,6 +98,10 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 Float percentDaily = (valueInt/sugarFloat)*100;
                 String s = String.format("%.2f", percentDaily);
                 viewHolder.amount.setText(s + " % Daily");
+            } else if(dailyValCals != null && teaspoonBtn){
+                double teaspoon = valueInt * 0.2028;
+                String teaspoonStr = String.format("%.2f", teaspoon);
+                viewHolder.amount.setText(teaspoonStr+" tsp");
             } else {
                 viewHolder.amount.setText(roundedVal + " " + unit);
             }
@@ -116,6 +120,10 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 Float percentDaily = (valueIntSodium/sodiumFloat)*100;
                 String s = String.format("%.2f", percentDaily);
                 viewHolder.amount.setText(s + " % Daily");
+            } else if(dailyValCals !=null && teaspoonBtn) {
+                double teaspoon = valueIntSodium * 0.2028;
+                String teaspoonStr = String.format("%.2f", teaspoon);
+                viewHolder.amount.setText(teaspoonStr+" tsp");
             } else {
                 viewHolder.amount.setText(roundedValSodium + " " + unit);
             }
@@ -129,6 +137,10 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 Float percentDaily = (valueInt/fattyAcidFloat)*100;
                 String s = String.format("%.2f", percentDaily);
                 viewHolder.amount.setText(s + " % Daily");
+            } else if(dailyValCals!=null && teaspoonBtn){
+                double teaspoon = valueInt * 0.2028;
+                String teaspoonStr = String.format("%.2f", teaspoon);
+                viewHolder.amount.setText(teaspoonStr+" tsp");
             } else {
                 viewHolder.amount.setText(roundedVal + " " + unit);
             }
