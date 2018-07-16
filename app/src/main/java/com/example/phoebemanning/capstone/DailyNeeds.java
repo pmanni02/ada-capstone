@@ -9,6 +9,8 @@ public class DailyNeeds {
 //  sugar daily amount is from http://sugarscience.ucsf.edu/the-growing-concern-of-overconsumption.html#.W0rFsthKjOQ
 //  all other daily amounts from https://www.accessdata.fda.gov/scripts/InteractiveNutritionFactsLabel/pdv.html
 
+//  ALL values are in GRAMS
+
     private static Map<String,String> dailyCals2000 = new HashMap<>();
     static {
         dailyCals2000.put("fat", "65");

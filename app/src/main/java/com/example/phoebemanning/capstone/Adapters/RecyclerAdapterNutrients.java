@@ -52,10 +52,12 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         String id = nutrients.get(i).getNutrient_id();
         Integer idInt = Integer.parseInt(id);
 
-        Measures measure = nutrients.get(i).getMeasures()[0];
-        String value = measure.getValue();
+//        Measures measure = nutrients.get(i).getMeasures()[0];
+        String value = nutrients.get(i).getValue();
+        String unit = nutrients.get(i).getUnit();
+//        String value = measure.getValue();
         Float valueInt = Float.parseFloat(value);
-        String unit = measure.getEunit();
+//        String unit = measure.getEunit();
 
 //      rounded to two decimal places
         BigDecimal roundedVal = new BigDecimal(Float.toString(valueInt));
@@ -73,6 +75,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 viewHolder.amount.setText(roundedVal + " Calories");
             }
         } else if(title.equals("Total lipid (fat)")){
+            String color = getBackgroundColor(valueInt ,17.5, 3.0);
+            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
 
             if(dailyValCals != null && percentBtn){
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
@@ -90,6 +94,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             }
 
         } else if(title.equals("Sugars")) {
+            String color = getBackgroundColor(valueInt ,22.5, 5.0);
+            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
 
             if(dailyValCals != null && percentBtn){
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
@@ -113,6 +119,9 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             BigDecimal roundedValSodium = new BigDecimal(Float.toString(valueIntSodium));
             roundedValSodium = roundedValSodium.setScale(2, BigDecimal.ROUND_HALF_UP);
 
+            String color = getBackgroundColor(valueIntSodium ,1.5, 0.3);
+            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
+
             if(dailyValCals != null && percentBtn){
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
                 String sodium = dailyCals2000.get("sodium");
@@ -125,10 +134,12 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 String teaspoonStr = String.format("%.2f", teaspoon);
                 viewHolder.amount.setText(teaspoonStr+" tsp");
             } else {
-                viewHolder.amount.setText(roundedValSodium + " " + unit);
+                viewHolder.amount.setText(roundedValSodium + " g");
             }
 
         } else if(title.equals("Fatty acids")){
+            String color = getBackgroundColor(valueInt ,5.0, 1.5);
+            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
 
             if(dailyValCals != null && percentBtn){
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
@@ -149,29 +160,29 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             viewHolder.amount.setText(roundedVal + " " + unit);
         }
 
-//      Total Lipid (fat)
-        if(idInt.equals(204)){
-            String color = getBackgroundColor(valueInt ,17.5, 3.0);
-            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-        }
-
-//      Sugar
-        if(idInt.equals(269)){
-            String color = getBackgroundColor(valueInt ,22.5, 5.0);
-            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-        }
-
-//      Sodium
-        if(idInt.equals(307)){
-            String color = getBackgroundColor(valueInt ,1.5, 0.3);
-            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-        }
-
-//      Saturated Fat
-        if(idInt.equals(606)){
-            String color = getBackgroundColor(valueInt ,5.0, 1.5);
-            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-        }
+////      Total Lipid (fat)
+//        if(idInt.equals(204)){
+//            String color = getBackgroundColor(valueInt ,17.5, 3.0);
+//            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
+//        }
+//
+////      Sugar
+//        if(idInt.equals(269)){
+//            String color = getBackgroundColor(valueInt ,22.5, 5.0);
+//            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
+//        }
+//
+////      Sodium
+//        if(idInt.equals(307)){
+//            String color = getBackgroundColor(valueInt ,1.5, 0.3);
+//            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
+//        }
+//
+////      Saturated Fat
+//        if(idInt.equals(606)){
+//            String color = getBackgroundColor(valueInt ,5.0, 1.5);
+//            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
+//        }
 
     }
 

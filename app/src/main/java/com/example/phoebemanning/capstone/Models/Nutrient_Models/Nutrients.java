@@ -7,6 +7,7 @@ public class Nutrients {
     private String name;
     private String nutrient_id;
     private String value;
+    private String unit;
     private Measures[] measures;
 
 //    private String group;
@@ -47,15 +48,15 @@ public class Nutrients {
         this.nutrient_id = nutrient_id;
     }
 
-//    public String getValue ()
-//    {
-//        return value;
-//    }
-//
-//    public void setValue (String value)
-//    {
-//        this.value = value;
-//    }
+    public String getValue ()
+    {
+        return value;
+    }
+
+    public void setValue (String value)
+    {
+        this.value = value;
+    }
 
     public Measures[] getMeasures () {
         return measures;
@@ -75,6 +76,13 @@ public class Nutrients {
 //        this.group = group;
 //    }
 
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     @Override
     public String toString() {
