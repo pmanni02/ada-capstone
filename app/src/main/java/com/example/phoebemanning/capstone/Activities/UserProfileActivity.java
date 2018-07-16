@@ -32,7 +32,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
-    TextView userName;
     RadioGroup radioGroup;
     RadioButton femaleBtn;
     RadioButton maleBtn;
@@ -41,7 +40,6 @@ public class UserProfileActivity extends AppCompatActivity {
     EditText heightIn;
     EditText age;
     Button submitBtn;
-//    User updatedUser;
     
     public void submitSettings(View view){
         
@@ -58,8 +56,6 @@ public class UserProfileActivity extends AppCompatActivity {
             int gender = radioGroup.getCheckedRadioButtonId();
 
             Integer bmr = getBasalMetabolicRate(gender, weightVal, heightFtVal, heightInVal, ageVal);
-//            Toast.makeText(this, bmr.toString(), Toast.LENGTH_SHORT).show();
-
             saveValInDatabase(bmr);
         }
     }
@@ -104,8 +100,6 @@ public class UserProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-//        userName = findViewById(R.id.userName);
-
         radioGroup = findViewById(R.id.gender);
         femaleBtn = findViewById(R.id.femaleRadio);
         maleBtn = findViewById(R.id.maleRadio);
@@ -114,28 +108,6 @@ public class UserProfileActivity extends AppCompatActivity {
         heightIn = findViewById(R.id.heightIn);
         age = findViewById(R.id.age);
         submitBtn = findViewById(R.id.submit);
-
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        String current_id = mUser.getUid();
-//        final DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
-//
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                User user = dataSnapshot.getValue(User.class);
-//                String fullName = null;
-//                if (user != null) {
-//                    fullName = "Hello " + user.getFirstName() + " " + user.getLastName() + "!";
-//                }
-//                userName.setText(fullName);
-////                databaseReference.removeEventListener(this);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(UserProfileActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
 //        heightIn.addTextChangedListener(new TextWatcher() {
 //            @Override
