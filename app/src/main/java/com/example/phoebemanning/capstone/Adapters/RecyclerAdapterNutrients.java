@@ -42,6 +42,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         return new MyViewHolder(view);
     }
 
+//    TODO: refactor this function
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
 
@@ -60,10 +61,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
         viewHolder.title.setText(title);
 
-//        TODO: finish percent daily values for other nutrients
-//        TODO: round values up
         if(title.equals("Energy")){
-            //      get % daily calories
             if(dailyValCals != null && percent){
                 Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
@@ -75,7 +73,6 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         } else if(title.equals("Total lipid (fat)")){
 
             if(dailyValCals != null && percent){
-//                Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
                 String fat= dailyCals2000.get("fat");
                 Float fatFloat = Float.parseFloat(fat);

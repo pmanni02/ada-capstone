@@ -14,7 +14,7 @@
         android:id="@+id/cardView">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
@@ -22,13 +22,14 @@
 
             <TextView
                 android:id="@+id/nutrient_item"
-                android:layout_width="match_parent"
+                android:layout_width="105dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="14dp"
                 android:text="Test"
-                android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <android.support.v4.widget.Space
                 android:layout_width="20dp"
@@ -40,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="amount"
+                android:textAlignment="viewStart"
                 android:textSize="18sp" />
 
         </LinearLayout>
