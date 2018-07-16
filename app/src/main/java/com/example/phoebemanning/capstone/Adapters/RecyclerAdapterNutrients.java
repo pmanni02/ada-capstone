@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.DailyNeeds;
 import com.example.phoebemanning.capstone.Models.Nutrient_Models.Measures;
@@ -53,12 +54,13 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         Integer idInt = Integer.parseInt(id);
 
 //        Measures measure = nutrients.get(i).getMeasures()[0];
-        String value = nutrients.get(i).getValue();
-        String unit = nutrients.get(i).getUnit();
 //        String value = measure.getValue();
-        Float valueInt = Float.parseFloat(value);
 //        String unit = measure.getEunit();
 
+        String value = nutrients.get(i).getValue();
+        String unit = nutrients.get(i).getUnit();
+        Float valueInt = Float.parseFloat(value);
+        
 //      rounded to two decimal places
         BigDecimal roundedVal = new BigDecimal(Float.toString(valueInt));
         roundedVal = roundedVal.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -75,114 +77,33 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 viewHolder.amount.setText(roundedVal + " Calories");
             }
         } else if(title.equals("Total lipid (fat)")){
+
             String color = getBackgroundColor(valueInt ,17.5, 3.0);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-
-            if(dailyValCals != null && percentBtn){
-                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
-                String fat= dailyCals2000.get("fat");
-                Float fatFloat = Float.parseFloat(fat);
-                Float percentDaily = (valueInt/fatFloat)*100;
-                String s = String.format("%.2f", percentDaily);
-                viewHolder.amount.setText(s + " % Daily");
-            } else if(dailyValCals !=null && teaspoonBtn){
-                double teaspoon = valueInt * 0.2028;
-                String teaspoonStr = String.format("%.2f", teaspoon);
-                viewHolder.amount.setText(teaspoonStr+" tsp");
-            } else {
-                viewHolder.amount.setText(roundedVal + " " + unit);
-            }
+            viewHolder.amount.setText(getAmountVal(valueInt, "fat", unit));
 
         } else if(title.equals("Sugars")) {
+
             String color = getBackgroundColor(valueInt ,22.5, 5.0);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-
-            if(dailyValCals != null && percentBtn){
-                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
-                String sugar = dailyCals2000.get("sugar");
-                Float sugarFloat = Float.parseFloat(sugar);
-                Float percentDaily = (valueInt/sugarFloat)*100;
-                String s = String.format("%.2f", percentDaily);
-                viewHolder.amount.setText(s + " % Daily");
-            } else if(dailyValCals != null && teaspoonBtn){
-                double teaspoon = valueInt * 0.2028;
-                String teaspoonStr = String.format("%.2f", teaspoon);
-                viewHolder.amount.setText(teaspoonStr+" tsp");
-            } else {
-                viewHolder.amount.setText(roundedVal + " " + unit);
-            }
+            viewHolder.amount.setText(getAmountVal(valueInt, "sugar", unit));
 
         } else if(title.equals("Sodium")){
 
 //          convert sodium levels from mg to g
             Float valueIntSodium = valueInt/1000;
-            BigDecimal roundedValSodium = new BigDecimal(Float.toString(valueIntSodium));
-            roundedValSodium = roundedValSodium.setScale(2, BigDecimal.ROUND_HALF_UP);
-
             String color = getBackgroundColor(valueIntSodium ,1.5, 0.3);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
+            viewHolder.amount.setText(getAmountVal(valueIntSodium, "sodium", "g"));
 
-            if(dailyValCals != null && percentBtn){
-                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
-                String sodium = dailyCals2000.get("sodium");
-                Float sodiumFloat = Float.parseFloat(sodium);
-                Float percentDaily = (valueIntSodium/sodiumFloat)*100;
-                String s = String.format("%.2f", percentDaily);
-                viewHolder.amount.setText(s + " % Daily");
-            } else if(dailyValCals !=null && teaspoonBtn) {
-                double teaspoon = valueIntSodium * 0.2028;
-                String teaspoonStr = String.format("%.2f", teaspoon);
-                viewHolder.amount.setText(teaspoonStr+" tsp");
-            } else {
-                viewHolder.amount.setText(roundedValSodium + " g");
-            }
+        } else if(title.equals("Fatty acids")) {
 
-        } else if(title.equals("Fatty acids")){
-            String color = getBackgroundColor(valueInt ,5.0, 1.5);
+            String color = getBackgroundColor(valueInt, 5.0, 1.5);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
+            viewHolder.amount.setText(getAmountVal(valueInt, "sat fat", unit));
 
-            if(dailyValCals != null && percentBtn){
-                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
-                String fattyAcid = dailyCals2000.get("sat fat");
-                Float fattyAcidFloat = Float.parseFloat(fattyAcid);
-                Float percentDaily = (valueInt/fattyAcidFloat)*100;
-                String s = String.format("%.2f", percentDaily);
-                viewHolder.amount.setText(s + " % Daily");
-            } else if(dailyValCals!=null && teaspoonBtn){
-                double teaspoon = valueInt * 0.2028;
-                String teaspoonStr = String.format("%.2f", teaspoon);
-                viewHolder.amount.setText(teaspoonStr+" tsp");
-            } else {
-                viewHolder.amount.setText(roundedVal + " " + unit);
-            }
-
-        } else {
-            viewHolder.amount.setText(roundedVal + " " + unit);
         }
 
-////      Total Lipid (fat)
-//        if(idInt.equals(204)){
-//            String color = getBackgroundColor(valueInt ,17.5, 3.0);
-//            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-//        }
-//
-////      Sugar
-//        if(idInt.equals(269)){
-//            String color = getBackgroundColor(valueInt ,22.5, 5.0);
-//            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-//        }
-//
-////      Sodium
-//        if(idInt.equals(307)){
-//            String color = getBackgroundColor(valueInt ,1.5, 0.3);
-//            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-//        }
-//
-////      Saturated Fat
-//        if(idInt.equals(606)){
-//            String color = getBackgroundColor(valueInt ,5.0, 1.5);
-//            viewHolder.cardView.setCardBackgroundColor(parseColor(color));
-//        }
 
     }
 
@@ -213,6 +134,30 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         } else {
             return "#FFA500";
         }
+    }
+
+    public String getAmountVal(Float value, String category, String unit){
+
+        BigDecimal roundedVal = new BigDecimal(Float.toString(value));
+        roundedVal = roundedVal.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+        String amount;
+
+        if(percentBtn){
+            Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
+            String nutrientDailyVal = dailyCals2000.get(category);
+            Float nutrientDailyValFloat = Float.parseFloat(nutrientDailyVal);
+            Float percentDaily = (value/nutrientDailyValFloat)*100;
+            String s = String.format("%.2f", percentDaily);
+            amount = s + " % Daily";
+        } else if(teaspoonBtn){
+            double teaspoon = value * 0.2028;
+            String teaspoonStr = String.format("%.2f", teaspoon);
+            amount = teaspoonStr + " tsp";
+        } else {
+            amount = roundedVal + " " + unit;
+        }
+        return amount;
     }
 
 }
