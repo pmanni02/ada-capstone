@@ -371,9 +371,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
 
+            case R.id.action_settings:
+                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
+                finish();
+                return true;
+
             case R.id.action_user_scans:
                 startActivity(new Intent(MainActivity.this, UserScansActivity.class));
                 finish();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

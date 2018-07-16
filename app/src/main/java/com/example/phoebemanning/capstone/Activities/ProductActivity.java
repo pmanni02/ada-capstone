@@ -287,6 +287,12 @@ public class ProductActivity extends AppCompatActivity {
             case R.id.action_user_scans:
                 startActivity(new Intent(ProductActivity.this, UserScansActivity.class));
                 finish();
+                return true;
+
+            case R.id.action_settings:
+                startActivity(new Intent(ProductActivity.this, UserProfileActivity.class));
+                finish();
+                return true;
 
             case R.id.action_favorite:
                 saveUpc();
