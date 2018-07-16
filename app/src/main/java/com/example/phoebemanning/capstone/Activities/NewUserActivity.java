@@ -41,7 +41,7 @@ public class NewUserActivity extends AppCompatActivity {
         final String firstNameString = firstName.getText().toString();
         final String lastNameString = lastName.getText().toString();
 
-        if(!emailString.equals("") && !passwordString.equals("")){
+        if(!emailString.equals("") && !passwordString.equals("") && !firstNameString.equals("") && !lastNameString.equals("")){
             if(passwordString.equals(confirmPasswordString)){
                 newUserProgress.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(NewUserActivity.this, new OnCompleteListener<AuthResult>() {
@@ -74,11 +74,11 @@ public class NewUserActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                Toast.makeText(this, "Passwords must match, try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Passwords must match, try again", Toast.LENGTH_SHORT).show();
             }
             
         } else {
-            Toast.makeText(this, "Username and password cannot be empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             newUserProgress.setVisibility(View.INVISIBLE);
         }
     }
