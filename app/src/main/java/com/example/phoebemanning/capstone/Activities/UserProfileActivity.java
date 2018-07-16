@@ -31,7 +31,12 @@ public class UserProfileActivity extends AppCompatActivity {
     
     public void submitSettings(View view){
         
-        if((weight != null) && (heightFt != null) && (heightIn != null) && (age != null)){
+        if((weight.getText().toString().equals("")) ||
+                (heightFt.getText().toString().equals("")) ||
+                (heightIn.getText().toString().equals("")) ||
+                (age.getText().toString().equals(""))){
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+        } else {
             Double weightVal = Double.parseDouble(weight.getText().toString());
             Double heightFtVal = Double.parseDouble(heightFt.getText().toString());
             Double heightInVal = Double.parseDouble(heightIn.getText().toString());
@@ -40,8 +45,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
             Integer bmr = getBasalMetabolicRate(gender, weightVal, heightFtVal, heightInVal, ageVal);
             Toast.makeText(this, bmr.toString(), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
         }
     }
 
