@@ -80,6 +80,8 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ab.setTitle("");
         setContentView(R.layout.activity_product);
 
         loadProductProgress = findViewById(R.id.loadProductProgress);

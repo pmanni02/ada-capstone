@@ -322,6 +322,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ab.setTitle("");
         setContentView(R.layout.activity_main);
 
         upcEditText = findViewById(R.id.upcEditText);

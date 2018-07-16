@@ -86,6 +86,8 @@ public class NewUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ab.setTitle("");
         setContentView(R.layout.activity_new_user);
 
         mAuth = FirebaseAuth.getInstance();

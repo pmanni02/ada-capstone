@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,6 +97,8 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ab.setTitle("");
         setContentView(R.layout.activity_user_profile);
 
         mAuth = FirebaseAuth.getInstance();
@@ -132,6 +136,26 @@ public class UserProfileActivity extends AppCompatActivity {
                 Toast.makeText(UserProfileActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+//        heightIn.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                String height = editable.toString();
+//                if(Double.valueOf(height) > 12){
+//                    Toast.makeText(UserProfileActivity.this, "Inches must be < 12", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
     }
 
     @Override
