@@ -1,6 +1,8 @@
 package com.example.phoebemanning.capstone.Activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,9 +14,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.phoebemanning.capstone.Models.Scan;
+import com.example.phoebemanning.capstone.Models.User;
 import com.example.phoebemanning.capstone.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -28,6 +37,7 @@ public class UserProfileActivity extends AppCompatActivity {
     EditText heightIn;
     EditText age;
     Button submitBtn;
+    User updatedUser;
     
     public void submitSettings(View view){
         
@@ -45,6 +55,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
             Integer bmr = getBasalMetabolicRate(gender, weightVal, heightFtVal, heightInVal, ageVal);
             Toast.makeText(this, bmr.toString(), Toast.LENGTH_SHORT).show();
+
+            saveValInDatabase(bmr);
         }
     }
 
@@ -63,6 +75,41 @@ public class UserProfileActivity extends AppCompatActivity {
             BMR = 88.362 + (13.397 * weightKg) + (4.799 * heightCm) - (5.677 * ageVal);
         }
         return (int) Math.rint(BMR);
+    }
+
+    private void saveValInDatabase(Integer bmr) {
+        final String BMR = Integer.toString(bmr);
+
+//        use user id to read email, first name, and last name
+
+        if(mUser != null){
+            String uid = mUser.getUid();
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+            final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).push();
+
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User oldUser = dataSnapshot.getValue(User.class);
+                    updatedUser = new User(oldUser.getEmail(), oldUser.getFirstName(), oldUser.getLastName(), BMR);
+                    databaseReference.removeValue(new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            if(databaseError == null){
+                                updateDbRef.setValue(updatedUser);
+                            } else {
+                                Toast.makeText(UserProfileActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(UserProfileActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
