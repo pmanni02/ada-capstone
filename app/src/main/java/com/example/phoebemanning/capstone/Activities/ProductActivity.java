@@ -73,7 +73,8 @@ public class ProductActivity extends AppCompatActivity {
     ProgressBar loadProductProgress;
     FloatingActionButton addNewScanButton;
     Menu main_menu;
-    Boolean percent = false;
+    Boolean percentBtn = false;
+    Boolean teaspoonBtn = false;
 
     @SuppressLint("ResourceType")
     @Override
@@ -256,7 +257,7 @@ public class ProductActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 String dailyVal = user.getDailyCalAmount();
 
-                adapter = new RecyclerAdapterNutrients(nutrientArray, dailyVal, percent,ProductActivity.this);
+                adapter = new RecyclerAdapterNutrients(nutrientArray, dailyVal, percentBtn, teaspoonBtn, ProductActivity.this);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -302,7 +303,19 @@ public class ProductActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_percent:
-                percent = !percent;
+                percentBtn = !percentBtn;
+                if(percentBtn){
+                    teaspoonBtn = false;
+                }
+                setAdapter();
+                return true;
+                
+            case R.id.action_spoon:
+//                Toast.makeText(this, "Spoon Clicked!", Toast.LENGTH_SHORT).show();
+                teaspoonBtn = !teaspoonBtn;
+                if(teaspoonBtn){
+                    percentBtn = false;
+                }
                 setAdapter();
                 return true;
 

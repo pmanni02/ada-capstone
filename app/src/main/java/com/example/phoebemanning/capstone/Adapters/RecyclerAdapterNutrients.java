@@ -26,13 +26,15 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
     private List<Nutrients> nutrients;
     private Context context;
     private String dailyValCals;
-    private Boolean percent;
+    private Boolean percentBtn;
+    private Boolean teaspoonBtn;
 
-    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyValCals, Boolean percent, Context context){
+    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyValCals, Boolean percentBtn, Boolean teaspoonBtn, Context context){
         this.nutrients = nutrients;
         this.context = context;
         this.dailyValCals = dailyValCals;
-        this.percent = percent;
+        this.percentBtn = percentBtn;
+        this.teaspoonBtn = teaspoonBtn;
     }
 
     @NonNull
@@ -62,7 +64,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         viewHolder.title.setText(title);
 
         if(title.equals("Energy")){
-            if(dailyValCals != null && percent){
+            if(dailyValCals != null && percentBtn){
                 Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
                 String s = String.format("%.2f", percentDailyVal);
@@ -72,20 +74,24 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             }
         } else if(title.equals("Total lipid (fat)")){
 
-            if(dailyValCals != null && percent){
+            if(dailyValCals != null && percentBtn){
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
                 String fat= dailyCals2000.get("fat");
                 Float fatFloat = Float.parseFloat(fat);
                 Float percentDaily = (valueInt/fatFloat)*100;
                 String s = String.format("%.2f", percentDaily);
                 viewHolder.amount.setText(s + " % Daily");
+            } else if(dailyValCals !=null && teaspoonBtn){
+                double teaspoon = valueInt * 0.2028;
+                String teaspoonStr = String.format("%.2f", teaspoon);
+                viewHolder.amount.setText(teaspoonStr+" tsp");
             } else {
                 viewHolder.amount.setText(roundedVal + " " + unit);
             }
 
         } else if(title.equals("Sugars")) {
 
-            if(dailyValCals != null && percent){
+            if(dailyValCals != null && percentBtn){
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
                 String sugar = dailyCals2000.get("sugar");
                 Float sugarFloat = Float.parseFloat(sugar);
@@ -103,7 +109,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             BigDecimal roundedValSodium = new BigDecimal(Float.toString(valueIntSodium));
             roundedValSodium = roundedValSodium.setScale(2, BigDecimal.ROUND_HALF_UP);
 
-            if(dailyValCals != null && percent){
+            if(dailyValCals != null && percentBtn){
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
                 String sodium = dailyCals2000.get("sodium");
                 Float sodiumFloat = Float.parseFloat(sodium);
@@ -116,7 +122,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
         } else if(title.equals("Fatty acids")){
 
-            if(dailyValCals != null && percent){
+            if(dailyValCals != null && percentBtn){
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
                 String fattyAcid = dailyCals2000.get("sat fat");
                 Float fattyAcidFloat = Float.parseFloat(fattyAcid);
