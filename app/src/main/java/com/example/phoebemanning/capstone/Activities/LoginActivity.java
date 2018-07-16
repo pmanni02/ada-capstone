@@ -86,6 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                             loginProgress.setVisibility(View.INVISIBLE);
                         }
                     });
+        } else {
+            Toast.makeText(this, "Please enter your email & password", Toast.LENGTH_SHORT).show();
         }
     }
 
