@@ -299,6 +299,7 @@ public class ProductActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_favorite:
+                
                 saveUpc();
                 return true;
 
@@ -311,7 +312,6 @@ public class ProductActivity extends AppCompatActivity {
                 return true;
                 
             case R.id.action_spoon:
-//                Toast.makeText(this, "Spoon Clicked!", Toast.LENGTH_SHORT).show();
                 teaspoonBtn = !teaspoonBtn;
                 if(teaspoonBtn){
                     percentBtn = false;

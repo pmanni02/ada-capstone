@@ -31,7 +31,5 @@
     android:icon="@drawable/ic_action_favorite"
     android:title="action_favorite"
     app:showAsAction="always" />
-
-
-
+    
 </menu>
