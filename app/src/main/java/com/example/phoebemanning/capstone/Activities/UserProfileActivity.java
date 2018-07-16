@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.R;
@@ -15,6 +18,13 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
+    RadioGroup radioGroup;
+    RadioButton female;
+    RadioButton male;
+    EditText weight;
+    EditText heightFt;
+    EditText heightIn;
+    EditText age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +33,12 @@ public class UserProfileActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
+
+        radioGroup = findViewById(R.id.gender);
+        weight = findViewById(R.id.weight);
+        heightFt = findViewById(R.id.heightFt);
+        heightIn = findViewById(R.id.heightIn);
+        age = findViewById(R.id.age);
     }
 
     @Override
