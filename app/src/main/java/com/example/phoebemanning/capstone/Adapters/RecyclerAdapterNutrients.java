@@ -25,13 +25,13 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
     private List<Nutrients> nutrients;
     private Context context;
-    private String dailyVal;
+    private String dailyValCals;
     private Boolean percent;
 
-    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyVal, Boolean percent, Context context){
+    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyValCals, Boolean percent, Context context){
         this.nutrients = nutrients;
         this.context = context;
-        this.dailyVal = dailyVal;
+        this.dailyValCals = dailyValCals;
         this.percent = percent;
     }
 
@@ -64,8 +64,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 //        TODO: round values up
         if(title.equals("Energy")){
             //      get % daily calories
-            if(dailyVal != null && percent){
-                Float dailyValFloat = Float.parseFloat(dailyVal);
+            if(dailyValCals != null && percent){
+                Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
                 viewHolder.amount.setText(percentDailyVal + " % Daily");
             } else {
@@ -73,8 +73,8 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             }
         } else if(title.equals("Total lipid (fat)")){
 
-            if(dailyVal != null && percent){
-                Float dailyValFloat = Float.parseFloat(dailyVal);
+            if(dailyValCals != null && percent){
+//                Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
                 String fat= dailyCals2000.get("fat");
                 Float fatFloat = Float.parseFloat(fat);
@@ -84,25 +84,70 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 viewHolder.amount.setText(roundedVal + " " + unit);
             }
 
+        } else if(title.equals("Sugars")) {
+
+            if(dailyValCals != null && percent){
+                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
+                String sugar = dailyCals2000.get("sugar");
+                Float sugarFloat = Float.parseFloat(sugar);
+                Float percentDaily = (valueInt/sugarFloat)*100;
+                viewHolder.amount.setText(percentDaily + " % Daily");
+            } else {
+                viewHolder.amount.setText(roundedVal + " " + unit);
+            }
+
+        } else if(title.equals("Sodium")){
+
+//          convert sodium levels from mg to g
+            Float valueIntSodium = valueInt/1000;
+            BigDecimal roundedValSodium = new BigDecimal(Float.toString(valueIntSodium));
+            roundedValSodium = roundedValSodium.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+            if(dailyValCals != null && percent){
+                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
+                String sodium = dailyCals2000.get("sodium");
+                Float sodiumFloat = Float.parseFloat(sodium);
+                Float percentDaily = (valueIntSodium/sodiumFloat)*100;
+                viewHolder.amount.setText(percentDaily + " % Daily");
+            } else {
+                viewHolder.amount.setText(roundedValSodium + " " + unit);
+            }
+
+        } else if(title.equals("Fatty acids")){
+
+            if(dailyValCals != null && percent){
+                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
+                String fattyAcid = dailyCals2000.get("sat fat");
+                Float fattyAcidFloat = Float.parseFloat(fattyAcid);
+                Float percentDaily = (valueInt/fattyAcidFloat)*100;
+                viewHolder.amount.setText(percentDaily + " % Daily");
+            } else {
+                viewHolder.amount.setText(roundedVal + " " + unit);
+            }
+
         } else {
             viewHolder.amount.setText(roundedVal + " " + unit);
         }
 
+//      Total Lipid (fat)
         if(idInt.equals(204)){
             String color = getBackgroundColor(valueInt ,17.5, 3.0);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
         }
 
+//      Sugar
         if(idInt.equals(269)){
             String color = getBackgroundColor(valueInt ,22.5, 5.0);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
         }
 
+//      Sodium
         if(idInt.equals(307)){
             String color = getBackgroundColor(valueInt ,1.5, 0.3);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
         }
 
+//      Saturated Fat
         if(idInt.equals(606)){
             String color = getBackgroundColor(valueInt ,5.0, 1.5);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
