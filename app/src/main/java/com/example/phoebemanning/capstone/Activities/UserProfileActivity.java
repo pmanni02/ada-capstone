@@ -41,7 +41,7 @@ public class UserProfileActivity extends AppCompatActivity {
     EditText heightIn;
     EditText age;
     Button submitBtn;
-    User updatedUser;
+//    User updatedUser;
     
     public void submitSettings(View view){
         
@@ -104,7 +104,7 @@ public class UserProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-        userName = findViewById(R.id.userName);
+//        userName = findViewById(R.id.userName);
 
         radioGroup = findViewById(R.id.gender);
         femaleBtn = findViewById(R.id.femaleRadio);
@@ -115,27 +115,27 @@ public class UserProfileActivity extends AppCompatActivity {
         age = findViewById(R.id.age);
         submitBtn = findViewById(R.id.submit);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String current_id = mUser.getUid();
-        final DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                String fullName = null;
-                if (user != null) {
-                    fullName = "Hello " + user.getFirstName() + " " + user.getLastName() + "!";
-                }
-                userName.setText(fullName);
-//                databaseReference.removeEventListener(this);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UserProfileActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        String current_id = mUser.getUid();
+//        final DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
+//
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                User user = dataSnapshot.getValue(User.class);
+//                String fullName = null;
+//                if (user != null) {
+//                    fullName = "Hello " + user.getFirstName() + " " + user.getLastName() + "!";
+//                }
+//                userName.setText(fullName);
+////                databaseReference.removeEventListener(this);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Toast.makeText(UserProfileActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 //        heightIn.addTextChangedListener(new TextWatcher() {
 //            @Override
