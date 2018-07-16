@@ -18,13 +18,14 @@
         android:ems="10"
         android:hint="First Name ..."
         android:inputType="textPersonName"
+        android:padding="16dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261" />
+        app:layout_constraintVertical_bias="0.234" />
 
     <EditText
         android:id="@+id/lastName"
@@ -37,6 +38,7 @@
         android:ems="10"
         android:hint="Last Name ..."
         android:inputType="textPersonName"
+        android:padding="16dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,13 +58,14 @@
         android:ems="10"
         android:hint="Email ..."
         android:inputType="textEmailAddress"
+        android:padding="16dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintVertical_bias="0.463" />
 
     <EditText
         android:id="@+id/newPasswordId"
@@ -75,13 +78,14 @@
         android:ems="10"
         android:hint="Password ..."
         android:inputType="textPassword"
+        android:padding="16dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525" />
+        app:layout_constraintVertical_bias="0.578" />
 
     <Button
         android:id="@+id/button"
@@ -100,7 +104,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.713" />
+        app:layout_constraintVertical_bias="0.803" />
 
     <ProgressBar
         android:id="@+id/newUserProgress"
@@ -128,13 +132,14 @@
         android:ems="10"
         android:hint="Confirm Password ..."
         android:inputType="textPassword"
+        android:padding="16dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/newUserProgress"
-        app:layout_constraintVertical_bias="0.613" />
+        app:layout_constraintVertical_bias="0.693" />
 
     <TextView
         android:id="@+id/textView5"
@@ -150,7 +155,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintVertical_bias="0.168" />
 </android.support.constraint.ConstraintLayout>
