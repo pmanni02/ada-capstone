@@ -20,7 +20,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -375,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_settings:
-                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
                 finish();
                 return true;
                 

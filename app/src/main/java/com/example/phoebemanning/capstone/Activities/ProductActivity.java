@@ -294,7 +294,7 @@ public class ProductActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_settings:
-                startActivity(new Intent(ProductActivity.this, UserProfileActivity.class));
+                startActivity(new Intent(ProductActivity.this, UserSettingsActivity.class));
                 finish();
                 return true;
 

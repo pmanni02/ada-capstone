@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -126,7 +125,7 @@ public class UserScansActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_settings:
-                startActivity(new Intent(UserScansActivity.this, UserProfileActivity.class));
+                startActivity(new Intent(UserScansActivity.this, UserSettingsActivity.class));
                 finish();
                 return true;
 

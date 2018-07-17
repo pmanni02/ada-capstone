@@ -1,12 +1,8 @@
 package com.example.phoebemanning.capstone.Activities;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,21 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.phoebemanning.capstone.Models.Scan;
-import com.example.phoebemanning.capstone.Models.User;
 import com.example.phoebemanning.capstone.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserSettingsActivity extends AppCompatActivity {
 
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
@@ -86,7 +76,7 @@ public class UserProfileActivity extends AppCompatActivity {
             final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("dailyCalAmount");
             updateDbRef.setValue(BMR);
             Toast.makeText(this, "Your new % Daily Value is " + BMR, Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(UserProfileActivity.this, MainActivity.class));
+            startActivity(new Intent(UserSettingsActivity.this, MainActivity.class));
         }
     }
 
@@ -95,7 +85,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ab.setTitle("");
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_user_settings);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -124,7 +114,7 @@ public class UserProfileActivity extends AppCompatActivity {
 //            public void afterTextChanged(Editable editable) {
 //                String height = editable.toString();
 //                if(Double.valueOf(height) > 12){
-//                    Toast.makeText(UserProfileActivity.this, "Inches must be < 12", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(UserSettingsActivity.this, "Inches must be < 12", Toast.LENGTH_SHORT).show();
 //                }
 //            }
 //        });
@@ -144,18 +134,18 @@ public class UserProfileActivity extends AppCompatActivity {
                 if(mUser !=null && mAuth != null){
                     mAuth.signOut();
                     Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(UserProfileActivity.this, LoginActivity.class));
+                    startActivity(new Intent(UserSettingsActivity.this, LoginActivity.class));
                     finish();
                 }
                 return true;
 
             case R.id.action_user_scans:
-                startActivity(new Intent(UserProfileActivity.this, UserScansActivity.class));
+                startActivity(new Intent(UserSettingsActivity.this, UserScansActivity.class));
                 finish();
                 return true;
 
             case R.id.action_information:
-                startActivity(new Intent(UserProfileActivity.this, InfoActivity.class));
+                startActivity(new Intent(UserSettingsActivity.this, InfoActivity.class));
                 finish();
                 return true;
 

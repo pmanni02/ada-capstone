@@ -47,7 +47,7 @@ public class InfoActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_settings:
-                startActivity(new Intent(InfoActivity.this, UserProfileActivity.class));
+                startActivity(new Intent(InfoActivity.this, UserSettingsActivity.class));
                 finish();
                 return true;
 
