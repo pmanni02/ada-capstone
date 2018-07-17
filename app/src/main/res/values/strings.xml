@@ -27,6 +27,8 @@
     <string name="newUser_createAct_btn">Create Account</string>
     <string name="user_profile_img">user profile</string>
     <string name="user_profile_revert_btn">Revert to Default</string>
+    <string name="user_scans_title">Saved Scans</string>
+    <string name="user_scans_no_scans">No scans</string>
     <string-array name="exercise_amount">
         <item>Basal Metabolic Rate (Resting)</item>
         <item>Sedentary - Little to no exercise</item>

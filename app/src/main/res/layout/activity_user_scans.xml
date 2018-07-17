@@ -25,7 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
-        android:text="Saved Scans"
+        android:text="@string/user_scans_title"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -62,7 +62,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="121dp"
-        android:text="No scans"
+        android:text="@string/user_scans_no_scans"
         android:textAlignment="center"
         android:visibility="invisible" />
 </RelativeLayout>
