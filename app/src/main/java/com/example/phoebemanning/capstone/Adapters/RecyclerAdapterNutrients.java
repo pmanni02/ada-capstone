@@ -127,11 +127,15 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
     public String getBackgroundColor(Float valueInt, Double high, Double low) {
         if(valueInt > high ){
-            return "#FF0000";
+//          RED
+            return "#e62e00";
         } else if(valueInt < low){
-            return "#32CD32";
+//          GREEN
+            return "#00cc00";
         } else {
-            return "#FFA500";
+//          ORANGE
+            return "#ff6600";
+
         }
     }
 
