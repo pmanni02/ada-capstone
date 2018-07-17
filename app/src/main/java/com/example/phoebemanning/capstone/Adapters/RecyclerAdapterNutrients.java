@@ -71,7 +71,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
                 String s = String.format("%.2f", percentDailyVal);
-                viewHolder.amount.setText(s + "% Daily");
+                viewHolder.amount.setText(s + "% / day");
             } else {
                 viewHolder.amount.setText(roundedVal + " Calories");
             }
@@ -152,7 +152,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             Float nutrientDailyValFloat = Float.parseFloat(nutrientDailyVal);
             Float percentDaily = (value/nutrientDailyValFloat)*100;
             String s = String.format("%.2f", percentDaily);
-            amount = s + "% Daily";
+            amount = s + "% / day";
         } else if(teaspoonBtn){
             double teaspoon = value * 0.2028;
             String teaspoonStr = String.format("%.2f", teaspoon);
