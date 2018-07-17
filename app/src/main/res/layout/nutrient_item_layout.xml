@@ -26,7 +26,7 @@
                 android:layout_width="105dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Test"
+                android:text="@string/nutrient_item_default_title"
                 android:textAlignment="textStart"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="amount"
+                android:text="@string/nutrient_item_amt_default"
                 android:textAlignment="viewStart"
                 android:textSize="18sp" />
 
