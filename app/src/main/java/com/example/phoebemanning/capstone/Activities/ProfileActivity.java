@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,17 @@ public class ProfileActivity extends AppCompatActivity {
     TextView userName;
     TextView userBmr;
     TextView userEmail;
+    Button defaultBtn;
+    
+    public void defaultBtnClick(View view){
+        if(mUser != null){
+            String uid = mUser.getUid();
+            final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("dailyCalAmount");
+            updateDbRef.setValue("2000");
+            Toast.makeText(this, "Your new Daily Value is 2000", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(UserSettingsActivity.this, ProfileActivity.class));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         userName = findViewById(R.id.userName);
         userBmr = findViewById(R.id.userBmr);
         userEmail = findViewById(R.id.userEmail);
+        defaultBtn = findViewById(R.id.defaultBtn);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 

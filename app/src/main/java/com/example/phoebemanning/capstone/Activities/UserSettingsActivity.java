@@ -72,7 +72,6 @@ public class UserSettingsActivity extends AppCompatActivity {
 
         if(mUser != null){
             String uid = mUser.getUid();
-            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
             final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("dailyCalAmount");
             updateDbRef.setValue(BMR);
             Toast.makeText(this, "Your new Daily Value is " + BMR, Toast.LENGTH_SHORT).show();
