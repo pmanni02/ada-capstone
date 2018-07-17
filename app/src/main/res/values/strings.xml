@@ -9,6 +9,11 @@
     <string name="user_height_in">Height (in) ...</string>
     <string name="update_settings">Update Settings</string>
     <string name="settings_title">Fill in details to get custom required calories / day value</string>
+    <string name="login_title">Welcome!</string>
+    <string name="login_email_hint">Email ...</string>
+    <string name="login_pwd_hint">Password ...</string>
+    <string name="login_signin_btn">Sign In</string>
+    <string name="login_createacct_btn">Create Account</string>
     <string-array name="exercise_amount">
         <item>Basal Metabolic Rate (Resting)</item>
         <item>Sedentary - Little to no exercise</item>
