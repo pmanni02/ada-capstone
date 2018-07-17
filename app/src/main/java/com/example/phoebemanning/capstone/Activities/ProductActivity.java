@@ -299,12 +299,16 @@ public class ProductActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_favorite:
-                
                 saveUpc();
                 return true;
 
             case R.id.action_information:
                 startActivity(new Intent(ProductActivity.this, InfoActivity.class));
+                finish();
+                return true;
+
+            case R.id.action_user_profile:
+                startActivity(new Intent(ProductActivity.this, ProfileActivity.class));
                 finish();
                 return true;
 

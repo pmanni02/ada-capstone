@@ -129,6 +129,11 @@ public class UserScansActivity extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.action_user_profile:
+                startActivity(new Intent(UserScansActivity.this, ProfileActivity.class));
+                finish();
+                return true;
+
             case R.id.action_information:
                 startActivity(new Intent(UserScansActivity.this, InfoActivity.class));
                 finish();

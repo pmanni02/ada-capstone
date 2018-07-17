@@ -383,6 +383,11 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.action_user_profile:
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                finish();
+                return true;
+
             case R.id.action_user_scans:
                 startActivity(new Intent(MainActivity.this, UserScansActivity.class));
                 finish();

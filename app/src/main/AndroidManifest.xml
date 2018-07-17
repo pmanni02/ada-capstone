@@ -48,7 +48,8 @@
         </provider>
 
         <activity android:name=".Activities.UserSettingsActivity" />
-        <activity android:name=".Activities.InfoActivity"></activity>
+        <activity android:name=".Activities.InfoActivity" />
+        <activity android:name=".Activities.ProfileActivity"></activity>
     </application>
 
 </manifest>

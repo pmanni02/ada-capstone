@@ -144,6 +144,11 @@ public class UserSettingsActivity extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.action_user_profile:
+                startActivity(new Intent(UserSettingsActivity.this, ProfileActivity.class));
+                finish();
+                return true;
+
             case R.id.action_information:
                 startActivity(new Intent(UserSettingsActivity.this, InfoActivity.class));
                 finish();
