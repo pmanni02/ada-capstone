@@ -158,7 +158,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.no_favorite_menu, menu);
+        getMenuInflater().inflate(R.menu.user_settings_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
