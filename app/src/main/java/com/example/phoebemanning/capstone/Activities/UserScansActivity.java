@@ -130,6 +130,11 @@ public class UserScansActivity extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.action_information:
+                startActivity(new Intent(UserScansActivity.this, InfoActivity.class));
+                finish();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

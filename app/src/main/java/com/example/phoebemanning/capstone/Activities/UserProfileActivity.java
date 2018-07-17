@@ -154,6 +154,11 @@ public class UserProfileActivity extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.action_information:
+                startActivity(new Intent(UserProfileActivity.this, InfoActivity.class));
+                finish();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

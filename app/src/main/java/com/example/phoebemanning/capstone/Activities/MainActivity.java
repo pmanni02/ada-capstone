@@ -378,6 +378,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
                 finish();
                 return true;
+                
+            case R.id.action_information:
+                startActivity(new Intent(MainActivity.this, InfoActivity.class));
+                finish();
+                return true;
 
             case R.id.action_user_scans:
                 startActivity(new Intent(MainActivity.this, UserScansActivity.class));

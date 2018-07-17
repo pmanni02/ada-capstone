@@ -303,6 +303,11 @@ public class ProductActivity extends AppCompatActivity {
                 saveUpc();
                 return true;
 
+            case R.id.action_information:
+                startActivity(new Intent(ProductActivity.this, InfoActivity.class));
+                finish();
+                return true;
+
             case R.id.action_percent:
                 percentBtn = !percentBtn;
                 if(percentBtn){

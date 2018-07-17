@@ -19,7 +19,11 @@
         app:showAsAction="never" />
 
     <item android:id="@+id/action_settings"
-        android:title="Settings"
+    android:title="Settings"
+    app:showAsAction="never" />
+
+    <item android:id="@+id/action_information"
+        android:title="Information"
         app:showAsAction="never" />
 
     <item android:id="@+id/action_logout"
