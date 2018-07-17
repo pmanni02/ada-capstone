@@ -36,7 +36,6 @@ public class ProfileActivity extends AppCompatActivity {
             final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("dailyCalAmount");
             updateDbRef.setValue("2000");
             Toast.makeText(this, "Your new Daily Value is 2000", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(UserSettingsActivity.this, ProfileActivity.class));
         }
     }
 

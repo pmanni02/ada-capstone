@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Capstone</string>
     <string name="info_page"><![CDATA[The purpose of this app is to provide an intuitive interface for users to get a better understanding of the information on nutrition labels. The rating system used is from standards sets by the Department of Health & Social Care in the United Kingdom. Red, orange, and green indicate high, medium, and low amounts of the nutrient respectively. Percent daily (%DV) values, with the exception of the energy quantity, are based on a 2,000 calorie diet. The energy %DV will be calculated per user if additional information is provided. This app uses the Revised Harris-Benedict equation to calculate Basal Metabolic Rate.]]></string>
+    <string-array name="exercise_amount">
+        <item>Basal Metabolic Rate (Resting)</item>
+        <item>Sedentary - Little to no exercise</item>
+        <item>Lightly Active (1–3 days per week)</item>
+        <item>Moderately Active (3–5 days per week)</item>
+        <item>Very Active (6–7 days per week)</item>
+        <item>Extra Active (twice or more /day)</item>
+    </string-array>
 </resources>

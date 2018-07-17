@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.R;
@@ -18,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class UserSettingsActivity extends AppCompatActivity {
+public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
@@ -30,9 +33,9 @@ public class UserSettingsActivity extends AppCompatActivity {
     EditText heightIn;
     EditText age;
     Button submitBtn;
+    Double exerciseFactor;
     
     public void submitSettings(View view){
-        
         if((weight.getText().toString().equals("")) ||
                 (heightFt.getText().toString().equals("")) ||
                 (heightIn.getText().toString().equals("")) ||
@@ -60,9 +63,9 @@ public class UserSettingsActivity extends AppCompatActivity {
         Double BMR;
 
         if(gender == femaleBtn.getId()){
-            BMR = 447.593 + (9.247 * weightKg) + (3.098 * heightCm) - (4.330 * ageVal);
+            BMR = (447.593 + (9.247 * weightKg) + (3.098 * heightCm) - (4.330 * ageVal)) * exerciseFactor;
         } else {
-            BMR = 88.362 + (13.397 * weightKg) + (4.799 * heightCm) - (5.677 * ageVal);
+            BMR = (88.362 + (13.397 * weightKg) + (4.799 * heightCm) - (5.677 * ageVal)) * exerciseFactor;
         }
         return (int) Math.rint(BMR);
     }
@@ -98,6 +101,17 @@ public class UserSettingsActivity extends AppCompatActivity {
         age = findViewById(R.id.age);
         submitBtn = findViewById(R.id.submit);
 
+        Spinner spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.exercise_amount,
+                android.R.layout.simple_spinner_item);
+
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+
+
+
 //        heightIn.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -117,6 +131,29 @@ public class UserSettingsActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+        String selectedItem = adapterView.getItemAtPosition(pos).toString();
+        if(pos == 0){
+            exerciseFactor = 1.0;
+        } else if(pos == 1){
+            exerciseFactor = 1.2;
+        } else if(pos == 2){
+            exerciseFactor = 1.375;
+        } else if(pos == 3){
+            exerciseFactor = 1.55;
+        } else if(pos == 4){
+            exerciseFactor = 1.725;
+        } else if(pos == 5){
+            exerciseFactor = 1.9;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     @Override
@@ -157,4 +194,6 @@ public class UserSettingsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
