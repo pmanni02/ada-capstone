@@ -18,6 +18,13 @@
     <string name="main_upcCode_hint">UPC code ...</string>
     <string name="main_submit_btn">Submit UPC</string>
     <string name="main_scan_btn">Scan Barcode</string>
+    <string name="newuser_title">Enter Your Information</string>
+    <string name="newuser_fname_hint">First Name ...</string>
+    <string name="newuser_lname_hint">Last Name ...</string>
+    <string name="newuser_email_hint">Email ...</string>
+    <string name="newuser_password_hint">Password ...</string>
+    <string name="newuser_pwdConfirm_hint">Confirm Password ...</string>
+    <string name="newUser_createAct_btn">Create Account</string>
     <string-array name="exercise_amount">
         <item>Basal Metabolic Rate (Resting)</item>
         <item>Sedentary - Little to no exercise</item>
