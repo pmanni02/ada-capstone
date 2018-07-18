@@ -76,6 +76,7 @@ public class ProductActivity extends AppCompatActivity {
     ProgressBar loadProductProgress;
 //    FloatingActionButton addNewScanButton;
     ToggleButton percentToogle;
+    ToggleButton tspToggle;
     Button newScanBtn;
     Menu main_menu;
 
@@ -107,6 +108,7 @@ public class ProductActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
 //        addNewScanButton = findViewById(R.id.floatingActionButton);
         percentToogle = findViewById(R.id.percentToggle);
+        tspToggle = findViewById(R.id.tspToggle);
         newScanBtn = findViewById(R.id.scanNewBtn);
         main_menu = findViewById(R.menu.main_menu);
 
@@ -143,10 +145,26 @@ public class ProductActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     teaspoonBtn = false;
+                    tspToggle.setChecked(false);
                     percentBtn = true;
                     setAdapter();
                 } else {
                     percentBtn = false;
+                    setAdapter();
+                }
+            }
+        });
+
+        tspToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    percentBtn = false;
+                    percentToogle.setChecked(false);
+                    teaspoonBtn = true;
+                    setAdapter();
+                } else {
+                    teaspoonBtn = false;
                     setAdapter();
                 }
             }
