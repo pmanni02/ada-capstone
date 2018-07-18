@@ -32,6 +32,7 @@
     <string name="nutrient_item_default_title">test</string>
     <string name="nutrient_item_amt_default">amount</string>
     <string name="scan_item_default_title">test</string>
+    <string name="user_profile_update_btn">Update Settings</string>
     <string-array name="exercise_amount">
         <item>Basal Metabolic Rate (Resting)</item>
         <item>Sedentary - Little to no exercise</item>

@@ -135,7 +135,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-        String selectedItem = adapterView.getItemAtPosition(pos).toString();
+//        String selectedItem = adapterView.getItemAtPosition(pos).toString();
         if(pos == 0){
             exerciseFactor = 1.0;
         } else if(pos == 1){

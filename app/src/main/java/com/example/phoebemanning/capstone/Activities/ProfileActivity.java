@@ -29,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView userBmr;
     TextView userEmail;
     Button defaultBtn;
+    Button updateBtn;
     
     public void defaultBtnClick(View view){
         if(mUser != null){
@@ -37,6 +38,10 @@ public class ProfileActivity extends AppCompatActivity {
             updateDbRef.setValue("2000");
             Toast.makeText(this, "Your new Daily Value is 2000", Toast.LENGTH_SHORT).show();
         }
+    }
+    
+    public void updateBtnClick(View view){
+        startActivity(new Intent(ProfileActivity.this, UserSettingsActivity.class));
     }
 
     @Override
@@ -53,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
         userBmr = findViewById(R.id.userBmr);
         userEmail = findViewById(R.id.userEmail);
         defaultBtn = findViewById(R.id.defaultBtn);
+        updateBtn = findViewById(R.id.updateBtn);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -78,7 +84,6 @@ public class ProfileActivity extends AppCompatActivity {
                 } else {
                     userBmr.setText("Daily Calories : " + bmr);
                 }
-
             }
 
             @Override
