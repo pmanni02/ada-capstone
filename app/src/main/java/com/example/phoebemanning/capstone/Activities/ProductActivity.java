@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -71,10 +72,15 @@ public class ProductActivity extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     RecyclerAdapterNutrients adapter;
     ProgressBar loadProductProgress;
-    FloatingActionButton addNewScanButton;
+//    FloatingActionButton addNewScanButton;
+    Button newScanBtn;
     Menu main_menu;
     Boolean percentBtn = false;
     Boolean teaspoonBtn = false;
+
+    public void newScanClick(View view){
+        startActivity(new Intent(ProductActivity.this, MainActivity.class));
+    }
 
     @SuppressLint("ResourceType")
     @Override
@@ -95,7 +101,8 @@ public class ProductActivity extends AppCompatActivity {
         productName = findViewById(R.id.productName);
         nutrientArray = new ArrayList<Nutrients>();
         imageView = findViewById(R.id.imageView);
-        addNewScanButton = findViewById(R.id.floatingActionButton);
+//        addNewScanButton = findViewById(R.id.floatingActionButton);
+        newScanBtn = findViewById(R.id.scanNewBtn);
         main_menu = findViewById(R.menu.main_menu);
 
 
@@ -119,12 +126,12 @@ public class ProductActivity extends AppCompatActivity {
 //      Make GET request for product image
         getImage();
 
-        addNewScanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProductActivity.this, MainActivity.class));
-            }
-        });
+//        addNewScanButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(ProductActivity.this, MainActivity.class));
+//            }
+//        });
 
     }
 

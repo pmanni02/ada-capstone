@@ -32,7 +32,6 @@ public class UserScansActivity extends AppCompatActivity {
 
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
-//    FloatingActionButton addNewScanButton;
     Button scanNew;
     RecyclerView recyclerViewScans;
     RecyclerAdapterScans adapter;
@@ -54,7 +53,6 @@ public class UserScansActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
-//        addNewScanButton = findViewById(R.id.floatingActionButton);
         scanNew = findViewById(R.id.scanNewBtn);
         recyclerViewScans = findViewById(R.id.recyclerViewScans);
         noScans = findViewById(R.id.noScansText);
@@ -65,13 +63,6 @@ public class UserScansActivity extends AppCompatActivity {
 
         loadScansProgress = findViewById(R.id.loadScansProgress);
         loadScansProgress.setVisibility(View.VISIBLE);
-
-//        addNewScanButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(UserScansActivity.this, MainActivity.class));
-//            }
-//        });
 
         getScanList();
     }
