@@ -71,7 +71,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                 Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
                 String s = String.format("%.2f", percentDailyVal);
-                viewHolder.amount.setText(s + "% / day");
+                viewHolder.amount.setText(s + " %");
             } else {
                 viewHolder.amount.setText(roundedVal + " Calories");
             }
@@ -96,7 +96,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             viewHolder.amount.setText(getAmountVal(valueIntSodium, "sodium", "g"));
 
         } else if(title.equals("Fatty acids")) {
-
+            viewHolder.title.setText("Saturated Fat");
             String color = getBackgroundColor(valueInt, 5.0, 1.5);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
             viewHolder.amount.setText(getAmountVal(valueInt, "sat fat", unit));
@@ -152,7 +152,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             Float nutrientDailyValFloat = Float.parseFloat(nutrientDailyVal);
             Float percentDaily = (value/nutrientDailyValFloat)*100;
             String s = String.format("%.2f", percentDaily);
-            amount = s + "% / day";
+            amount = s + " %";
         } else if(teaspoonBtn){
             double teaspoon = value * 0.2028;
             String teaspoonStr = String.format("%.2f", teaspoon);

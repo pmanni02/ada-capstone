@@ -22,9 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //    private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-//    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mUser;
 
     private EditText email;
@@ -39,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference databaseReference = database.getReference("Users");
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
@@ -96,22 +93,4 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        if(item.getItemId() == R.id.action_logout){
-//            mAuth.signOut();
-//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//            finish();
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
 }
