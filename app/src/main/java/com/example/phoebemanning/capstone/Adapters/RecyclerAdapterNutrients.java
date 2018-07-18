@@ -1,5 +1,6 @@
 package com.example.phoebemanning.capstone.Adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -30,6 +31,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
     private String dailyValCals;
     private Boolean percentBtn;
     private Boolean teaspoonBtn;
+    private Dialog myDialog;
 
     public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyValCals, Boolean percentBtn, Boolean teaspoonBtn, Context context){
         this.nutrients = nutrients;
@@ -45,10 +47,15 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.nutrient_item_layout, viewGroup, false);
         final MyViewHolder vHolder = new MyViewHolder(view);
 
+        myDialog = new Dialog(context);
+        myDialog.setContentView(R.layout.dialog_nutrient);
+
         vHolder.item_nutrient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(context, "Clicked" + String.valueOf(vHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                TextView dialogNutrientName = myDialog.findViewById(R.id.nutrientNameTx);
+                dialogNutrientName.setText(nutrients.get(vHolder.getAdapterPosition()).getName());
+                myDialog.show();
             }
         });
 
