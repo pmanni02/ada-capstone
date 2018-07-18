@@ -169,7 +169,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             case R.id.action_logout:
                 if(mUser !=null && mAuth != null){
                     mAuth.signOut();
-                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(UserSettingsActivity.this, LoginActivity.class));
                     finish();
                 }

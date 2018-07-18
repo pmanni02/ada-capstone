@@ -40,7 +40,7 @@ public class InfoActivity extends AppCompatActivity {
             case R.id.action_logout:
                 if(mUser !=null && mAuth != null){
                     mAuth.signOut();
-                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(InfoActivity.this, LoginActivity.class));
                     finish();
                 }

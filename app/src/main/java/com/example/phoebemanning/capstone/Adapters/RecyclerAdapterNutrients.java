@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,16 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.nutrient_item_layout, viewGroup, false);
-        return new MyViewHolder(view);
+        final MyViewHolder vHolder = new MyViewHolder(view);
+
+        vHolder.item_nutrient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText(context, "Clicked" + String.valueOf(vHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return vHolder;
     }
 
     @Override
@@ -116,12 +126,14 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         TextView title;
         TextView amount;
         CardView cardView;
+        RelativeLayout item_nutrient;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.nutrient_item);
             amount = itemView.findViewById(R.id.nutrient_amount);
             cardView = itemView.findViewById(R.id.cardView);
+            item_nutrient = itemView.findViewById(R.id.nutrient_item_holder);
         }
     }
 
