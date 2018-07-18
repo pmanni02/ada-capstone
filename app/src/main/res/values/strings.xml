@@ -35,6 +35,7 @@
     <string name="user_profile_update_btn">Update Settings</string>
     <string name="user_scans_new_scan_btn">Scan New Product</string>
     <string name="product_add_scan_btn">Scan New Product</string>
+    <string name="product_note_text">Note: color coded values are per 100 g</string>
     <string-array name="exercise_amount">
         <item>Basal Metabolic Rate (Resting)</item>
         <item>Sedentary - Little to no exercise</item>

@@ -74,7 +74,6 @@ public class ProductActivity extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     RecyclerAdapterNutrients adapter;
     ProgressBar loadProductProgress;
-//    FloatingActionButton addNewScanButton;
     ToggleButton percentToogle;
     ToggleButton tspToggle;
     Button newScanBtn;
@@ -106,7 +105,6 @@ public class ProductActivity extends AppCompatActivity {
         productName = findViewById(R.id.productName);
         nutrientArray = new ArrayList<Nutrients>();
         imageView = findViewById(R.id.imageView);
-//        addNewScanButton = findViewById(R.id.floatingActionButton);
         percentToogle = findViewById(R.id.percentToggle);
         tspToggle = findViewById(R.id.tspToggle);
         newScanBtn = findViewById(R.id.scanNewBtn);
@@ -132,13 +130,6 @@ public class ProductActivity extends AppCompatActivity {
 
 //      Make GET request for product image
         getImage();
-
-//        addNewScanButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(ProductActivity.this, MainActivity.class));
-//            }
-//        });
 
         percentToogle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -310,7 +301,6 @@ public class ProductActivity extends AppCompatActivity {
                 Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     @Override
@@ -354,22 +344,6 @@ public class ProductActivity extends AppCompatActivity {
             case R.id.action_user_profile:
                 startActivity(new Intent(ProductActivity.this, ProfileActivity.class));
                 finish();
-                return true;
-
-            case R.id.action_percent:
-                percentBtn = !percentBtn;
-                if(percentBtn){
-                    teaspoonBtn = false;
-                }
-                setAdapter();
-                return true;
-                
-            case R.id.action_spoon:
-                teaspoonBtn = !teaspoonBtn;
-                if(teaspoonBtn){
-                    percentBtn = false;
-                }
-                setAdapter();
                 return true;
 
             default:

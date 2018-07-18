@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-    <item
-        android:id="@+id/action_percent"
-        android:icon="@drawable/ic_action_percent"
-        android:title="action_percent"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_spoon"
-        android:icon="@drawable/ic_action_spoon"
-        android:title="action_spoon"
-        app:showAsAction="always" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/action_user_scans"
         android:title="My Scans"
