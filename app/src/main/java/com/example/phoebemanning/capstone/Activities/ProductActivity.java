@@ -17,10 +17,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.phoebemanning.capstone.Apis.ImageApi;
 import com.example.phoebemanning.capstone.BuildConfig;
@@ -73,8 +75,10 @@ public class ProductActivity extends AppCompatActivity {
     RecyclerAdapterNutrients adapter;
     ProgressBar loadProductProgress;
 //    FloatingActionButton addNewScanButton;
+    ToggleButton percentToogle;
     Button newScanBtn;
     Menu main_menu;
+
     Boolean percentBtn = false;
     Boolean teaspoonBtn = false;
 
@@ -102,6 +106,7 @@ public class ProductActivity extends AppCompatActivity {
         nutrientArray = new ArrayList<Nutrients>();
         imageView = findViewById(R.id.imageView);
 //        addNewScanButton = findViewById(R.id.floatingActionButton);
+        percentToogle = findViewById(R.id.percentToggle);
         newScanBtn = findViewById(R.id.scanNewBtn);
         main_menu = findViewById(R.menu.main_menu);
 
@@ -132,6 +137,20 @@ public class ProductActivity extends AppCompatActivity {
 //                startActivity(new Intent(ProductActivity.this, MainActivity.class));
 //            }
 //        });
+
+        percentToogle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    teaspoonBtn = false;
+                    percentBtn = true;
+                    setAdapter();
+                } else {
+                    percentBtn = false;
+                    setAdapter();
+                }
+            }
+        });
 
     }
 
