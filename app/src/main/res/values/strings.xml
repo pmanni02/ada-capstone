@@ -37,6 +37,7 @@
     <string name="product_add_scan_btn">Scan New Product</string>
     <string name="product_note_text">Note: nutrient values are per 100 g</string>
     <string name="energy_desc">The amount of energy (measured in calories / kilojoules) that this product will give you per serving or 100 grams. Your target daily calorie intake depends on age, size, level of exercise, among other factors.  </string>
+    <string name="fat_desc">Fat is both a source for fatty acids as well as how our bodies absorb vitamins A, D, and E. Two main two types of fat are saturated and unsaturated. Saturated fats are often come from animals (meat, dairy, and some plants). Too much saturated fat leads to increased cholesterol which can put you at higher risk for heart disease and stroke. Unsaturated fat is typically liquid at room temperature. Plant oils, nuts, avocados, and some fish are examples of foods high in unsaturated fat. Unsaturated fat can help lower bad types of cholesterol.</string>
     <string-array name="exercise_amount">
         <item>Basal Metabolic Rate (Resting)</item>
         <item>Sedentary - Little to no exercise</item>

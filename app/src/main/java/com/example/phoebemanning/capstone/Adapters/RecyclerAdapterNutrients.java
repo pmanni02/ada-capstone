@@ -55,9 +55,16 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             public void onClick(View view) {
                 TextView dialogNutrientName = myDialog.findViewById(R.id.nutrientNameTx);
                 TextView dialogNutrientDescription = myDialog.findViewById(R.id.nutrient_desc);
-
                 dialogNutrientName.setText(nutrients.get(vHolder.getAdapterPosition()).getName());
-                dialogNutrientDescription.setText(R.string.energy_desc);
+                String title = nutrients.get(vHolder.getAdapterPosition()).getName();
+
+                if(title.equals("Energy")){
+                    dialogNutrientDescription.setText(R.string.energy_desc);
+                } else if(title.equals("Total lipid (fat)")){
+                    dialogNutrientDescription.setText(R.string.fat_desc);
+                }
+
+//                dialogNutrientDescription.setText(R.string.energy_desc);
                 myDialog.show();
             }
         });
