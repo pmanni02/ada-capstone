@@ -62,9 +62,14 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
                     dialogNutrientDescription.setText(R.string.energy_desc);
                 } else if(title.equals("Total lipid (fat)")){
                     dialogNutrientDescription.setText(R.string.fat_desc);
+                } else if(title.equals("Sugars, total")){
+                    dialogNutrientDescription.setText(R.string.sugar_desc);
+                } else if(title.equals("Sodium, Na")){
+                    dialogNutrientDescription.setText(R.string.sodium_desc);
+                } else if(title.equals("Fatty acids, total saturated")){
+                    dialogNutrientDescription.setText(R.string.sat_fat_desc);
                 }
 
-//                dialogNutrientDescription.setText(R.string.energy_desc);
                 myDialog.show();
             }
         });
