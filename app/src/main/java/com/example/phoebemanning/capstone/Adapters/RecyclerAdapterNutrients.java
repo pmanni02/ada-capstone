@@ -54,7 +54,10 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             @Override
             public void onClick(View view) {
                 TextView dialogNutrientName = myDialog.findViewById(R.id.nutrientNameTx);
+                TextView dialogNutrientDescription = myDialog.findViewById(R.id.nutrient_desc);
+
                 dialogNutrientName.setText(nutrients.get(vHolder.getAdapterPosition()).getName());
+                dialogNutrientDescription.setText(R.string.energy_desc);
                 myDialog.show();
             }
         });

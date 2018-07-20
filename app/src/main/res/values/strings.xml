@@ -36,6 +36,7 @@
     <string name="user_scans_new_scan_btn">Scan New Product</string>
     <string name="product_add_scan_btn">Scan New Product</string>
     <string name="product_note_text">Note: nutrient values are per 100 g</string>
+    <string name="energy_desc">The amount of energy (measured in calories / kilojoules) that this product will give you per serving or 100 grams. Your target daily calorie intake depends on age, size, level of exercise, among other factors.  </string>
     <string-array name="exercise_amount">
         <item>Basal Metabolic Rate (Resting)</item>
         <item>Sedentary - Little to no exercise</item>
