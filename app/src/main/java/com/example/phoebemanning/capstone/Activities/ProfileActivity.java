@@ -31,13 +31,23 @@ public class ProfileActivity extends AppCompatActivity {
     TextView userEmail;
     Button defaultBtn;
     Button updateBtn;
+    String gender = null;
     
     public void defaultBtnClick(View view){
         if(mUser != null){
             String uid = mUser.getUid();
+            String defaultCals = null;
+
             final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("dailyCalAmount");
-            updateDbRef.setValue("2000");
-            Toast.makeText(this, "Your new Daily Value is 2000", Toast.LENGTH_SHORT).show();
+
+            if(gender.equals("female")){
+                defaultCals = "2000";
+            } else {
+                defaultCals = "2500";
+            }
+            updateDbRef.setValue(defaultCals);
+
+            Toast.makeText(this, "Your new Daily Value is " + defaultCals, Toast.LENGTH_SHORT).show();
         }
     }
     
@@ -77,10 +87,14 @@ public class ProfileActivity extends AppCompatActivity {
                     fullName = user.getFirstName().toUpperCase() + " " + user.getLastName().toUpperCase();
                     email = user.getEmail();
                     bmr = user.getDailyCalAmount();
+                    gender = user.getGender();
                 }
                 userName.setText(fullName);
                 userEmail.setText(email);
-                if(bmr.equals("2000")){
+
+                if(gender.equals("female") && bmr.equals("2000")){
+                    userBmr.setText("Daily Calories (default): " + bmr);
+                } else if(gender.equals("male") && bmr.equals("2500")){
                     userBmr.setText("Daily Calories (default): " + bmr);
                 } else {
                     userBmr.setText("Daily Calories : " + bmr);
