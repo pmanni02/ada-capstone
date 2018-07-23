@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
                     grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                     grantResults[2] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-//                takePicIntent();
             } else {
                 Toast.makeText(this, "Permission NOT granted", Toast.LENGTH_SHORT).show();
             }
@@ -176,10 +175,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
-//            Log.i("PHOTO_PATH", mCurrentPhotoPath);
-//            Log.i("EXTRAS", photoURI.getPath());
-
-//            barcodeRecognitionURI(photoURI);
             barcodeRecognitionBitmap(rotatedImg);
         }
     }
@@ -253,13 +248,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(java.util.List<FirebaseVisionBarcode> barcodes) {
                         for (FirebaseVisionBarcode barcode: barcodes) {
-                            Rect bounds = barcode.getBoundingBox();
-                            Point[] corners = barcode.getCornerPoints();
+//                            Rect bounds = barcode.getBoundingBox();
+//                            Point[] corners = barcode.getCornerPoints();
 
                             String rawValue = barcode.getRawValue();
 
                             Toast.makeText(MainActivity.this, rawValue, Toast.LENGTH_SHORT).show();
-//                            resultText.setText(rawValue);
 
 //                          TODO: check that upc code is valid
                             getProductCode(rawValue);
@@ -275,7 +269,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getProductCode(final String upcCode){
-//        Log.i("UPC TEXT: ", upcEditText.getText().toString());
         Call<ResponseData> call = UsdaApi.getClient().getResponse(upcCode, BuildConfig.ApiKey);
 
         call.enqueue(new Callback<ResponseData>() {
@@ -345,7 +338,6 @@ public class MainActivity extends AppCompatActivity {
                     fullName = "Welcome " + user.getFirstName() + " " + user.getLastName() + "!";
                 }
                 userName.setText(fullName);
-//                databaseReference.removeEventListener(this);
             }
 
             @Override
@@ -369,7 +361,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_logout:
                 if(mUser !=null && mAuth != null){
                     mAuth.signOut();
-//                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();
                 }

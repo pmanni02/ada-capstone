@@ -26,7 +26,6 @@ public class NewUserActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    private String userID;
 
     EditText firstName;
     EditText lastName;

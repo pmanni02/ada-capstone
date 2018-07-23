@@ -32,9 +32,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
-//    RadioGroup radioGroup;
-//    RadioButton femaleBtn;
-//    RadioButton maleBtn;
     EditText weight;
     EditText heightFt;
     EditText heightIn;
@@ -54,8 +51,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             Double heightFtVal = Double.parseDouble(heightFt.getText().toString());
             Double heightInVal = Double.parseDouble(heightIn.getText().toString());
             Integer ageVal = Integer.parseInt(age.getText().toString());
-//            int gender = radioGroup.getCheckedRadioButtonId();
-
             Integer bmr = getBasalMetabolicRate(gender, weightVal, heightFtVal, heightInVal, ageVal);
             saveValInDatabase(bmr);
         }
@@ -99,10 +94,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
-
-//        radioGroup = findViewById(R.id.gender);
-//        femaleBtn = findViewById(R.id.femaleRadio);
-//        maleBtn = findViewById(R.id.maleRadio);
         weight = findViewById(R.id.weight);
         heightFt = findViewById(R.id.heightFt);
         heightIn = findViewById(R.id.heightIn);
@@ -128,6 +119,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             }
         });
 
+//      Dropdown menu
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
@@ -137,26 +129,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
-
-//        heightIn.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                String height = editable.toString();
-//                if(Double.valueOf(height) > 12){
-//                    Toast.makeText(UserSettingsActivity.this, "Inches must be < 12", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
     }
 
     @Override

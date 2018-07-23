@@ -100,10 +100,9 @@ public class ProductActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         productName = findViewById(R.id.productName);
-        nutrientArray = new ArrayList<Nutrients>();
+        nutrientArray = new ArrayList<>();
         imageView = findViewById(R.id.imageView);
         percentToogle = findViewById(R.id.percentToggle);
         tspToggle = findViewById(R.id.tspToggle);
@@ -240,7 +239,6 @@ public class ProductActivity extends AppCompatActivity {
         call.enqueue(new Callback<NutrientData>() {
             @Override
             public void onResponse(Call<NutrientData> call, Response<NutrientData> response) {
-//                Log.i("URL", call.request().url().toString());
 
                 if(response.isSuccessful()) {
                     if (response.body() != null) {
@@ -317,7 +315,6 @@ public class ProductActivity extends AppCompatActivity {
             case R.id.action_logout:
                 if(mUser !=null && mAuth != null){
                     mAuth.signOut();
-//                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ProductActivity.this, LoginActivity.class));
                     finish();
                 }

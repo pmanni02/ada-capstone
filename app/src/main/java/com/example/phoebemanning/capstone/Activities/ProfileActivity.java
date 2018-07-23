@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void defaultBtnClick(View view){
         if(mUser != null){
             String uid = mUser.getUid();
-            String defaultCals = null;
+            String defaultCals;
 
             final DatabaseReference updateDbRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("dailyCalAmount");
 
@@ -92,9 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
                 userName.setText(fullName);
                 userEmail.setText(email);
 
-                if(gender.equals("female") && bmr.equals("2000")){
-                    userBmr.setText("Daily Calories (default): " + bmr);
-                } else if(gender.equals("male") && bmr.equals("2500")){
+                if((gender.equals("female") && bmr.equals("2000")) || (gender.equals("male") && bmr.equals("2500"))){
                     userBmr.setText("Daily Calories (default): " + bmr);
                 } else {
                     userBmr.setText("Daily Calories : " + bmr);
@@ -121,7 +119,6 @@ public class ProfileActivity extends AppCompatActivity {
             case R.id.action_logout:
                 if(mUser !=null && mAuth != null){
                     mAuth.signOut();
-//                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
                     finish();
                 }

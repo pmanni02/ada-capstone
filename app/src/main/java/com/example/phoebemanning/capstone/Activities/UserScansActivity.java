@@ -76,7 +76,6 @@ public class UserScansActivity extends AppCompatActivity {
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    ArrayList<Scan> list = new ArrayList<>();
 
                     for(DataSnapshot s : dataSnapshot.getChildren()){
                         Scan scan = s.getValue(Scan.class);
@@ -118,7 +117,6 @@ public class UserScansActivity extends AppCompatActivity {
             case R.id.action_logout:
                 if(mUser !=null && mAuth != null){
                     mAuth.signOut();
-//                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(UserScansActivity.this, LoginActivity.class));
                     finish();
                 }
