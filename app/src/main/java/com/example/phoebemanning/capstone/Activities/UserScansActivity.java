@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,7 +88,8 @@ public class UserScansActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(UserScansActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.i("Database error: ", databaseError.getMessage());
+//                    Toast.makeText(UserScansActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
