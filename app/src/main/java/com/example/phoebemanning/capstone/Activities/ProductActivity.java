@@ -290,8 +290,9 @@ public class ProductActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 String dailyVal = user.getDailyCalAmount();
+                String gender = user.getGender();
 
-                adapter = new RecyclerAdapterNutrients(nutrientArray, dailyVal, percentBtn, teaspoonBtn, ProductActivity.this);
+                adapter = new RecyclerAdapterNutrients(nutrientArray, dailyVal, percentBtn, teaspoonBtn, gender, ProductActivity.this);
                 recyclerView.setAdapter(adapter);
             }
 

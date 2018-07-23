@@ -32,13 +32,15 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
     private Boolean percentBtn;
     private Boolean teaspoonBtn;
     private Dialog myDialog;
+    private String gender;
 
-    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyValCals, Boolean percentBtn, Boolean teaspoonBtn, Context context){
+    public RecyclerAdapterNutrients(List<Nutrients> nutrients, String dailyValCals, Boolean percentBtn, Boolean teaspoonBtn, String gender, Context context){
         this.nutrients = nutrients;
         this.context = context;
         this.dailyValCals = dailyValCals;
         this.percentBtn = percentBtn;
         this.teaspoonBtn = teaspoonBtn;
+        this.gender = gender;
     }
 
     @NonNull
@@ -134,8 +136,6 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             viewHolder.amount.setText(getAmountVal(valueInt, "sat fat", unit));
 
         }
-
-
     }
 
     @Override
@@ -179,14 +179,23 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
         roundedVal = roundedVal.setScale(2, BigDecimal.ROUND_HALF_UP);
 
         String amount;
+        String nutrientDailyVal = null;
 
         if(percentBtn){
-            Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
-            String nutrientDailyVal = dailyCals2000.get(category);
+
+            if(gender.equals("female")){
+                Map<String, String> dailyCals2000 = DailyNeeds.getDailyCals2000();
+                nutrientDailyVal = dailyCals2000.get(category);
+            } else {
+                Map<String, String> dailyCals2500 = DailyNeeds.getDailyCals2500();
+                nutrientDailyVal = dailyCals2500.get(category);
+            }
+
             Float nutrientDailyValFloat = Float.parseFloat(nutrientDailyVal);
             Float percentDaily = (value/nutrientDailyValFloat)*100;
             String s = String.format("%.2f", percentDaily);
             amount = s + " %";
+            
         } else if(teaspoonBtn){
             double teaspoon = value * 0.2028;
             String teaspoonStr = String.format("%.2f", teaspoon);
