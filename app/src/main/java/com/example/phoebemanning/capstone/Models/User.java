@@ -8,16 +8,14 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
-//    private Integer age;
-//    private Integer weight;
     private String dailyCalAmount;
+    private String gender;
 
-    public User(String email, String firstName, String lastName, String dailyCalAmount) {
+    public User(String email, String firstName, String lastName, String dailyCalAmount, String gender) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-//        this.age = age;
-//        this.weight = weight;
+        this.gender = gender;
         this.dailyCalAmount = dailyCalAmount;
     }
 
@@ -48,22 +46,13 @@ public class User {
         this.lastName = lastName;
     }
 
-//    public Integer getAge() {
-//        return age;
-//    }
-//
-//    public void setAge(Integer age) {
-//        this.age = age;
-//    }
-//
-//    public Integer getWeight() {
-//        return weight;
-//    }
-//
-//    public void setWeight(Integer weight) {
-//        this.weight = weight;
-//    }
+    public String getGender() {
+        return gender;
+    }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public String getDailyCalAmount() {
         return dailyCalAmount;
