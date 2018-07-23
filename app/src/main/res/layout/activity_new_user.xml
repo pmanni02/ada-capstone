@@ -7,6 +7,38 @@
     tools:context=".Activities.NewUserActivity"
     tools:layout_editor_absoluteY="81dp">
 
+    <RadioGroup
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.176">
+
+        <RadioButton
+            android:id="@+id/femaleRadio"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/female"
+            android:textAlignment="viewStart" />
+
+        <RadioButton
+            android:id="@+id/maleRadio"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:text="@string/male"
+            android:textAlignment="textStart" />
+    </RadioGroup>
+
     <EditText
         android:id="@+id/firstName"
         android:layout_width="0dp"
@@ -25,7 +57,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.234" />
+        app:layout_constraintVertical_bias="0.292" />
 
     <EditText
         android:id="@+id/lastName"
@@ -45,7 +77,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.349" />
+        app:layout_constraintVertical_bias="0.407" />
 
     <EditText
         android:id="@+id/newEmailId"
@@ -65,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.463" />
+        app:layout_constraintVertical_bias="0.522" />
 
     <EditText
         android:id="@+id/newPasswordId"
@@ -85,7 +117,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.637" />
 
     <Button
         android:id="@+id/button"
@@ -104,7 +136,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.803" />
+        app:layout_constraintVertical_bias="0.861" />
 
     <ProgressBar
         android:id="@+id/newUserProgress"
@@ -139,7 +171,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/newUserProgress"
-        app:layout_constraintVertical_bias="0.693" />
+        app:layout_constraintVertical_bias="0.752" />
 
     <TextView
         android:id="@+id/textView5"
@@ -158,5 +190,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.112" />
 </android.support.constraint.ConstraintLayout>

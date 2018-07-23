@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.phoebemanning.capstone.Models.Scan;
@@ -33,6 +35,10 @@ public class NewUserActivity extends AppCompatActivity {
     EditText confirmPassword;
     ProgressBar newUserProgress;
 
+    RadioGroup radioGroup;
+    RadioButton femaleBtn;
+    RadioButton maleBtn;
+
     public void createAccount(View view){
 
         final String emailString = email.getText().toString();
@@ -44,6 +50,7 @@ public class NewUserActivity extends AppCompatActivity {
         if(!emailString.equals("") && !passwordString.equals("") && !firstNameString.equals("") && !lastNameString.equals("")){
             if(passwordString.equals(confirmPasswordString)){
                 newUserProgress.setVisibility(View.VISIBLE);
+                final int gender = radioGroup.getCheckedRadioButtonId();
                 mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(NewUserActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -56,8 +63,17 @@ public class NewUserActivity extends AppCompatActivity {
                             String uid = current_user.getUid();
 
 //                      add new user info to database
-                            String defaultCalAmt = "2000";
-                            User user = new User(emailString, firstNameString, lastNameString, defaultCalAmt);
+                            String genderStr = null;
+                            String defaultCalAmt = null;
+                            if(gender == femaleBtn.getId()){
+                                genderStr = "female";
+                                defaultCalAmt = "2000";
+                            } else {
+                                genderStr = "male";
+                                defaultCalAmt = "2500";
+                            }
+
+                            User user = new User(emailString, firstNameString, lastNameString, defaultCalAmt, genderStr);
                             databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
                             databaseReference.setValue(user);
 
@@ -98,5 +114,9 @@ public class NewUserActivity extends AppCompatActivity {
         password = findViewById(R.id.newPasswordId);
         confirmPassword = findViewById(R.id.confirmPassword);
         newUserProgress = findViewById(R.id.newUserProgress);
+
+        radioGroup = findViewById(R.id.gender);
+        femaleBtn = findViewById(R.id.femaleRadio);
+        maleBtn = findViewById(R.id.maleRadio);
     }
 }
