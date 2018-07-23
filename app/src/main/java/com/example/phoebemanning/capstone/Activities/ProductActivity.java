@@ -169,9 +169,8 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ImageData> call, Response<ImageData> response) {
 
-                if(response.isSuccessful()){
+                if(response.isSuccessful() && response.body().getItems().length != 0){
                     loadProductProgress.setVisibility(View.INVISIBLE);
-                    if(response.body() != null){
 
                         Items[] items = response.body().getItems();
                         String [] images = items[0].getImages();
@@ -188,9 +187,6 @@ public class ProductActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                    } else {
-                        Log.i("onResponse", "Body NULL");
-                    }
                 } else {
                     Log.i("onResponse", "Image API call failed");
                     imageView.setImageResource(R.drawable.default_img);
