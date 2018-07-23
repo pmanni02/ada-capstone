@@ -84,12 +84,23 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Objects.requireNonNull(mgr).hideSoftInputFromWindow(upcEditText.getWindowToken(), 0);
 
-        if (upcEditText.length() != 12 || upcEditText.length() != 6){
-            Toast.makeText(this, "Invalid UPC", Toast.LENGTH_LONG).show();
+        if (upcEditText.length() == 12 || upcEditText.length() == 14 || upcEditText.length() == 6){
+
+            if (upcEditText.length() == 6) {
+//                String convertedUpc = convertUpcCode(upcEditText.getText().toString());
+//                getProductCode(convertedUpc);
+            } else {
+                getProductCode(upcEditText.getText().toString());
+            }
         } else {
-            getProductCode(upcEditText.getText().toString());
+            Toast.makeText(this, "Invalid UPC", Toast.LENGTH_LONG).show();
         }
     }
+
+//    private String convertUpcCode(String orgUpc) {
+//        String convertedUpc = "";
+//        return convertedUpc;
+//    }
 
     public void scanBtnClick(View view){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
