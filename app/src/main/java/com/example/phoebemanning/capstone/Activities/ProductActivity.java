@@ -110,7 +110,6 @@ public class ProductActivity extends AppCompatActivity {
         newScanBtn = findViewById(R.id.scanNewBtn);
         main_menu = findViewById(R.menu.main_menu);
 
-
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);

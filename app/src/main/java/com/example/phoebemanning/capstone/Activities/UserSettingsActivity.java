@@ -1,8 +1,10 @@
 package com.example.phoebemanning.capstone.Activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,25 +17,31 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.phoebemanning.capstone.Adapters.RecyclerAdapterNutrients;
+import com.example.phoebemanning.capstone.Models.User;
 import com.example.phoebemanning.capstone.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
-    RadioGroup radioGroup;
-    RadioButton femaleBtn;
-    RadioButton maleBtn;
+//    RadioGroup radioGroup;
+//    RadioButton femaleBtn;
+//    RadioButton maleBtn;
     EditText weight;
     EditText heightFt;
     EditText heightIn;
     EditText age;
     Button submitBtn;
     Double exerciseFactor;
+    String gender;
     
     public void submitSettings(View view){
         if((weight.getText().toString().equals("")) ||
@@ -46,7 +54,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             Double heightFtVal = Double.parseDouble(heightFt.getText().toString());
             Double heightInVal = Double.parseDouble(heightIn.getText().toString());
             Integer ageVal = Integer.parseInt(age.getText().toString());
-            int gender = radioGroup.getCheckedRadioButtonId();
+//            int gender = radioGroup.getCheckedRadioButtonId();
 
             Integer bmr = getBasalMetabolicRate(gender, weightVal, heightFtVal, heightInVal, ageVal);
             saveValInDatabase(bmr);
@@ -56,13 +64,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //    Men	BMR = 88.362 + (13.397 x weight in kg) + (4.799 x height in cm) - (5.677 x age in years)
 //    Women BMR = 447.593 + (9.247 x weight in kg) + (3.098 x height in cm) - (4.330 x age in years)
 
-    private int getBasalMetabolicRate(int gender, Double weightVal, Double heightFtVal, Double heightInVal, Integer ageVal) {
+    private int getBasalMetabolicRate(String gender, Double weightVal, Double heightFtVal, Double heightInVal, Integer ageVal) {
         Double weightKg = weightVal * 0.45359;
         Double totalFeet = heightFtVal + (heightInVal * 0.0833);
         Double heightCm = totalFeet * 30.48;
         Double BMR;
 
-        if(gender == femaleBtn.getId()){
+        if(gender == "female"){
             BMR = (447.593 + (9.247 * weightKg) + (3.098 * heightCm) - (4.330 * ageVal)) * exerciseFactor;
         } else {
             BMR = (88.362 + (13.397 * weightKg) + (4.799 * heightCm) - (5.677 * ageVal)) * exerciseFactor;
@@ -92,14 +100,33 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-        radioGroup = findViewById(R.id.gender);
-        femaleBtn = findViewById(R.id.femaleRadio);
-        maleBtn = findViewById(R.id.maleRadio);
+//        radioGroup = findViewById(R.id.gender);
+//        femaleBtn = findViewById(R.id.femaleRadio);
+//        maleBtn = findViewById(R.id.maleRadio);
         weight = findViewById(R.id.weight);
         heightFt = findViewById(R.id.heightFt);
         heightIn = findViewById(R.id.heightIn);
         age = findViewById(R.id.age);
         submitBtn = findViewById(R.id.submit);
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String current_id = mUser.getUid();
+        DatabaseReference databaseReference = database.getReference().child("Users").child(current_id);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                gender = user.getGender();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i("Database error: ", databaseError.getMessage());
+//                Toast.makeText(ProductActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
@@ -109,7 +136,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
-
 
 
 //        heightIn.addTextChangedListener(new TextWatcher() {
@@ -135,7 +161,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-//        String selectedItem = adapterView.getItemAtPosition(pos).toString();
         if(pos == 0){
             exerciseFactor = 1.0;
         } else if(pos == 1){
@@ -169,7 +194,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             case R.id.action_logout:
                 if(mUser !=null && mAuth != null){
                     mAuth.signOut();
-//                    Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(UserSettingsActivity.this, LoginActivity.class));
                     finish();
                 }
