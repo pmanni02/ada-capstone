@@ -1,5 +1,6 @@
 package com.example.phoebemanning.capstone.Adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -24,6 +25,7 @@ public class RecyclerAdapterScans extends RecyclerView.Adapter<RecyclerAdapterSc
 
     private ArrayList<Scan> scans;
     private Context context;
+    private Dialog myDialog;
 
     public RecyclerAdapterScans(ArrayList<Scan> scans, Context context){
         this.scans = scans;
@@ -36,10 +38,14 @@ public class RecyclerAdapterScans extends RecyclerView.Adapter<RecyclerAdapterSc
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.scan_item_layout, viewGroup, false);
         final MyViewHolder vHolder = new MyViewHolder(view);
 
+        myDialog = new Dialog(context);
+        myDialog.setContentView(R.layout.dialog_delete);
+
         vHolder.scanItemHolder.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(context, "LONG CLICK", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "LONG CLICK", Toast.LENGTH_SHORT).show();
+                myDialog.show();
                 return true;
             }
         });
