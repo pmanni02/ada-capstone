@@ -1,5 +1,6 @@
 package com.example.phoebemanning.capstone.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,9 @@ public class UserScansActivity extends AppCompatActivity {
     ProgressBar loadScansProgress;
     ArrayList<Scan> list = new ArrayList<>();
     TextView noScans;
+    
+//    RelativeLayout scanItemHolder;
+//    private Dialog myDialog;
 
     public void scanNewBtnClick(View view){
         startActivity(new Intent(UserScansActivity.this, MainActivity.class));
@@ -64,6 +69,18 @@ public class UserScansActivity extends AppCompatActivity {
 
         loadScansProgress = findViewById(R.id.loadScansProgress);
         loadScansProgress.setVisibility(View.VISIBLE);
+        
+//        scanItemHolder = findViewById(R.id.scan_item_holder);
+//        myDialog = new Dialog(UserScansActivity.this);
+//        myDialog.setContentView(R.layout.dialog_delete);
+//
+//        scanItemHolder.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                Toast.makeText(UserScansActivity.this, "CHECK", Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//        });
 
         getScanList();
     }

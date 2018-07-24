@@ -57,6 +57,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             public void onClick(View view) {
                 TextView dialogNutrientName = myDialog.findViewById(R.id.nutrientNameTx);
                 TextView dialogNutrientDescription = myDialog.findViewById(R.id.nutrient_desc);
+                
                 dialogNutrientName.setText(nutrients.get(vHolder.getAdapterPosition()).getName());
                 String title = nutrients.get(vHolder.getAdapterPosition()).getName();
 
