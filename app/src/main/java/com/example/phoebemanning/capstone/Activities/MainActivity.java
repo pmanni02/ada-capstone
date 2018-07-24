@@ -84,14 +84,14 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Objects.requireNonNull(mgr).hideSoftInputFromWindow(upcEditText.getWindowToken(), 0);
 
-        if (upcEditText.length() == 12 || upcEditText.length() == 14 || upcEditText.length() == 6){
+        if (upcEditText.length() == 12 || upcEditText.length() == 14 || upcEditText.length() == 6 ){
 
-            if (upcEditText.length() == 6) {
-//                String convertedUpc = convertUpcCode(upcEditText.getText().toString());
-//                getProductCode(convertedUpc);
-            } else {
+//            if (upcEditText.length() == 6) {
+//////                String convertedUpc = convertUpcCode(upcEditText.getText().toString());
+//////                getProductCode(convertedUpc);
+////            } else {
                 getProductCode(upcEditText.getText().toString());
-            }
+//            }
         } else {
             Toast.makeText(this, "Invalid UPC", Toast.LENGTH_LONG).show();
         }

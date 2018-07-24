@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,17 @@ public class RecyclerAdapterScans extends RecyclerView.Adapter<RecyclerAdapterSc
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.scan_item_layout, viewGroup, false);
-        return new MyViewHolder(view);
+        final MyViewHolder vHolder = new MyViewHolder(view);
+
+        vHolder.scanItemHolder.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(context, "LONG CLICK", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+        return vHolder;
     }
 
     @Override
@@ -50,11 +61,13 @@ public class RecyclerAdapterScans extends RecyclerView.Adapter<RecyclerAdapterSc
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView scanName;
+        RelativeLayout scanItemHolder;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             scanName = itemView.findViewById(R.id.scan_item);
+            scanItemHolder = itemView.findViewById(R.id.scan_item_holder);
         }
 
         @Override
