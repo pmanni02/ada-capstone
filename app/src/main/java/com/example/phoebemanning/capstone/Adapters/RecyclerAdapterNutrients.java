@@ -82,6 +82,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
 
+
         String title = nutrients.get(i).getName().split(",")[0];
         String id = nutrients.get(i).getNutrient_id();
         Integer idInt = Integer.parseInt(id);
@@ -130,6 +131,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             viewHolder.amount.setText(getAmountVal(valueIntSodium, "sodium", "g"));
 
         } else if(title.equals("Fatty acids")) {
+
             viewHolder.title.setText("Saturated Fat");
             String color = getBackgroundColor(valueInt, 5.0, 1.5);
             viewHolder.cardView.setCardBackgroundColor(parseColor(color));
