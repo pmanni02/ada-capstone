@@ -39,7 +39,7 @@ public class RecyclerAdapterScans extends RecyclerView.Adapter<RecyclerAdapterSc
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         String scanName = scans.get(i).getProductName();
-        myViewHolder.scanName.setText(scanName);
+        myViewHolder.scanName.setText(scanName.toUpperCase());
     }
 
     @Override

@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/scan_item_default_title"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textSize="14sp" />
 
