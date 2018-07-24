@@ -105,10 +105,11 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
             if(dailyValCals != null && percentBtn){
                 Float dailyValFloat = Float.parseFloat(dailyValCals);
                 Float percentDailyVal = (valueInt/dailyValFloat)*100;
-                String s = String.format("%.2f", percentDailyVal);
+                String s = String.format("%.0f", percentDailyVal);
                 viewHolder.amount.setText(s + " %");
             } else {
-                viewHolder.amount.setText(roundedVal + " Calories");
+                String noDec = String.format("%.0f", roundedVal);
+                viewHolder.amount.setText(noDec + " Calories");
             }
         } else if(title.equals("Total lipid (fat)")){
 
@@ -195,7 +196,7 @@ public class RecyclerAdapterNutrients extends RecyclerView.Adapter<RecyclerAdapt
 
             Float nutrientDailyValFloat = Float.parseFloat(nutrientDailyVal);
             Float percentDaily = (value/nutrientDailyValFloat)*100;
-            String s = String.format("%.2f", percentDaily);
+            String s = String.format("%.0f", percentDaily);
             amount = s + " %";
             
         } else if(teaspoonBtn){
