@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capstone</string>
+    <string name="app_name">nutriScan</string>
     <string name="info_page_1"><![CDATA[The purpose of this app is to provide an intuitive interface for users to get a better understanding of the information on nutrition labels. The rating system used is from standards sets by the Department of Health & Social Care in the United Kingdom. Red, orange, and green indicate high, medium, and low amounts of the nutrient respectively. ]]></string>
     <string name="info_page_2">Percent daily (%DV) values, with the exception of the energy quantity, are based on a 2,000 calorie diet for females and a 2,500 calorie diet for males. The energy %DV will be calculated per user if additional information is provided. This app uses the Revised Harris-Benedict equation to calculate Basal Metabolic Rate.</string>
     <string name="female">Female</string>
@@ -10,7 +10,7 @@
     <string name="user_height_in">Height (in) ...</string>
     <string name="update_settings">Update Settings</string>
     <string name="settings_title">Fill in details to get custom required calories / day value</string>
-    <string name="login_title">Welcome!</string>
+    <string name="login_title">Welcome to NutriScan!</string>
     <string name="login_email_hint">Email ...</string>
     <string name="login_pwd_hint">Password ...</string>
     <string name="login_signin_btn">Sign In</string>
