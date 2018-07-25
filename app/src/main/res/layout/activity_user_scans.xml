@@ -43,8 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/loadScansProgress"
-        app:layout_constraintVertical_bias="0.312" />
+        app:layout_constraintTop_toTopOf="@+id/noScansText"
+        app:layout_constraintVertical_bias="0.046" />
 
     <ProgressBar
         android:id="@+id/loadScansProgress"

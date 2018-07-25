@@ -97,8 +97,17 @@ public class UserScansActivity extends AppCompatActivity {
     }
 
     private void setScanList(ArrayList<Scan> list) {
+        if(list.size() == 0){
+            String uid = mUser.getUid();
+            Scan emptyScan = new Scan("Null", "Null", "Null");
+            DatabaseReference databaseReferenceAdd = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid).push();
+            databaseReferenceAdd.setValue(emptyScan);
+            list.add(emptyScan);
+        }
+
         if(list.get(0).getProductName().equals("Null")){
             noScans.setVisibility(View.VISIBLE);
+            recyclerViewScans.setVisibility(View.INVISIBLE);
         } else {
             noScans.setVisibility(View.INVISIBLE);
             adapter = new RecyclerAdapterScans(list, UserScansActivity.this);

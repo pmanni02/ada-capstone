@@ -51,10 +51,10 @@ public class RecyclerAdapterScans extends RecyclerView.Adapter<RecyclerAdapterSc
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
-        String uid = mUser.getUid();
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
+        final String uid = mUser.getUid();
+        final DatabaseReference databaseReferenceDelete = FirebaseDatabase.getInstance().getReference().child("Scans").child(uid);
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReferenceDelete.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Scan> list = new ArrayList<Scan>();
@@ -68,7 +68,7 @@ public class RecyclerAdapterScans extends RecyclerView.Adapter<RecyclerAdapterSc
                 }
 
                 if(key != null){
-                    databaseReference.child(key).removeValue();
+                    databaseReferenceDelete.child(key).removeValue();
                     myDialog.hide();
                 }
             }
