@@ -56,7 +56,7 @@ public class NewUserActivity extends AppCompatActivity {
                         if(!task.isSuccessful()){
                             Toast.makeText(NewUserActivity.this, "Failed to create account", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(NewUserActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(NewUserActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
 
                             FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
                             String uid = current_user.getUid();
